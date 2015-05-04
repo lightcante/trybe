@@ -1,0 +1,29 @@
+/* -------------------------------------------------------------------
+ Bootstrap 3 breakpoints, cloned for use in '@mixin bs-breakpoint'
+------------------------------------------------------------------- */
+
+// Extra small screen / phone
+$ui-xs-min:                480px !default;
+$ui-xs-max:                767px !default;
+
+// Small screen / tablet
+$ui-sm-min:                768px !default;
+$ui-sm-max:                991px !default;
+
+// Medium screen / desktop
+$ui-md-min:                992px !default;
+$ui-md-max:               1999px !default;
+
+// Large screen / wide desktop
+$ui-lg-min:               1200px !default;
+
+
+/* -------------------------------------------------------------------
+ iTN Color Palette
+------------------------------------------------------------------- */
+$brand-primary:         #ef9919 !default; // orange
+$brand-secondary:       #1d3b55 !default; // navy blue
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
