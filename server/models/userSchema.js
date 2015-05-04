@@ -1,0 +1,1 @@
+// This file is used to create the user table in the config.js
