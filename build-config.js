@@ -1,21 +1,21 @@
 module.exports  = {
   build   : 'dist',
   server  : 'server',
-  app     : 'src/app',
-  data    : 'src/assets/data',
-  images  : 'src/assets/images',
-  fonts   : 'src/assets/fonts',
-  styles  : 'src/assets/styles',
+  app     : 'client/app',
+  data    : 'client/assets/data',
+  images  : 'client/assets/images',
+  fonts   : 'client/assets/fonts',
+  styles  : 'client/assets/styles',
   app_files: {
 
     // Source excluding test files
-    js: [ 'src/app/**/*.js', '!src/app/**/*.spec.js'],
+    js: [ 'client/app/**/*.js', '!client/app/**/*.spec.js'],
 
     // Entry page
-    html: [ 'src/index.html' ],
+    html: [ 'client/index.html' ],
 
     // Module styles
-    scss: [ 'src/app/**/*.scss' ]
+    scss: [ 'client/app/**/*.scss' ]
   },
   vendor_files  : {
     js: [
