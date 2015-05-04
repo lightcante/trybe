@@ -20,7 +20,6 @@ Project plugins are seprated to the groups 'suggested', 'linters', and 'themes'.
 * Sidebar Enhancements
 * DocBlockr
 * File​Header
-* EditorConfig
 * Markdown Preview
 * Alignment
 * JavaScriptNext ES6 Syntax

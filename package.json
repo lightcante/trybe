@@ -1,0 +1,42 @@
+{
+  "name": "trybe",
+  "version": "0.0.1",
+  "description": "Trybe project - social workouts for the crossfit community",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lightcante/trybe.git"
+  },
+  "keywords": [
+    "crossfit",
+    "community",
+    "awesome",
+    "angular",
+    "sass",
+    "nodejs",
+    "mysql"
+  ],
+  "author": "Lightcante Group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lightcante/trybe/issues"
+  },
+  "homepage": "https://github.com/lightcante/trybe",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-nodemon": "^0.4.0",
+    "grunt-sass": "^0.18.1",
+    "grunt-shell": "^1.1.2",
+    "lodash": "^3.7.0",
+    "node-inspector": "^0.10.0",
+    "oauth": "^0.9.12",
+    "open": "0.0.5"
+  }
+}
