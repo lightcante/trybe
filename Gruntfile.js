@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-04 13:42:33
+* @Last Modified time: 2015-05-04 15:15:58
 */
 
 'use strict';
@@ -217,7 +217,7 @@ module.exports = function (grunt) {
         dir: '<%= build %>',
         src: [
           '<%= vendor_files.js %>',
-          '<%= app %>/src/**/*.js',
+          '<%= app %>/client/**/*.js',
           '<%= vendor_files.css %>',
           '<%= styles %>/main.css'
         ]
@@ -306,8 +306,8 @@ module.exports = function (grunt) {
       // Output indexed JS files to console
       grunt.log.writeln(this.filesSrc.join().replace(/,/g, '\n'));
 
-      // Add indexed files to index.html as it moves from src to build
-      grunt.file.copy('src/index.html', this.data.dir + '/index.html', {
+      // Add indexed files to index.html as it moves from client to build
+      grunt.file.copy('client/index.html', this.data.dir + '/index.html', {
           process: function (contents, path) {
               return grunt.template.process(contents, {
                   data: {
