@@ -1,0 +1,28 @@
+{
+  "name": "trybe",
+  "version": "0.0.1",
+  "homepage": "https://github.com/lightcante/trybe.git",
+  "authors": [
+    "Lightcante Group"
+  ],
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.15",
+    "bootstrap-sass-official": "~3.3.4",
+    "lodash": "~3.7.0",
+    "d3": "~3.5.5",
+    "animate.css": "~3.2.6"
+  }
+}

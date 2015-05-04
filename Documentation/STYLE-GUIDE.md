@@ -359,7 +359,7 @@ When writing any block of code that is logically subordinate to the line immedia
 
 ### HTML
 
-* Do not use ids for html elements. Use a class instead.
+* Use classes for styles only.  Use [data behaviors](http://blog.bigbinary.com/2012/10/10/data-behavior.html) or in JavaScript.
 
     ```html
     <!-- good -->
