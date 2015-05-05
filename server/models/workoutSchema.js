@@ -1,8 +1,8 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 14:08:02
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-05 15:24:17
 */
 
 
@@ -10,9 +10,9 @@
 
 module.exports = function (sequelize, DataTypes) {
   return sequelize.define('Workouts', {
-    title: sequelize.STRING,
-    type: sequelize.STRING,
-    description: sequelize.STRING,
-    finalResult: sequelize.STRING
-  })
-}
+    title: DataTypes.STRING,
+    type: DataTypes.STRING,
+    description: DataTypes.STRING,
+    finalResult: DataTypes.STRING
+  });
+};
