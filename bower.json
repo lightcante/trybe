@@ -23,6 +23,7 @@
     "bootstrap-sass-official": "~3.3.4",
     "lodash": "~3.7.0",
     "d3": "~3.5.5",
-    "animate.css": "~3.2.6"
+    "animate.css": "~3.2.6",
+    "angular-ui-router": "~0.2.14"
   }
 }

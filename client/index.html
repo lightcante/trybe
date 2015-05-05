@@ -1,8 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-    </body>
+<html ng-app="trybe-app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Social Workouts for the Crossfit Community">
+
+    <title>Trybe | Social Workouts for Crossfit Community</title>
+
+<% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" href="<%= file %>"/>
+<% }); %>
+</head>
+<body ng-controller="AppCtrl">
+    <!--[if lte IE 8]>
+    <script>
+        document.createElement('tabs');
+        document.createElement('pane');
+        document.createElement('ng-pluralize');
+    </script>
+    <![endif]-->
+    <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+    <main class="container">
+        
+    </main>
+
+<% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+<% }); %>
+
+</body>
 </html>
