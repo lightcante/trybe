@@ -44,5 +44,9 @@
     "node-inspector": "^0.10.0",
     "oauth": "^0.9.12",
     "open": "0.0.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.12.3",
+    "express": "^4.12.3"
   }
 }
