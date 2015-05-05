@@ -1,8 +1,8 @@
 /* 
 * @Author: justinwebb
 * @Date:   2015-05-04 15:12:58
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 14:37:51
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-05 15:11:51
 */
 'use strict';
 var config = require('./server-config');
@@ -10,7 +10,7 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var open = require('open');
-var models = require('/models');
+var models = require('./models');
 
 // Configure server
 app.use(express.static(config.static_site_root));
