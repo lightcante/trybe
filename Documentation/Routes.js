@@ -26,7 +26,7 @@
   //Checking if signed in
 
     return $http({
-      method: 'POST',
+      method: 'GET',
       url: '/api/users/signedin',
       data: tokenObject
       })
