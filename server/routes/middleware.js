@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 10:14:44
 * @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-05 12:00:16
+* @Last Modified time: 2015-05-05 12:12:14
 */
 'use strict';
 //this file will be used to interpret and route http requests
@@ -29,7 +29,7 @@ module.exports = function(app, express){
 
   //express.static allows us to look up files in the client
   //folder
-  app.use(express.static(__dirname + '/../../client'));
+  app.use(express.static(__dirname + '/../../dist'));
 
   // use userRouter for user requests
   app.use('api/users', userRouter);
