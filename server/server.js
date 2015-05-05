@@ -1,8 +1,8 @@
 /* 
 * @Author: justinwebb
 * @Date:   2015-05-04 15:12:58
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-04 15:14:26
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-05 10:25:43
 */
 'use strict';
 var config = require('./server-config'),
@@ -26,3 +26,9 @@ server.listen(config.port, function () {
         }
     });
 });
+
+// Configure our server with middleware for routing
+require('./routes/middleware.js')(app, express);
+
+// Export our app for testing
+module.exports = app;
