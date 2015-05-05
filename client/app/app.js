@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 10:16:27
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-05 14:45:50
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-05 15:43:01
 */
 
 'use strict';
@@ -14,18 +14,12 @@
    * @param {angular} $stateProvider
    * @param {angular} $urlRouterProvider
    */
-  var AppConfig = function($stateProvider, $urlRouterProvider){
+  var AppStateConfig = function($stateProvider, $urlRouterProvider){
     // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise('/state1');
 
-    $stateProvider
-      .state('state1', {
-        url: '/state1',
-        templateUrl: 'state1.html',
-      })
-      .state('state1.list', {
-        url: '/list',
-        templateUrl: 'state1.list.html',
+    $stateProvider.state('root', {
+        url: '/',
         controller: AppCtrl
       });
     };
@@ -40,9 +34,19 @@
 
   //Entry point for for module
   angular
-    .module('trybe-app', ['ui-router', 'ng-animate'])
 
-    .config(AppConfig)
+    .module('trybe-app', [
+      // angular modules
+      'ui-router',
+      'ng-animate',
+
+      // app modules
+      'trybe-app.workout',
+      'trybe-app.feed',
+      'trybe-app.login'
+    ])
+
+    .config(AppStateConfig)
 
     .controller('AppCtrl', AppCtrl);
 
