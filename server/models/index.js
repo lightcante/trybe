@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-05 13:33:15
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 14:22:31
+* @Last Modified time: 2015-05-05 14:31:33
 */
 
 //This file is used to coordinate all the schemas
@@ -32,6 +32,9 @@ models.forEach(function(model){
 
   module.Trybes.hasMany(module.Workouts);
   module.Workouts.belongsTo(module.Trybes);
+
+  module.Trybes.hasMany(module.Users, {through : UsersTrybes});
+  module.Users.hasMany(module.Trybes, {through : UsersTrybes});
 
 }(module.exports));
 
