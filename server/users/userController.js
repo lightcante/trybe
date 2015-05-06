@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 10:00:08
+* @Last Modified time: 2015-05-06 11:35:45
 */
 
 'use strict';
@@ -24,7 +24,7 @@ module.exports = {
         res.write(token);
         workoutController.getAllWorkouts(req, res, next);
       }
-    });
+    })(req, res, next);
   },
 
   signup: function(req, res, next){
