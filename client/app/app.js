@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 10:16:27
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 15:43:01
+* @Last Modified by:   Justin Webb
+* @Last Modified time: 2015-05-05 17:40:14
 */
 
 'use strict';
@@ -15,14 +15,14 @@
    * @param {angular} $urlRouterProvider
    */
   var AppStateConfig = function($stateProvider, $urlRouterProvider){
-    // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise('/state1');
-
     $stateProvider.state('root', {
-        url: '/',
-        controller: AppCtrl
-      });
-    };
+      url: '/',
+      controller: AppCtrl
+    });
+
+    // For any unmatched url, redirect to /state1
+    $urlRouterProvider.otherwise('/');
+  };
 
   /**
    * Entry point for application. Loads all client-side dependencies
@@ -37,13 +37,13 @@
 
     .module('trybe-app', [
       // angular modules
-      'ui-router',
-      'ng-animate',
+      'ngAnimate',
+      'ui.router',
 
       // app modules
       'trybe-app.workout',
-      'trybe-app.feed',
-      'trybe-app.login'
+      'trybe-app.feed'
+      // 'trybe-app.login'
     ])
 
     .config(AppStateConfig)
