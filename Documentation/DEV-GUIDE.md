@@ -62,3 +62,9 @@ LightCante's list of favorite themes appears below:
 
 
 
+## Installing MYSQL 
+MYSQL has to be installed in order to create 'trybe' database. 
+When we ge ready to deploy, will have to write grunt file
+to make the server to two tasks: 
+1) create 'trybe' database
+2) run grunt build
