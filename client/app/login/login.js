@@ -2,7 +2,11 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 16:24:15
+<<<<<<< HEAD
+* @Last Modified time: 2015-05-08 09:27:30
+=======
+* @Last Modified time: 2015-05-06 16:44:58
+>>>>>>> (refactor) Refactor login module for clarity
 */
 
 'use strict';
@@ -11,27 +15,19 @@
   /**
    * Sets viewstate for login page
    * @param {[angular]} $stateProvider
-   * @param {[angular]} $urlRouterProvider
    */
-  var LoginConfig = function($stateProvider, $urlRouterProvider) {
+  var LoginConfig = function($stateProvider) {
 
     $stateProvider
       .state('login', {
         url: '/login',
-        templateUrl: '/login/login.tpl.html',
-        controller: LoginCtrl
-      })
-      .state('signup', {
-        url: '/signup',
-        templateUrl: '/login/login.tpl.html',
+        templateUrl: 'login/login.tpl.html',
         controller: LoginCtrl
       });
-
-    // For any unmatched url, redirect to /login
-    $urlRouterProvider.otherwise('/login');
   };
 
   /**
+>>>>>>> (refactor) Refactor login module for clarity
    * Controls login and signup for client side. Has
    * states for login and signup.
    * @param {angular} $scope
