@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 10:16:27
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 10:21:53
+* @Last Modified by:   Justin Webb
+* @Last Modified time: 2015-05-06 14:08:17
 */
 
 'use strict';
@@ -30,6 +30,12 @@
    */
   var AppCtrl = function($scope) {
     $scope.items = ['A', 'List', 'Of', 'Items'];
+
+    // $rootScope.isAuthed = false;
+
+    // $rootScope.$on('$routeChangeError', function (event, current, previous, rejection) {
+    //   console.log('routeChangeError: ', event);
+    // });
   };
 
   //Entry point for for module
