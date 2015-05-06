@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-06 17:57:58
+* @Last Modified time: 2015-05-06 17:58:42
 */
 
 'use strict';
@@ -152,8 +152,8 @@ module.exports = function (grunt) {
         tasks: ['copy:appjs', 'index']
       },
       html: {
-        files: ['src/index.html'],
-        tasks: ['index']
+        files: ['<%= app_files.atpl %>', 'src/index.html'],
+        tasks: ['html2js', 'index']
       },
       gruntfile: {
         files: 'Gruntfile.js',
