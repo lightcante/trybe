@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-06 16:47:11
+* @Last Modified time: 2015-05-06 16:54:15
 */
 'use strict';
 
@@ -17,21 +17,19 @@ module.exports = {
     // Acquire workout information from the req.body;
     // Write the workout information to the sql tables
 
-    console.log(req.body);
-
-    // Trybe.find({where: {name: req.body.trybe}}).then(function(trybe){
-    //   console.log("TRYBE INFO FROM TABLE: ", trybe);
-    // })
     var userID;
     var trybeID;
     var workoutID;
 
-
+    //Acquire userID from User table
     User.find({where: {username: req.body.username}}).then(function(user){
       userID = user.get('id');
+      
+      //Acquire trybeID from Trybe table
       Trybe.find({where: {name: req.body.trybe}}).then(function(trybe){
         trybeID = trybe.get('id');
         
+        //Insert data into Workout table
         Workout.build({
           UserId: userID,
           type: req.body.type,
@@ -42,8 +40,11 @@ module.exports = {
         })
         .save()
         .then(function(workout){
+
+          //Acquire the workoutID from Workout table
           workoutID = workout.get('id');
 
+          //Insert all exercises into Exercises table
           req.body.exercises.forEach(function(exercise){
             Exercise.build({
               exerciseName: exercise.exerciseName,
@@ -54,6 +55,8 @@ module.exports = {
             .save();
           });
 
+          //Run getAllWorkouts to return the response with 
+          //an array of workouts 
           module.exports.getAllWorkouts(req, res, next);
         });
       });
