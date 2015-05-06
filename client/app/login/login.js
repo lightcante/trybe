@@ -2,11 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-<<<<<<< HEAD
-* @Last Modified time: 2015-05-10 16:23:16
-=======
-* @Last Modified time: 2015-05-06 16:24:15
->>>>>>> (refactor) Update naming of resp object for clarity
+* @Last Modified time: 2015-05-10 16:24:44
 */
 
 'use strict';
