@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-06 15:33:52
+* @Last Modified time: 2015-05-06 16:47:11
 */
 'use strict';
 
@@ -22,26 +22,49 @@ module.exports = {
     // Trybe.find({where: {name: req.body.trybe}}).then(function(trybe){
     //   console.log("TRYBE INFO FROM TABLE: ", trybe);
     // })
-    
-    User.find({where: {name: req.body.username}}).then(function(user){
-      console.log("USER INFO FROM TABLE", user);
-    })
-    // var userID = 
+    var userID;
+    var trybeID;
+    var workoutID;
 
-    Workout.build({
-      // userId: 
-      type: req.body.type,
-      title: req.body.title,
-      description: req.body.description, 
-      finalResult: req.body.finalResult
-      // TrybeId: 
-    })
+
+    User.find({where: {username: req.body.username}}).then(function(user){
+      userID = user.get('id');
+      Trybe.find({where: {name: req.body.trybe}}).then(function(trybe){
+        trybeID = trybe.get('id');
+        
+        Workout.build({
+          UserId: userID,
+          type: req.body.type,
+          title: req.body.title,
+          description: req.body.description, 
+          finalResult: req.body.finalResult,
+          TrybeId: trybeID
+        })
+        .save()
+        .then(function(workout){
+          workoutID = workout.get('id');
+
+          req.body.exercises.forEach(function(exercise){
+            Exercise.build({
+              exerciseName: exercise.exerciseName,
+              quantity: JSON.stringify(exercise.quantity), 
+              result: exercise.result, 
+              WorkoutId: workoutID
+            })
+            .save();
+          });
+
+          module.exports.getAllWorkouts(req, res, next);
+        });
+      });
+    });
+    
+
 
 
     
     // We then run getAllWorkouts to acquire workouts
     // from workout table
-    // module.exports.getAllWorkouts(req, res, next);
   },
 
   //take in 4th parameter of token to be added to res.body
