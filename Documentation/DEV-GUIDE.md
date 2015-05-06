@@ -64,10 +64,17 @@ LightCante's list of favorite themes appears below:
 ## Deployment
 
 -- Installing MYSQL 
+
+mysql -u root -p
+
 MYSQL has to be installed in order to create 'trybe' 
 database. When we ge ready to deploy, will have to write 
 grunt file to make the server to two tasks: 
-1) create 'trybe' database
+
+1) create 'trybe' database using the following command: 
+
+$~~ create database 'trybe';
+
 2) run grunt build
 
 --Installing/running bower
