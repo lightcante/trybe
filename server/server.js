@@ -1,8 +1,8 @@
 /* 
 * @Author: justinwebb
 * @Date:   2015-05-04 15:12:58
-* @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-05 15:11:51
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-05 16:18:31
 */
 'use strict';
 var config = require('./server-config');
@@ -11,6 +11,7 @@ var app = express();
 var server = require('http').createServer(app);
 var open = require('open');
 var models = require('./models');
+var passport = require('passport')
 
 // Configure server
 app.use(express.static(config.static_site_root));
@@ -30,7 +31,7 @@ models.sequelize.sync().then(function(){
 });
 
 // Configure our server with middleware for routing
-require('./routes/middleware.js')(app, express);
+require('./routes/middleware.js')(app, express, passport);
 
 // Export our app for testing
 module.exports = app;
