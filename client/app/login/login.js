@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 14:54:55
+* @Last Modified time: 2015-05-06 15:57:43
 */
 
 'use strict';
@@ -51,14 +51,18 @@
    * @param {angular} $scope
    */
   var LoginCtrl = function ($scope, $window, $location, AuthFactory) {
-    $scope.isUser = true;
+    $scope.switchMethod = function() {
+      $scope.newUser = !$scope.newUser;
+    };
+
+    $scope.newUser = true;
 
     $scope.user = {};
 
     $scope.signup = function() {
       AuthFactory.signup($scope.user)
-        .then(function (token) {
-          $window.localStorage.setItem('com.trybe', token);
+        .then(function (data) {
+          $window.localStorage.setItem('com.trybe', data.token);
           $location.path('/feed');
         })
         .catch(function (error) {
@@ -68,8 +72,8 @@
 
     $scope.signin = function() {
       AuthFactory.signin($scope.user)
-        .then(function (token) {
-          $window.localStorage.setItem('com.trybe', token);
+        .then(function (data) {
+          $window.localStorage.setItem('com.trybe', data.token);
           $location.path('/feed');
         })
         .catch(function (error) {
