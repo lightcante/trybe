@@ -2,7 +2,7 @@
 * @Author: Justin Webb
 * @Date:   2015-05-06 11:43:21
 * @Last Modified by:   Justin Webb
-* @Last Modified time: 2015-05-06 15:11:39
+* @Last Modified time: 2015-05-06 15:44:22
 */
 'use strict';
 (function (angular) {
@@ -24,9 +24,9 @@
       transclude: true,
       template: ''+
         '<div class="numbericStepper">'+
-        ' <i class="fa fa-minus"></i>'+
+        ' <i class="fa fa-minus fa-3"></i>'+
         ' <input type="text" pattern="[0-9]" placeholder="0"></input>'+
-        ' <i class="fa fa-plus"></i>'+
+        ' <i class="fa fa-plus fa-3"></i>'+
         '</div>',
       link: link,
       controller: numbericStepperCtrl
