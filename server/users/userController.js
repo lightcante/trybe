@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 12:18:40
+* @Last Modified time: 2015-05-06 13:28:57
 */
 
 'use strict';
@@ -14,6 +14,7 @@ var workoutController = require('../workout/workoutController.js');
 module.exports = {
 
   signin : function(req, res, next){
+    console.log(req.body)
     passport.authenticate('local-signin' , function(err, user, info){
       if(err){ // if there was an error
         return next(err);

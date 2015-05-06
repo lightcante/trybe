@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-05 16:15:10
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 11:34:05
+* @Last Modified time: 2015-05-06 13:48:54
 */
 
 'use strict';
@@ -31,13 +31,15 @@ passport.use('local-signin', new LocalStrategy(
       // if a user exists with that username
       if (user) {
         // compare the password with the password that matches up
-        if(user.comparePassword(password)){
+        user.comparePassword(password, function(isMatch){
+          if (isMatch){
           // if the password matches up, return the user to the next function
-          return done(null, user);
-        } else {
+            return done(null, user);
+          } else {
           // if the user does not match up, send back a null for the user and a message to send up to the client
           return done(null, false, 'The password does not match');
-        }
+          }
+        })
       } else { //user does not exist with that username
         return done(null, false, 'User does not exist');
       }
