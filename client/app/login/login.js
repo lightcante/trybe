@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-11 11:11:33
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-11 11:17:31
 */
 
 'use strict';
@@ -53,7 +53,6 @@
           //stringify obj to store into local storage
           AuthFactory.setUserLocalStorage(data);
           $state.go('feed');
-
         })
         .catch(function (error) {
           console.error(error);
