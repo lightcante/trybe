@@ -1,7 +1,7 @@
 <div class="signin">
   <form>
-    <div ng-show="isUser">Sign in</div>
-    <div ng-show="!isUser">Sign up</div>
+    <div ng-show="newUser">Sign in</div>
+    <div ng-show="!newUser">Sign up</div>
 
     <div class="form-group">
       <label for="Username">Username</label>
@@ -13,7 +13,10 @@
       <input ng-model="user.password" type="password" class="form-control" id="password" placeholder="Password">
     </div>
 
-    <button ng-show="isUser" ng-click="signin()" type="submit" class="btn btn-default">Sign in</button>
-    <button ng-show="!isUser" ng-click="signup()" type="submit" class="btn btn-default">Sign up</button>
+    <button ng-show="newUser" ng-click="signin()" type="submit" class="btn btn-default">Sign in</button>
+    <button ng-show="!newUser" ng-click="signup()" type="submit" class="btn btn-default">Sign up</button>
+
+    <button ng-show="newUser" ng-click="switchMethod()" type="submit" class="btn btn-default">Sign up</button>
+    <button ng-show="!newUser" ng-click="switchMethod()" type="submit" class="btn btn-default">Sign in</button>
   </form>
 </div>

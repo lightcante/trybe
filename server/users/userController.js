@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 14:10:44
+* @Last Modified time: 2015-05-06 15:30:37
 */
 
 'use strict';
@@ -19,7 +19,7 @@ module.exports = {
       if(err){ // if there was an error
         return next(err);
       } else if(!user){ // if the user was not found in the database
-        return res.send(info); // will return the info back to the client side
+        next (new Error(info)); // will return the info back to the client side
       } else {
         var token =  jwt.encode(user, 'lighthoney');
         console.log(token)
@@ -33,7 +33,7 @@ module.exports = {
       if(err){
         return next(err);
       } else if (!user){
-        return res.send(info)
+        next( new Error(info))
       } else {
         module.exports.signin(req,res,next) // redirect to sign in function
       }
