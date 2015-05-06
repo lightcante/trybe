@@ -7,11 +7,14 @@
 // Workout : Lift
                                                                                 
 {
-  username: 'Tom',
-  trybe: 'CFSF',
-  type: 'lift',
-  title: '05042015',
-  description: 'build up to 8- rep max of ',
+
+  userID: 3, 
+  username: "Tom",
+  trybe: "CFSF",
+  type: "lift",
+  title: "05042015",
+  description: "build up to 8- rep max of ",
+
   exercises: [
     {
       exerciseName: 'bench press',
@@ -31,11 +34,13 @@
 //Workout : Metcon
 
 {
-  username: 'Mia',
-  trybe: 'CFSF',
-  type: 'metcon',
-  title: '05042015',
-  description: '5 rounds, each on a 3-minute clock of', 
+
+  userID: 4, 
+  username: "Mia",
+  trybe: "CFSF",
+  type: "metcon",
+  title: "05042015",
+  description: "5 rounds, each on a 3-minute clock of", 
   exercises: [
     {
       exerciseName: '20 GHD sit-ups',
@@ -53,11 +58,13 @@
 
 // Workout: Benchmark
 {
-  username: 'Greg',
-  trybe: 'CFSF',
-  type: 'benchmark',
-  title: 'fran',
-  description: 'perform 21-15-9 reps of', 
+
+  userID: 7, 
+  username: "Greg",
+  trybe: "CFSF",
+  type: "benchmark",
+  title: "fran",
+  description: "perform 21-15-9 reps of", 
   exercises: [
     {
       exerciseName: '95 lb thrusters',
