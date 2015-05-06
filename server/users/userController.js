@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 15:30:37
+* @Last Modified time: 2015-05-06 17:51:12
 */
 
 'use strict';
@@ -22,8 +22,8 @@ module.exports = {
         next (new Error(info)); // will return the info back to the client side
       } else {
         var token =  jwt.encode(user, 'lighthoney');
-        console.log(token)
-        workoutController.getAllWorkouts(req, res, next, token);
+        var userID = user.get('id')
+        workoutController.getAllWorkouts(req, res, next, token, userID);
       }
     })(req, res, next);
   },
