@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-05 16:59:58
+* @Last Modified time: 2015-05-05 18:11:44
 */
 
 'use strict';
@@ -32,16 +32,38 @@
    * states for login and signup.
    * @param {angular} $scope
    */
-  var LoginCtrl = function ($scope) {
+  var LoginCtrl = function ($scope, $window, $location, Auth) {
     $scope.isUser = true;
-    $scope.username;
-    $scope.password;
+
+    $scope.user = {};
+
+    $scope.signup = function() {
+      Auth.signin($scope.user)
+        .then(function (token) {
+          $window.localStorage.setItem('com.trybe', token);
+          $location.path('/feed');
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    };
+
+    $scope.signin = function() {
+      Auth.signup($scope.user)
+        .then(function (token) {
+          $window.localStorage.setItem('com.trybe', token);
+          $location.path('/feed');
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    };
   };
 
   // Entry point for module
   angular
 
-    .module('trybe-app.login', [])
+    .module('trybe-app.login', []) //can add 'Auth' to array
 
     .config(LoginConfig)
 
