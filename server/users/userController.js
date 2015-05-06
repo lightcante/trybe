@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-09 00:17:34
+* @Last Modified time: 2015-05-09 00:18:44
 */
 
 'use strict';
@@ -21,7 +21,9 @@ module.exports = {
       } else if(!user){ // if the user was not found in the database
         next (new Error(info)); // will return the info back to the client side
       } else {
+
         var token =  jwt.encode(user.username, 'lighthoney');
+
         console.log('token', token);
         // var userID = user.get('id');
         var username = user.get('username');
@@ -29,7 +31,6 @@ module.exports = {
           username: username, 
           token: token
         });
-        // workoutController.getAllWorkouts(req, res, next, token, userID);
       }
     })(req, res, next);
   },
