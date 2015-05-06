@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 16:44:04
+* @Last Modified time: 2015-05-05 18:07:07
 */
 
 'use strict';
@@ -16,7 +16,7 @@
     
     $stateProvider.state('feed', {
       url: '/feed',
-      templateUrl: 'client/app/feed/feed.tpl.html',
+      templateUrl: 'feed/feed.tpl.html',
       controller: FeedCtrl
     });
   };
