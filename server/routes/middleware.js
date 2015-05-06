@@ -1,8 +1,8 @@
 /* 
 * @Author: vokoshyv
 * @Date:   2015-05-05 10:14:44
-* @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-05 12:12:14
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-05 16:20:16
 */
 'use strict';
 //this file will be used to interpret and route http requests
@@ -10,7 +10,7 @@
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 
-module.exports = function(app, express){
+module.exports = function(app, express, passport){
 
   //Express allows us to use multiple routers with their own
   //configurations
@@ -36,6 +36,8 @@ module.exports = function(app, express){
 
   // use workoutRouter for workout requests
   app.use('api/workouts', workoutRouter);
+
+  require('../users/passportConfig.js')(passport)
 
   // inject routers into their respective route files
   require('../users/userRoutes.js')(userRouter);
