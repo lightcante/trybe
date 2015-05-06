@@ -1,8 +1,8 @@
 /* 
 * @Author: vokoshyv
 * @Date:   2015-05-05 10:14:44
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 09:58:09
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-06 10:34:41
 */
 'use strict';
 //this file will be used to interpret and route http requests
@@ -32,10 +32,10 @@ module.exports = function(app, express, passport){
   app.use(express.static(__dirname + '/../../client'));
 
   // use userRouter for user requests
-  app.use('api/users', userRouter);
+  app.use('/api/users', userRouter);
 
   // use workoutRouter for workout requests
-  app.use('api/workouts', workoutRouter);
+  app.use('/api/workouts', workoutRouter);
 
   require('../users/passportConfig.js')(passport);
 
