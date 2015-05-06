@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 17:18:38
+* @Last Modified time: 2015-05-05 17:58:44
 */
 
 'use strict';
@@ -211,13 +211,22 @@ module.exports = function (grunt) {
         baseRewrite: '../../../app'
       }
     },
-
+    html2js: {
+      app: {
+        options: {
+          base: '<%= app %>'
+        },
+        src: [ '<%= app_files.atpl %>' ],
+        dest: '<%= build %>/templates-app.js'
+      }
+    },
     index: {
       build: {
         dir: '<%= build %>',
         src: [
           '<%= vendor_files.js %>',
           '<%= app_files.js %>',
+          '<%= html2js.app.dest %>',
           '<%= vendor_files.css %>',
           '<%= styles %>/main.css'
         ]
@@ -240,6 +249,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-html2js');
 
   // ----------------------------------------------------
   // Register tasks
@@ -261,7 +271,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('wire-styles', ['manifest', 'sass', 'copy:css']);
 
-  grunt.registerTask('wire-behaviors', ['copy:appjs', 'index']);
+  grunt.registerTask('wire-behaviors', ['copy:appjs', 'html2js', 'index']);
  
   // ----------------------------------------------------
   // Register multi-tasks and helper methods

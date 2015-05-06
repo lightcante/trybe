@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 10:16:27
-* @Last Modified by:   Justin Webb
-* @Last Modified time: 2015-05-05 17:40:14
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-05 18:12:57
 */
 
 'use strict';
@@ -41,6 +41,7 @@
       'ui.router',
 
       // app modules
+      'templates-app',
       'trybe-app.workout',
       'trybe-app.feed'
       // 'trybe-app.login'

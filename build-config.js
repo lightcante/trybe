@@ -11,6 +11,9 @@ module.exports  = {
     // Source excluding test files
     js: [ 'client/app/**/*.js', '!client/app/**/*.spec.js'],
 
+    // Templates
+    atpl: [ 'client/app/**/*.tpl.html' ],
+
     // Entry page
     html: [ 'client/index.html' ],
 
