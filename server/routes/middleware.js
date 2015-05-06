@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 10:14:44
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 16:20:16
+* @Last Modified time: 2015-05-06 09:58:09
 */
 'use strict';
 //this file will be used to interpret and route http requests
@@ -29,7 +29,7 @@ module.exports = function(app, express, passport){
 
   //express.static allows us to look up files in the client
   //folder
-  app.use(express.static(__dirname + '/../../dist'));
+  app.use(express.static(__dirname + '/../../client'));
 
   // use userRouter for user requests
   app.use('api/users', userRouter);
@@ -37,7 +37,7 @@ module.exports = function(app, express, passport){
   // use workoutRouter for workout requests
   app.use('api/workouts', workoutRouter);
 
-  require('../users/passportConfig.js')(passport)
+  require('../users/passportConfig.js')(passport);
 
   // inject routers into their respective route files
   require('../users/userRoutes.js')(userRouter);

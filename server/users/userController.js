@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 17:26:05
+* @Last Modified time: 2015-05-06 10:00:08
 */
 
 'use strict';
@@ -29,9 +29,11 @@ module.exports = {
 
   signup: function(req, res, next){
     console.log('singing up');
+    res.send(200)
   },
 
   checkAuth: function(req, res, next){
     console.log('auth')
+    res.send(200);
   }
 };

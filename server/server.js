@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:12:58
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 18:52:45
+* @Last Modified time: 2015-05-06 09:28:23
 */
 'use strict';
 var config = require('./server-config');
@@ -11,13 +11,15 @@ var app = express();
 var server = require('http').createServer(app);
 var open = require('open');
 var models = require('./models');
-var passport = require('passport')
+var passport = require('passport');
+var mysql = require('mysql');
 
 // Configure server
 app.use(express.static(config.static_site_root));
 
+
 // Create tables and start server
-models.sequelize.sync({force:true})
+models.sequelize.sync()
 .done(function(){
   server.listen(config.port, function () {
     console.log('Express server listening on port %d', config.port);

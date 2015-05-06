@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-05 13:33:15
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 19:14:47
+* @Last Modified time: 2015-05-05 19:31:28
 */
 
 //This file is used to coordinate all the schemas
@@ -11,11 +11,7 @@
 var Sequelize = require('sequelize'); 
 
 //initialize database connection
-var sequelize = new Sequelize('trybe', null , null, {
-  host: '127.0.0.1',
-  port: 3306,
-  dialect: 'mysql'
-}); 
+var sequelize = new Sequelize('trybe', 'root' , null); 
 
 // TODO: add trybes, as per database design
 
