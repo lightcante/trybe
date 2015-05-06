@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 16:44:58
+* @Last Modified time: 2015-05-06 16:48:35
 */
 
 'use strict';
@@ -51,6 +51,7 @@
       AuthFactory.signin($scope.user)
         .then(function (data) {
           $window.localStorage.setItem('com.trybe', data.token);
+
           $location.path('/feed');
         })
         .catch(function (error) {
