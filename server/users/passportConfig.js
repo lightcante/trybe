@@ -1,8 +1,8 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-05 16:15:10
-* @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-06 10:35:15
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-06 11:34:05
 */
 
 'use strict';
@@ -23,9 +23,11 @@ module.exports = function(passport){
         });
     });
 
+//this function will set up the strategy for when a user signs in. It will search the database for the username and match
+//the password
 passport.use('local-signin', new LocalStrategy(
   function(username, password, done){
-    User.find( {where: {username: username} }).on('success', function(user){
+    User.find( {where: {username: username} }).then(function(user){
       // if a user exists with that username
       if (user) {
         // compare the password with the password that matches up
@@ -41,4 +43,25 @@ passport.use('local-signin', new LocalStrategy(
       }
     });
   }));
+
+// this function will set up the strategy for user sign up. It will search the database for that username to make sure that
+// there isn't a user with that username and then if ok, will create a table entry in the database.
+passport.use('local-signup', new LocalStrategy(
+  function(username, password, done){
+    User.find( {where: {username: username} }).then(function(user){
+      if(user){ //if that username already exists
+        return done(null, false, 'That username already exists') //send back a falsy value for user and the message
+      } else {
+        User.build({username: username, password: password}) // builds the new user to be saved in the database
+          .save() // saves the user to the database
+          .then(function(user){ // on success, send back user data
+            return done(null, user)
+          })
+          .catch(function(err){ // error handling
+            return done(err);
+          })
+      }
+    })
+  }))
+
 };
