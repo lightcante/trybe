@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 13:28:57
+* @Last Modified time: 2015-05-06 14:10:44
 */
 
 'use strict';
@@ -10,11 +10,11 @@
 var jwt = require('jwt-simple');
 var passport= require('passport');
 var workoutController = require('../workout/workoutController.js');
+var User = require('../models').user;
 
 module.exports = {
 
   signin : function(req, res, next){
-    console.log(req.body)
     passport.authenticate('local-signin' , function(err, user, info){
       if(err){ // if there was an error
         return next(err);
@@ -22,6 +22,7 @@ module.exports = {
         return res.send(info); // will return the info back to the client side
       } else {
         var token =  jwt.encode(user, 'lighthoney');
+        console.log(token)
         workoutController.getAllWorkouts(req, res, next, token);
       }
     })(req, res, next);
@@ -40,8 +41,15 @@ module.exports = {
   },
 
   checkAuth: function(req, res, next){
-    console.log('auth')
-    res.send(200);
+    var token = req.headers['x-access-token']; //get the token from the request header
+    var user = jwt.decode(token, 'lighthoney'); // decode the token with our secret to find the user object
+    User.find( {where: {username: user.username}} ).then(function(user){ // search the database for a user that matches
+      if(user){ // if the user is found, send back a 200 status code
+        res.send(200);
+      } else { // if the user isn't found, send back a 401
+        res.send(401)
+      }
+    })
   }
 };
 
