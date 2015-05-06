@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:12:58
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 16:18:31
+* @Last Modified time: 2015-05-05 18:52:45
 */
 'use strict';
 var config = require('./server-config');
@@ -17,7 +17,8 @@ var passport = require('passport')
 app.use(express.static(config.static_site_root));
 
 // Create tables and start server
-models.sequelize.sync().then(function(){  
+models.sequelize.sync({force:true})
+.done(function(){
   server.listen(config.port, function () {
     console.log('Express server listening on port %d', config.port);
     open( 'http://localhost:' + config.port, function (err) {
@@ -28,7 +29,7 @@ models.sequelize.sync().then(function(){
       }
     });
   });
-});
+})
 
 // Configure our server with middleware for routing
 require('./routes/middleware.js')(app, express, passport);
