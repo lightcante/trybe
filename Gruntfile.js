@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 17:58:44
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-06 13:19:21
 */
 
 'use strict';
@@ -73,6 +73,30 @@ module.exports = function (grunt) {
               }, 1000);
             });
           }
+        }
+      }
+    },
+
+    karma: {
+      options: {
+        configFile: 'karma.conf.js',
+        reporters: ['progress', 'coverage']
+      },
+      // Watch configuration
+      watch: {
+        background: true,
+        reporters: ['progress']
+      },
+      // Single-run configuration for development
+      single: {
+        singleRun: true,
+      },
+      // Single-run configuration for CI
+      ci: {
+        singleRun: true,
+        coverageReporter: {
+          type: 'lcov',
+          dir: 'results/coverage/'
         }
       }
     },
@@ -250,6 +274,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-karma');
 
   // ----------------------------------------------------
   // Register tasks
@@ -257,7 +282,7 @@ module.exports = function (grunt) {
   grunt.registerTask('serverdev', ['concurrent:serverdev']);
 
   grunt.registerTask('serverdebug', ['concurrent:serverdebug']);
-  
+
   grunt.registerTask('clientdev', ['concurrent:clientdev']);
 
   grunt.registerTask('build', [
@@ -272,7 +297,9 @@ module.exports = function (grunt) {
   grunt.registerTask('wire-styles', ['manifest', 'sass', 'copy:css']);
 
   grunt.registerTask('wire-behaviors', ['copy:appjs', 'html2js', 'index']);
- 
+
+  grunt.registerTask('testClient', ['karma:single']);
+
   // ----------------------------------------------------
   // Register multi-tasks and helper methods
   // ----------------------------------------------------

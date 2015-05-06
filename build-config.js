@@ -25,7 +25,7 @@ module.exports  = {
       'vendor/angular/angular.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-animate/angular-animate.js',
-      'vendor/lodash/lodash.js'
+      'vendor/lodash/lodash.js',
     ],
     css: [
       'vendor/animate.css/animate.min.css'
