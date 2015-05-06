@@ -2,7 +2,11 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-08 09:57:12
+<<<<<<< HEAD
+* @Last Modified time: 2015-05-10 16:23:16
+=======
+* @Last Modified time: 2015-05-06 16:24:15
+>>>>>>> (refactor) Update naming of resp object for clarity
 */
 
 'use strict';
@@ -53,7 +57,6 @@
         .then(function (data) {
           console.log('*data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
-
           $state.go('feed');
         })
         .catch(function (error) {
