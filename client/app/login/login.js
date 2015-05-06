@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-08 09:57:12
+* @Last Modified time: 2015-05-10 22:32:26
 */
 
 'use strict';
@@ -53,7 +53,6 @@
         .then(function (data) {
           console.log('*data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
-
           $state.go('feed');
         })
         .catch(function (error) {
