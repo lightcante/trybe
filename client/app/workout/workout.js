@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 16:01:16
+* @Last Modified time: 2015-05-05 17:42:33
 */
 
 'use strict';
@@ -16,7 +16,7 @@
     
     $stateProvider.state('workout', {
       url: '/workout',
-      templateUrl: 'client/app/workout/workout.tpl.html',
+      templateUrl: 'workout/workout.tpl.html',
       controller: WorkoutCtrl
     });
   };

@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-04 15:15:58
+* @Last Modified time: 2015-05-05 17:18:38
 */
 
 'use strict';
@@ -217,7 +217,7 @@ module.exports = function (grunt) {
         dir: '<%= build %>',
         src: [
           '<%= vendor_files.js %>',
-          '<%= app %>/client/**/*.js',
+          '<%= app_files.js %>',
           '<%= vendor_files.css %>',
           '<%= styles %>/main.css'
         ]
