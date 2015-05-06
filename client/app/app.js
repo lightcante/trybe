@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 10:16:27
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 18:12:57
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-05 18:49:14
 */
 
 'use strict';
@@ -43,8 +43,8 @@
       // app modules
       'templates-app',
       'trybe-app.workout',
-      'trybe-app.feed'
-      // 'trybe-app.login'
+      'trybe-app.feed',
+      'trybe-app.login'
     ])
 
     .config(AppStateConfig)
