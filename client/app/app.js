@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-05 10:16:27
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-05 14:45:50
+* @Last Modified time: 2015-05-05 18:49:14
 */
 
 'use strict';
@@ -14,21 +14,15 @@
    * @param {angular} $stateProvider
    * @param {angular} $urlRouterProvider
    */
-  var AppConfig = function($stateProvider, $urlRouterProvider){
-    // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise('/state1');
+  var AppStateConfig = function($stateProvider, $urlRouterProvider){
+    $stateProvider.state('root', {
+      url: '/',
+      controller: AppCtrl
+    });
 
-    $stateProvider
-      .state('state1', {
-        url: '/state1',
-        templateUrl: 'state1.html',
-      })
-      .state('state1.list', {
-        url: '/list',
-        templateUrl: 'state1.list.html',
-        controller: AppCtrl
-      });
-    };
+    // For any unmatched url, redirect to /state1
+    $urlRouterProvider.otherwise('/');
+  };
 
   /**
    * Entry point for application. Loads all client-side dependencies
@@ -40,9 +34,20 @@
 
   //Entry point for for module
   angular
-    .module('trybe-app', ['ui-router', 'ng-animate'])
 
-    .config(AppConfig)
+    .module('trybe-app', [
+      // angular modules
+      'ngAnimate',
+      'ui.router',
+
+      // app modules
+      'templates-app',
+      'trybe-app.workout',
+      'trybe-app.feed',
+      'trybe-app.login'
+    ])
+
+    .config(AppStateConfig)
 
     .controller('AppCtrl', AppCtrl);
 
