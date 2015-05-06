@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 10:21:11
+* @Last Modified time: 2015-05-06 14:54:55
 */
 
 'use strict';
@@ -56,7 +56,7 @@
     $scope.user = {};
 
     $scope.signup = function() {
-      AuthFactory.signin($scope.user)
+      AuthFactory.signup($scope.user)
         .then(function (token) {
           $window.localStorage.setItem('com.trybe', token);
           $location.path('/feed');
@@ -67,7 +67,7 @@
     };
 
     $scope.signin = function() {
-      AuthFactory.signup($scope.user)
+      AuthFactory.signin($scope.user)
         .then(function (token) {
           $window.localStorage.setItem('com.trybe', token);
           $location.path('/feed');
