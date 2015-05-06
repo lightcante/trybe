@@ -2,27 +2,54 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-06 12:21:18
+* @Last Modified time: 2015-05-06 15:33:52
 */
 'use strict';
+
+var Workout = require('../models').workout;
+var Trybe = require('../models').trybe;
+var Exercise = require('../models').exercise;
+var User = require('../models').user;
 
 module.exports = {
 
   saveWorkout: function(req, res, next){
     // Acquire workout information from the req.body;
     // Write the workout information to the sql tables
-    // console.log(req.body);
+
+    console.log(req.body);
+
+    // Trybe.find({where: {name: req.body.trybe}}).then(function(trybe){
+    //   console.log("TRYBE INFO FROM TABLE: ", trybe);
+    // })
+    
+    User.find({where: {name: req.body.username}}).then(function(user){
+      console.log("USER INFO FROM TABLE", user);
+    })
+    // var userID = 
+
+    Workout.build({
+      // userId: 
+      type: req.body.type,
+      title: req.body.title,
+      description: req.body.description, 
+      finalResult: req.body.finalResult
+      // TrybeId: 
+    })
+
+
     
     // We then run getAllWorkouts to acquire workouts
     // from workout table
-    module.exports.getAllWorkouts(req, res, next);
+    // module.exports.getAllWorkouts(req, res, next);
   },
 
   //take in 4th parameter of token to be added to res.body
-  getAllWorkouts: function(req, res, next, token){
+  getAllWorkouts: function(req, res, next, token, userID){
     // var body = {
     //   token : token, 
-    //   workout: [1, 2, 3]
+    //   workout: [1, 2, 3], 
+    //   userID: userID
     // }
 
     res.send({
