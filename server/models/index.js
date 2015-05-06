@@ -1,8 +1,8 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-05 13:33:15
-* @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-05 15:36:20
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-05 19:31:28
 */
 
 //This file is used to coordinate all the schemas
@@ -11,7 +11,7 @@
 var Sequelize = require('sequelize'); 
 
 //initialize database connection
-var sequelize = new Sequelize('trybe', null, null); 
+var sequelize = new Sequelize('trybe', 'root' , null); 
 
 // TODO: add trybes, as per database design
 

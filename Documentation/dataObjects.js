@@ -5,7 +5,7 @@
 
 
 // Workout : Lift
-
+                                                                                
 {
   username: "Tom",
   trybe: "CFSF",
@@ -35,16 +35,16 @@
   trybe: "CFSF",
   type: "metcon",
   title: "05042015",
-  description: "5 rounds, each on a 3-minute clock of"
+  description: "5 rounds, each on a 3-minute clock of", 
   exercises: [
     {
       exerciseName: "20 GHD sit-ups",
-      quantity: [null],
+      quantity: null,
       result: null
     },
     {
-      exerciseName: "hip extensions",
-      quantity: [2,5],
+      exerciseName: "20 hip extensions",
+      quantity: null,
       result: null
     }
   ],
@@ -57,16 +57,16 @@
   trybe: "CFSF",
   type: "benchmark",
   title: "fran",
-  description: "perform 21-15-9 reps of"
+  description: "perform 21-15-9 reps of", 
   exercises: [
     {
       exerciseName: "95 lb thrusters",
       quantity: null,
       result: null
-    },INSERT_ORDERING_CRITERIA_HERE
+    },
     {
       exerciseName: "pull-ups",
-      quantity: null
+      quantity: null, 
       result: null
     },
   ],
