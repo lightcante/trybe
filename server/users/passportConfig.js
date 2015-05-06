@@ -1,8 +1,8 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-05 16:15:10
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-05 17:23:15
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-06 10:35:15
 */
 
 'use strict';
@@ -22,7 +22,6 @@ module.exports = function(passport){
             done(err, user);
         });
     });
-  };
 
 passport.use('local-signin', new LocalStrategy(
   function(username, password, done){
@@ -42,3 +41,4 @@ passport.use('local-signin', new LocalStrategy(
       }
     });
   }));
+};
