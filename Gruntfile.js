@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 13:19:21
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-06 17:57:58
 */
 
 'use strict';
@@ -174,7 +174,7 @@ module.exports = function (grunt) {
       },
       gen: {
         files: {
-            '<%= styles %>/main.css': '<%= styles %/main.scss'
+            '<%= styles %>/main.css': '<%= styles %>/main.scss'
         }
       }
     },
