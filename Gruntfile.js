@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-06 17:58:42
+* @Last Modified time: 2015-05-06 17:59:38
 */
 
 'use strict';
@@ -167,7 +167,10 @@ module.exports = function (grunt) {
     sass: {
       options: {
         sourceMap: true,
-        includePaths: ['<%= sass_bootstrap_dir %>'],
+        includePaths: [
+          '<%= import_path.bootstrap %>',
+          '<%= import_path.fontawesome %>'
+        ],
         imagePath: '<%= images %>',
         outputStyle: 'nested', //'nested' or 'compressed'
         precision: 10

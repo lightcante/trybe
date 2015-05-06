@@ -31,5 +31,8 @@ module.exports  = {
       'vendor/animate.css/animate.min.css'
     ]
   },
-  sass_bootstrap_dir : 'vendor/bootstrap-sass-official/assets/stylesheets'
+  import_path: {
+    bootstrap : 'vendor/bootstrap-sass-official/assets/stylesheets',
+    fontawesome : 'vendor/font-awesome/scss'
+  }
 };
