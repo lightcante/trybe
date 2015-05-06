@@ -2,29 +2,11 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 15:57:43
+* @Last Modified time: 2015-05-06 16:44:58
 */
 
 'use strict';
 (function (angular, _) {
-
-  var LoginConfig = function($stateProvider, $urlRouterProvider) {
-
-    $stateProvider
-      .state('login', {
-        url: '/login',
-        templateUrl: '/login/login.tpl.html',
-        controller: LoginCtrl
-      })
-      .state('signup', {
-        url: '/signup',
-        templateUrl: '/login/login.tpl.html',
-        controller: LoginCtrl
-      });
-
-    // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise('/login');
-  };
 
   /**
    * Sets viewstate for login page
@@ -38,11 +20,6 @@
         templateUrl: 'login/login.tpl.html',
         controller: LoginCtrl
       })
-      // .state('login/signup', {
-      //   url: '/signup',
-      //   templateUrl: 'login/login.tpl.html',
-      //   controller: LoginCtrl
-      // });
   };
 
   /**
