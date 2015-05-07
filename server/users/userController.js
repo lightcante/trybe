@@ -1,8 +1,8 @@
 /* 
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-08 22:10:31
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-09 00:17:34
 */
 
 'use strict';
@@ -29,8 +29,8 @@ module.exports = {
           username: username, 
           token: token
         });
-      };
         // workoutController.getAllWorkouts(req, res, next, token, userID);
+      }
     })(req, res, next);
   },
 
