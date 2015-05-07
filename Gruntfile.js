@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 13:19:21
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-06 17:59:38
 */
 
 'use strict';
@@ -152,8 +152,8 @@ module.exports = function (grunt) {
         tasks: ['copy:appjs', 'index']
       },
       html: {
-        files: ['src/index.html'],
-        tasks: ['index']
+        files: ['<%= app_files.atpl %>', 'src/index.html'],
+        tasks: ['html2js', 'index']
       },
       gruntfile: {
         files: 'Gruntfile.js',
@@ -167,14 +167,17 @@ module.exports = function (grunt) {
     sass: {
       options: {
         sourceMap: true,
-        includePaths: ['<%= sass_bootstrap_dir %>'],
+        includePaths: [
+          '<%= import_path.bootstrap %>',
+          '<%= import_path.fontawesome %>'
+        ],
         imagePath: '<%= images %>',
         outputStyle: 'nested', //'nested' or 'compressed'
         precision: 10
       },
       gen: {
         files: {
-            '<%= styles %>/main.css': '<%= styles %/main.scss'
+            '<%= styles %>/main.css': '<%= styles %>/main.scss'
         }
       }
     },

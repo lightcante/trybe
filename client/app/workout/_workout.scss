@@ -3,5 +3,5 @@
 .workout {
   @include make-xs-column(4);
   @include make-xs-column-offset(2);
-  background-color: #ffc0cb
+  background-color: #ffc0cb;
 }

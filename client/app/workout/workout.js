@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 18:00:09
+* @Last Modified time: 2015-05-06 10:55:59
 */
 
 'use strict';
@@ -22,13 +22,34 @@
   };
 
   /**
-   * Controls interactions in workout view.  Enable user to 
+   * Controls interactions in workout view.  Enables user to 
    * veiw read only details of workout.  Allows user to
    * record workout results.
    * @param {angular} $scope 
    */
   var WorkoutCtrl = function ($scope) {
-    $scope.bar = 'baz';
+
+    // dummy workout object
+    $scope.workout = {
+      username: 'Greg',
+      trybe: 'CFSF',
+      type: 'benchmark',
+      title: 'fran',
+      description: 'perform 21-15-9 reps of',
+      exercises: [
+        {
+          exerciseName: '95 lb thrusters',
+          quantity: null,
+          result: null
+        },
+        {
+          exerciseName: 'pull-ups',
+          quantity: null,
+          result: null
+        },
+      ],
+      finalResult: {type: 'time', value: 338}
+    };
   };
 
   // Entry point for module
