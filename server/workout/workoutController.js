@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-06 16:54:15
+* @Last Modified time: 2015-05-06 17:50:38
 */
 'use strict';
 
@@ -24,7 +24,7 @@ module.exports = {
     //Acquire userID from User table
     User.find({where: {username: req.body.username}}).then(function(user){
       userID = user.get('id');
-      
+
       //Acquire trybeID from Trybe table
       Trybe.find({where: {name: req.body.trybe}}).then(function(trybe){
         trybeID = trybe.get('id');
@@ -70,8 +70,8 @@ module.exports = {
     // from workout table
   },
 
-  //take in 4th parameter of token to be added to res.body
-  getAllWorkouts: function(req, res, next, token, userID){
+
+  getAllWorkouts: function(req, res, next){
     // var body = {
     //   token : token, 
     //   workout: [1, 2, 3], 
