@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-08 22:05:57
+* @Last Modified time: 2015-05-08 22:06:31
 */
 
 'use strict';
@@ -21,7 +21,6 @@ module.exports = {
       } else if(!user){ // if the user was not found in the database
         next (new Error(info)); // will return the info back to the client side
       } else {
-<<<<<<< HEAD
         var token =  jwt.encode(user.username, 'lighthoney');
 <<<<<<< HEAD
         console.log('token', token);
@@ -34,9 +33,6 @@ module.exports = {
         // workoutController.getAllWorkouts(req, res, next, token, userID);
 =======
         console.log('token', token)
-=======
-        var token =  jwt.encode(user, 'lighthoney');
->>>>>>> (feat) Add userId to arguments sent to workout controller from user controller
         var userID = user.get('id')
         workoutController.getAllWorkouts(req, res, next, token, userID);
 >>>>>>> (feat) Add userId to arguments sent to workout controller from user controller
