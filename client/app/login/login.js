@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 16:48:35
+* @Last Modified time: 2015-05-06 18:10:22
 */
 
 'use strict';
@@ -39,6 +39,7 @@
     $scope.signup = function() {
       AuthFactory.signup($scope.user)
         .then(function (data) {
+          console.log('*data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
           $location.path('/feed');
         })
@@ -50,6 +51,7 @@
     $scope.signin = function() {
       AuthFactory.signin($scope.user)
         .then(function (data) {
+          console.log('*data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
 
           $location.path('/feed');
@@ -63,7 +65,7 @@
   // Entry point for module
   angular
 
-    .module('trybe-app.login', ['trybe-app.common']) //can add 'Auth' to array
+    .module('trybe-app.login', ['trybe-app.common'])
 
     .config(LoginConfig)
 
