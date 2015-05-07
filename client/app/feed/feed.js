@@ -1,8 +1,8 @@
-/* 
+/*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 18:07:07
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-06 18:07:44
 */
 
 'use strict';
@@ -13,7 +13,7 @@
    * @param {[type]} $stateProvider [description]
    */
   var FeedStateConfig = function ($stateProvider) {
-    
+
     $stateProvider.state('feed', {
       url: '/feed',
       templateUrl: 'feed/feed.tpl.html',
@@ -22,12 +22,24 @@
   };
 
   /**
-   * controls application access from the client side. Has
-   * states for login and signup.  
-   * @param {angular} $scope 
+   * controls feed state from client side
+   * @param {angular} $scope
    */
   var FeedCtrl = function ($scope) {
-    $scope.foo = 'bar';
+    $scope.getWorkouts = function() {
+      FeedFactory.getAll()
+        .then(function(data)) {
+          console.log('data received from getWorkouts:', data);
+          $scope.workouts = data;
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    };
+    $scope.getWorkouts();
+
+
+
   };
 
   // Entry point for module
