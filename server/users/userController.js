@@ -1,8 +1,8 @@
 /* 
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 17:56:58
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-06 18:17:28
 */
 
 'use strict';
@@ -22,9 +22,14 @@ module.exports = {
         next (new Error(info)); // will return the info back to the client side
       } else {
         var token =  jwt.encode(user.username, 'lighthoney');
-        console.log('token', token)
-        var userID = user.get('id')
-        workoutController.getAllWorkouts(req, res, next, token, userID);
+        console.log('token', token);
+        // var userID = user.get('id');
+        var username = user.get('username');
+        res.send({
+          username: username, 
+          token: token
+        });
+        // workoutController.getAllWorkouts(req, res, next, token, userID);
       }
     })(req, res, next);
   },
