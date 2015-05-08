@@ -2,7 +2,11 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   VINCE
+<<<<<<< HEAD
 * @Last Modified time: 2015-05-08 11:26:34
+=======
+* @Last Modified time: 2015-05-08 10:58:41
+>>>>>>> (fix) Fix bug in profile and feed factory where each referenced itself
 */
 
 'use strict';
