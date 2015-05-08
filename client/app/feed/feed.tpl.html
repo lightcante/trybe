@@ -1,6 +1,11 @@
 <div class="feed">
 
-  <div class="workouts" ng-repeat="workout in data.workouts track by $index">
+  <div id="type" class="btn-group" role="group" aria-label="...">
+    <button type="button" ng-click="viewAll()" class="btn btn-default">All</button>
+    <button type="button" ng-click="viewMe()" class="btn btn-default">Me</button>
+  </div>
+
+  <div class="workouts" ng-repeat="workout in data.workouts | filter:viewFilter track by $index">
     <div class="workout" ng-click="log($index)">
       <!-- Show workout descr -->
       <div><span>{{ workout.username }} posted to {{ workout.trybe }}</span></div>

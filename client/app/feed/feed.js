@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 23:19:29
+* @Last Modified time: 2015-05-07 23:58:54
 */
 
 'use strict';
@@ -26,6 +26,8 @@
    */
   var FeedCtrl = function ($scope, $location, $state, FeedFactory) {
     $scope.data = {};
+    $scope.view = 'all';
+
     $scope.getWorkouts = function() {
       FeedFactory.getWorkouts()
         .then(function(data) {
@@ -38,14 +40,29 @@
     };
     $scope.getWorkouts();
 
+    $scope.viewMe = function() {
+      $scope.view = 'me';
+    }
+
+    $scope.viewAll = function() {
+      $scope.view = 'all';
+    }
+
+    $scope.viewFilter = function(workout) {
+      if($scope.view === 'me') {
+        //later change to own username
+        return (workout.username === $scope.view);
+      } else {
+        return true;
+      }
+    }
+
     $scope.log = function(index) {
       var selection = $scope.data.workouts[index];
       console.log("selected workout:", selection);
       FeedFactory.sendWorkout(selection);
       $state.go('workout');
     }
-
-
 
   };
 
