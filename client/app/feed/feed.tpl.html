@@ -28,6 +28,9 @@
 
       <!-- Shows workout result if a metcon or benchmark workout -->
       <div><span ng-if="workout.type !== 'lift'"> {{ workout.finalResult.type }} {{ workout.finalResult.value }} </span></div>
+      <div id="type" class="btn-group" role="group" aria-label="...">
+        <button type="button" class="tryButton">try</button>
+      </div>
 
     </div>
   </div>

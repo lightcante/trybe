@@ -14,3 +14,13 @@
 .exercises {
   margin-left: 10px;
 }
+
+.tryButton {
+  border:1px solid gray;
+  font-size:0.875;
+  word-wrap: break-word;
+  width: 400px; // only for IE8
+  max-width: 100%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
