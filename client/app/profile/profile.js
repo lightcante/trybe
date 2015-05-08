@@ -1,8 +1,8 @@
 /*
 * @Author: VINCE
 * @Date:   2015-05-08 11:11:52
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-08 11:31:53
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-11 10:56:02
 */
 
 'use strict';
@@ -23,26 +23,13 @@
   };
 
   /**
-   * Controls profile for client side.
+
+   * Controls login and signup for client side. Has
+   * states for login and signup.
    * @param {angular} $scope
    */
-  var ProfileCtrl = function ($scope, $window, $state, AuthFactory, FeedFactory) {
+  var ProfileCtrl = function ($scope, $window, $state, AuthFactory) {
     $scope.foo = 'bar';
-    $scope.data = {};
-
-    $scope.getUserData = function() {
-      FeedFactory.getWorkouts()
-        .then(function(data){
-          $scope.data.workouts = data.workouts;
-          console.log($scope.data.workouts);
-        })
-        .catch(function(error) {
-          console.error(error);
-        });
-    };
-    $scope.getUserData();
-
-
   };
 
   // Entry point for module
