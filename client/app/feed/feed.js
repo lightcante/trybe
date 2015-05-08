@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-08 09:31:47
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-08 11:27:49
 */
 
 'use strict';
@@ -71,7 +71,7 @@
   // Entry point for module
   angular
 
-    .module('trybe-app.feed', [])
+    .module('trybe-app.feed', ['trybe-app.common'])
 
     .config(FeedStateConfig)
 
