@@ -12,29 +12,39 @@
     </div>
 
     <div class="form-group">
-      <label for="description">Description</label>
+      <label for="description">Instructions</label>
       <textarea id="description" class="form-control" placeholder="Password"></textarea>
+      <ul class="exercise-list">
+        <li>
+          <span></span><span></span>
+        </li>
+      </ul>
     </div>
 
-    <div class="form-group">
-      <label for="exercise">Exercise</label>
-      <input id="exercise" class="form-control" placeholder="exercise"></input>
+    <!-- Create state -->
+    <div class="ctrls-by-type">
 
-      <!-- Create state -->
-      <div class="ctrls-by-type">
-        <label for="exercise">Exercise</label>
-        <i class="fa fa-minus fa-3"></i>
-        <numberstep></numberstep>        
+      <div class="ctrl-group">
+        <label for="exercise-label">Label</label>
+        <input class="exercise-label" placeholder="name"></input>
       </div>
 
-      <!-- Read state -->
-      <div class="ctrls-by-type">  
+      <div class="ctrl-group">
+        <label for="exercise">Sets:</label>
+        <numstepper></numstepper>
       </div>
-
-      <!-- Log state -->
-      <div class="ctrls-by-type">  
+      <div class="ctrl-group">
+        <label for="exercise">Reps:</label>
+        <numstepper></numstepper>
       </div>
+    </div>
 
+    <!-- Read state -->
+    <div class="ctrls-by-type">  
+    </div>
+
+    <!-- Log state -->
+    <div class="ctrls-by-type">  
     </div>
 
   </form>

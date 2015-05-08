@@ -6,10 +6,14 @@
 @import "library/variables";
 @import "library/mixins";
 
+
 // Add core Bootstrap styles. Comment and uncomment functionality inside 'bootstrap.scss' as required to keep 'main.css'
 // as small as possible.
 @import "font-awesome";
 @import "bootstrap";
+
+// Styles shared between custom components
+@import "snippets/bs-forms";
 
 // Skins may exist in several locations throughout the application.  They may override existing Bootstrap
 // directives or represent styles for custom application modules

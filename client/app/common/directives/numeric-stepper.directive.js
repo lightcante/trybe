@@ -1,35 +1,46 @@
 /* 
 * @Author: Justin Webb
 * @Date:   2015-05-06 11:43:21
-* @Last Modified by:   Justin Webb
-* @Last Modified time: 2015-05-06 15:44:22
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-07 22:34:35
 */
 'use strict';
 (function (angular) {
   
   var link = function (scope, elem, attr) {
-
+    elem.addClass('numstepper');
   };
 
-  var numbericStepperCtrl = function ($scope) {
+  var numericStepperCtrl = function ($scope) {
 
+    $scope.val = 0;
+
+    $scope.increment = function () {
+      console.log('increment');
+      $scope.val++;
+    };
+
+    $scope.decrement = function () {
+      if ($scope.val > 0) {
+        $scope.val--;
+      }
+    };
   };
 
-  var numbericStepper = function () {
+  var numericStepperDirective = function () {
     return {
       restrict: 'E',
       scope: {
-        foo: '='
+        min: '=',
+        max: '=',
       },
+      link: link,
+      controller: numericStepperCtrl,
       transclude: true,
       template: ''+
-        '<div class="numbericStepper">'+
-        ' <i class="fa fa-minus fa-3"></i>'+
-        ' <input type="text" pattern="[0-9]" placeholder="0"></input>'+
-        ' <i class="fa fa-plus fa-3"></i>'+
-        '</div>',
-      link: link,
-      controller: numbericStepperCtrl
+        ' <i class="fa fa-minus fa-3" ng-click="decrement()"></i>'+
+        ' <input ng-model="val" type="text" pattern="[0-9]" placeholder="0"></input>'+
+        ' <i class="fa fa-plus fa-3" ng-click="increment()"></i>'
     }
   };
 
@@ -37,6 +48,6 @@
     
     .module('trybe-app.common')
 
-    .directive('numberstep', numbericStepper);
+    .directive('numstepper', numericStepperDirective);
 
 })(angular);

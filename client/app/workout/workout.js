@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-06 10:55:59
+* @Last Modified time: 2015-05-07 13:43:34
 */
 
 'use strict';
@@ -31,24 +31,24 @@
 
     // dummy workout object
     $scope.workout = {
-      username: 'Greg',
+      username: 'Tom',
       trybe: 'CFSF',
-      type: 'benchmark',
-      title: 'fran',
-      description: 'perform 21-15-9 reps of',
+      type: 'lift',
+      title: '05042015',
+      description: 'build up to 8- rep max of ',
       exercises: [
         {
-          exerciseName: '95 lb thrusters',
-          quantity: null,
-          result: null
+          exerciseName: 'bench press',
+          quantity: [3, 8], //[sets, reps]
+          result: 185
         },
         {
-          exerciseName: 'pull-ups',
-          quantity: null,
-          result: null
-        },
+          exerciseName: 'squat',
+          quantity: [2,8],
+          result: 200
+        }
       ],
-      finalResult: {type: 'time', value: 338}
+      finalResult: null
     };
   };
 
