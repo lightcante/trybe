@@ -2,11 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-<<<<<<< HEAD
-* @Last Modified time: 2015-05-08 09:27:30
-=======
-* @Last Modified time: 2015-05-06 16:44:58
->>>>>>> (refactor) Refactor login module for clarity
+* @Last Modified time: 2015-05-08 09:30:03
 */
 
 'use strict';
@@ -27,12 +23,11 @@
   };
 
   /**
->>>>>>> (refactor) Refactor login module for clarity
    * Controls login and signup for client side. Has
    * states for login and signup.
    * @param {angular} $scope
    */
-  var LoginCtrl = function ($scope, $window, $location, AuthFactory) {
+  var LoginCtrl = function ($scope, $window, $state, AuthFactory) {
     $scope.switchMethod = function() {
       $scope.newUser = !$scope.newUser;
     };
@@ -44,8 +39,9 @@
     $scope.signup = function() {
       AuthFactory.signup($scope.user)
         .then(function (data) {
+          console.log('data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
-          $location.path('/feed');
+          $state.go('feed');
         })
         .catch(function (error) {
           console.error(error);
@@ -55,9 +51,9 @@
     $scope.signin = function() {
       AuthFactory.signin($scope.user)
         .then(function (data) {
+          console.log('*data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
-
-          $location.path('/feed');
+          $state.go('feed');
         })
         .catch(function (error) {
           console.error(error);
@@ -68,7 +64,7 @@
   // Entry point for module
   angular
 
-    .module('trybe-app.login', ['trybe-app.common']) //can add 'Auth' to array
+    .module('trybe-app.login', ['trybe-app.common'])
 
     .config(LoginConfig)
 

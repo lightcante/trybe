@@ -1,3 +1,16 @@
+// With regard to Bootstrap, app modules are positioned as
+// rows with nested spans, which divide rows horizontally.
 .feed {
-  
+  // @include make-xs-column(4);
+  // @include make-xs-column-offset(2);
+  // background-color: #ffc0cb;
+}
+
+.workout {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.exercises {
+  margin-left: 10px;
 }
