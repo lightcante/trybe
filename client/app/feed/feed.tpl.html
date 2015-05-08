@@ -1,7 +1,8 @@
 <div class="feed">
 
   <div class="workouts" ng-repeat="workout in data.workouts track by $index">
-    <div class="workout" ng-click="render($index)">
+    <div class="workout" ng-click="log($index)">
+      <!-- Show workout descr -->
       <div><span>{{ workout.username }} posted to {{ workout.trybe }}</span></div>
       <div><span>{{ workout.title }}</span></div>
       <div><span>{{ workout.description }}</span></div>

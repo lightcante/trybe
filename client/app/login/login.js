@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-08 00:19:17
+* @Last Modified time: 2015-05-08 00:19:46
 */
 
 'use strict';
@@ -27,7 +27,7 @@
    * states for login and signup.
    * @param {angular} $scope
    */
-  var LoginCtrl = function ($scope, $window, $location, AuthFactory) {
+  var LoginCtrl = function ($scope, $window, $state, AuthFactory) {
     $scope.switchMethod = function() {
       $scope.newUser = !$scope.newUser;
     };
@@ -39,9 +39,9 @@
     $scope.signup = function() {
       AuthFactory.signup($scope.user)
         .then(function (data) {
-          console.log('*data received:', data);
+          console.log('data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
-          $location.path('/feed');
+          $state.go('feed');
         })
         .catch(function (error) {
           console.error(error);
@@ -54,7 +54,7 @@
           console.log('*data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
 
-          $location.path('/feed');
+          $state.go('feed');
         })
         .catch(function (error) {
           console.error(error);

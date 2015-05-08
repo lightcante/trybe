@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 22:34:41
+* @Last Modified time: 2015-05-07 23:06:38
 */
 
 'use strict';
@@ -24,24 +24,25 @@
    * controls feed state from client side
    * @param {angular} $scope
    */
-  var FeedCtrl = function ($scope, FeedFactory) {
+  var FeedCtrl = function ($scope, FeedFactory, $location, $state) {
     $scope.data = {};
-    $scope.renderedWorkouts = {};
     $scope.getWorkouts = function() {
       FeedFactory.getWorkouts()
         .then(function(data) {
           $scope.data.workouts = data.workouts;
           console.log($scope.data.workouts);
-          // FeedFactory.renderWorkouts($scope.data.workouts)
-          //   .then(function(data)) {
-          //     $scope.renderedWorkouts = data;
-          //   }
         })
         .catch(function(error) {
           console.error(error);
         });
     };
     $scope.getWorkouts();
+
+    $scope.log = function(index) {
+      var selection = $scope.data.workouts[index];
+      console.log("selected workout:", selection);
+      $state.go('workout');
+    }
 
 
 
