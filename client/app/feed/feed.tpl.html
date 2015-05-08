@@ -16,14 +16,14 @@
     <div class="workout" ng-click="log($index)">
       <!-- Show workout descr -->
       <div><span>{{ workout.username }} posted to {{ workout.trybe }}</span></div>
-      <div><span>{{ workout.title }}</span></div>
+      <div><span ng-if="workout.type === 'benchmark'">{{ workout.title }}</span></div>
       <div><span>{{ workout.description }}</span></div>
 
       <!-- Repeats through exercises in workout, shows sets & reps if a lift -->
       <div class="exercises" ng-repeat="exercise in workout.exercises track by $index">
         <div><span>{{ exercise.exerciseName }}</span></div>
           <div><span ng-if="workout.type === 'lift'">{{ exercise.quantity[0] }} Sets, {{ exercise.quantity[1] }} Reps</span></div>
-          <div><span ng-if="workout.type === 'lift'">Result: {{ exercise.result }} </span></div>
+          <div><span ng-if="workout.type === 'lift'" class="liftResult">Result: {{ exercise.result }} </span></div>
       </div>
 
       <!-- Shows workout result if a metcon or benchmark workout -->
