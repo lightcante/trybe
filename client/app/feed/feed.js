@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 18:16:38
+* @Last Modified time: 2015-05-07 20:59:40
 */
 
 'use strict';
@@ -13,7 +13,6 @@
    * @param {[type]} $stateProvider [description]
    */
   var FeedStateConfig = function ($stateProvider) {
-
     $stateProvider.state('feed', {
       url: '/feed',
       templateUrl: 'feed/feed.tpl.html',
@@ -25,12 +24,12 @@
    * controls feed state from client side
    * @param {angular} $scope
    */
-  var FeedCtrl = function ($scope) {
+  var FeedCtrl = function ($scope, FeedFactory) {
     $scope.getWorkouts = function() {
-      FeedFactory.getAll()
+      FeedFactory.getWorkouts()
         .then(function(data) {
           console.log('data received from getWorkouts:', data);
-          $scope.workouts = data;
+          $scope.workouts = data.workouts; //array of workouts
         })
         .catch(function(error) {
           console.error(error);
