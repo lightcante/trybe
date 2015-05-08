@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-11 10:03:51
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-11 10:50:32
 */
 
 'use strict';
@@ -36,7 +36,7 @@
     var getWorkout = function() {
       console.log('workout req from log');
       return workout;
-    }
+    };
 
     return {
       getWorkouts: getWorkouts,
