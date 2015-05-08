@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 21:51:32
+* @Last Modified time: 2015-05-07 22:34:41
 */
 
 'use strict';
@@ -30,7 +30,8 @@
     $scope.getWorkouts = function() {
       FeedFactory.getWorkouts()
         .then(function(data) {
-          $scope.data.workouts = data.workouts; //array of workouts
+          $scope.data.workouts = data.workouts;
+          console.log($scope.data.workouts);
           // FeedFactory.renderWorkouts($scope.data.workouts)
           //   .then(function(data)) {
           //     $scope.renderedWorkouts = data;

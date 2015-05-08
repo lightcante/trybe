@@ -1,20 +1,20 @@
 <div class="feed">
-  <input type='text' ng-model='search' placeholder='Find past workouts' class="search"/>
 
   <div class="workouts" ng-repeat="workout in data.workouts track by $index">
     <div class="workout" ng-click="render($index)">
-      <div><span class="body">{{ workout.username }}</span></div>
-      <div><span class="body">{{ workout.title }}</span></div>
-      <div><span class="body">{{ workout.description }}</span></div>
+      <div><span>{{ workout.username }} posted to {{ workout.trybe }}</span></div>
+      <div><span>{{ workout.title }}</span></div>
+      <div><span>{{ workout.description }}</span></div>
 
-      <!-- Should repeat if has more than 1 exercise-->
+      <!-- Repeats through exercises in workout, shows sets & reps if a lift -->
       <div class="exercises" ng-repeat="exercise in workout.exercises track by $index">
-        <div><span class="body">{{ exercise.exerciseName }}</span></div>
-        <div><span class="body">{{ exercise.quantity[0] }} Sets </span></div>
-        <div><span class="body">{{ exercise.quantity[1] }} Reps </span></div>
-        <div><span class="body">Result: {{ exercise.result }} </span></div>
+        <div><span>{{ exercise.exerciseName }}</span></div>
+          <div><span ng-if="workout.type === 'lift'">{{ exercise.quantity[0] }} Sets, {{ exercise.quantity[1] }} Reps</span></div>
+          <div><span ng-if="workout.type === 'lift'">Result: {{ exercise.result }} </span></div>
 
-      <!-- <div><span class="body">Sets {{ workout.description }}</span></div> -->
+      <!-- Shows workout result if a metcon or benchmark workout -->
+      <div><span ng-if="workout.type !== 'lift'"> {{ workout.finalResult.type }} {{ workout.finalResult.value }} </span></div>
+
     </div>
   </div>
 
