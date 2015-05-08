@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 23:18:33
+* @Last Modified time: 2015-05-07 23:25:20
 */
 
 'use strict';
@@ -27,9 +27,10 @@
       });
     };
 
-    var sendWorkout = function(workout) {
-      console.log('workout sent from feed:', workout);
-      workout = workout;
+    var sendWorkout = function(selection) {
+      console.log('workout sent from feed:', selection);
+      workout = selection;
+      console.log('FeedFactory workout var:', workout);
     };
 
     var getWorkout = function() {
