@@ -1,8 +1,8 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
-* @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-06 17:50:38
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-08 12:58:03
 */
 'use strict';
 
@@ -77,70 +77,30 @@ module.exports = {
     //   workout: [1, 2, 3], 
     //   userID: userID
     // }
-
-    res.send({
-      workouts: [ 
-      {
-        username: 'Tom',
-        trybe: 'CFSF',
-        type: 'lift',
-        title: '05042015',
-        description: 'build up to 8- rep max of ',
-        exercises: [
-          {
-            exerciseName: 'bench press',
-            quantity: [3, 8], //[sets, reps]
-            result: 185
-          },
-          {
-            exerciseName: 'squat',
-            quantity: [2,8],
-            result: 200
-          }
-        ],
-        finalResult: null
-      }, 
-      {
-        username: 'Mia',
-        trybe: 'CFSF',
-        type: 'metcon',
-        title: '05042015',
-        description: '5 rounds, each on a 3-minute clock of', 
-        exercises: [
-          {
-            exerciseName: '20 GHD sit-ups',
-            quantity: [null],
-            result: null
-          },
-          {
-            exerciseName: 'hip extensions',
-            quantity: [2,5],
-            result: null
-          }
-        ],
-        finalResult: {type: 'reps', value: 45}
-      }, 
-      {
-        username: 'Greg',
-        trybe: 'CFSF',
-        type: 'benchmark',
-        title: 'fran',
-        description: 'perform 21-15-9 reps of', 
-        exercises: [
-          {
-            exerciseName: '95 lb thrusters',
-            quantity: null,
-            result: null
-          },
-          {
-            exerciseName: 'pull-ups',
-            quantity: null, 
-            result: null
-          },
-        ],
-        finalResult: {type: 'time', value: 338}
-      } 
-      ]
+    var workouts = [];
+    var userID = req.headers['x-access-userid']
+    User.find ({where: {id: userID}}).then(function(user){ // find the user
+      user.getTrybes().then(function(trybes){ //will return an array of trybe objects
+        trybes.forEach(function(trybe){
+          trybe.getWorkouts().then(function(workouts){ // will return an array of workouts
+            workouts.forEach(function(workout){
+              Exercise.findAll({where: {workoutID: workout.get('id')}}).then(function(exercises){ // finds all exercises for each workout
+                var workoutObj = {
+                  username: user.get('username'),
+                  trybe: trybe.get('name'),
+                  type: workout.get('type'),
+                  title: workout.get('title'),
+                  description: workout.get('description'),
+                  exercises: exercises,
+                  finalResult: workout.get('finalResult')
+                };
+                workouts.push(workoutObj);
+              });
+            })
+          })
+        })
+        res.send(workouts)
+      })
     });
   }
 
