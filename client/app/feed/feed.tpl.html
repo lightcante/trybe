@@ -1,4 +1,10 @@
 <div class="feed">
-    
+  <input type='text' ng-model='search' placeholder='Find past workouts' class="search"/>
+
+  <div class="workouts" ng-repeat="workout in data.workouts | filter:search">
+    <div class="workout" ng-click="render($index)">
+      <div><span class="body">{{ workout }}</span></div>
+    </div>
+  </div>
 
 </div>

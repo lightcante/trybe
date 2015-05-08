@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 20:59:40
+* @Last Modified time: 2015-05-07 21:12:25
 */
 
 'use strict';
@@ -25,11 +25,13 @@
    * @param {angular} $scope
    */
   var FeedCtrl = function ($scope, FeedFactory) {
+    $scope.data = {};
     $scope.getWorkouts = function() {
       FeedFactory.getWorkouts()
         .then(function(data) {
           console.log('data received from getWorkouts:', data);
-          $scope.workouts = data.workouts; //array of workouts
+          $scope.data.workouts = data.workouts; //array of workouts
+          console.log('$scope.data.workouts:', $scope.data.workouts);
         })
         .catch(function(error) {
           console.error(error);
