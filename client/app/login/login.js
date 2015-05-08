@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-08 00:19:46
+* @Last Modified time: 2015-05-08 09:57:12
 */
 
 'use strict';
@@ -19,7 +19,7 @@
         url: '/login',
         templateUrl: 'login/login.tpl.html',
         controller: LoginCtrl
-      })
+      });
   };
 
   /**
