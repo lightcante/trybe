@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 23:06:38
+* @Last Modified time: 2015-05-07 23:19:29
 */
 
 'use strict';
@@ -24,7 +24,7 @@
    * controls feed state from client side
    * @param {angular} $scope
    */
-  var FeedCtrl = function ($scope, FeedFactory, $location, $state) {
+  var FeedCtrl = function ($scope, $location, $state, FeedFactory) {
     $scope.data = {};
     $scope.getWorkouts = function() {
       FeedFactory.getWorkouts()
@@ -41,6 +41,7 @@
     $scope.log = function(index) {
       var selection = $scope.data.workouts[index];
       console.log("selected workout:", selection);
+      FeedFactory.sendWorkout(selection);
       $state.go('workout');
     }
 

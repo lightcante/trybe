@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 21:39:04
+* @Last Modified time: 2015-05-07 23:18:33
 */
 
 'use strict';
@@ -15,6 +15,7 @@
    * @param {[angular]} $window
    */
   var FeedFactory = function ($http, $location, $window) {
+    var workout;
     var getWorkouts = function () {
       return $http({
         method: 'GET',
@@ -26,17 +27,20 @@
       });
     };
 
-    var renderWorkouts = function (workouts) {
-      //for each workout in the array of workouts
-      //change date to a string
-      for(var i = 0; i < workouts.length; i++) {
-        //render data to be more readable
-      }
+    var sendWorkout = function(workout) {
+      console.log('workout sent from feed:', workout);
+      workout = workout;
     };
+
+    var getWorkout = function() {
+      console.log('workout req from log');
+      return workout;
+    }
 
     return {
       getWorkouts: getWorkouts,
-      renderWorkouts: renderWorkouts
+      sendWorkout: sendWorkout,
+      getWorkout: getWorkout
     };
   };
 
