@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 23:58:54
+* @Last Modified time: 2015-05-08 00:06:06
 */
 
 'use strict';
@@ -50,13 +50,15 @@
 
     $scope.viewFilter = function(workout) {
       if($scope.view === 'me') {
-        //later change to own username
+        //later change $scope.view to own username
         return (workout.username === $scope.view);
       } else {
         return true;
       }
     }
 
+    //Sends workout data from user's selection to workout
+    //module so user can log workout
     $scope.log = function(index) {
       var selection = $scope.data.workouts[index];
       console.log("selected workout:", selection);
