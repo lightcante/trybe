@@ -1,9 +1,20 @@
 <div class="feed">
   <input type='text' ng-model='search' placeholder='Find past workouts' class="search"/>
 
-  <div class="workouts" ng-repeat="workout in data.workouts | filter:search">
+  <div class="workouts" ng-repeat="workout in data.workouts track by $index">
     <div class="workout" ng-click="render($index)">
-      <div><span class="body">{{ workout }}</span></div>
+      <div><span class="body">{{ workout.username }}</span></div>
+      <div><span class="body">{{ workout.title }}</span></div>
+      <div><span class="body">{{ workout.description }}</span></div>
+
+      <!-- Should repeat if has more than 1 exercise-->
+      <div class="exercises" ng-repeat="exercise in workout.exercises track by $index">
+        <div><span class="body">{{ exercise.exerciseName }}</span></div>
+        <div><span class="body">{{ exercise.quantity[0] }} Sets </span></div>
+        <div><span class="body">{{ exercise.quantity[1] }} Reps </span></div>
+        <div><span class="body">Result: {{ exercise.result }} </span></div>
+
+      <!-- <div><span class="body">Sets {{ workout.description }}</span></div> -->
     </div>
   </div>
 

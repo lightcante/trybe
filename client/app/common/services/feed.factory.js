@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 20:58:26
+* @Last Modified time: 2015-05-07 21:39:04
 */
 
 'use strict';
@@ -26,8 +26,17 @@
       });
     };
 
+    var renderWorkouts = function (workouts) {
+      //for each workout in the array of workouts
+      //change date to a string
+      for(var i = 0; i < workouts.length; i++) {
+        //render data to be more readable
+      }
+    };
+
     return {
-      getWorkouts: getWorkouts
+      getWorkouts: getWorkouts,
+      renderWorkouts: renderWorkouts
     };
   };
 
