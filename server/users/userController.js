@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-08 22:06:31
+* @Last Modified time: 2015-05-08 22:10:31
 */
 
 'use strict';
@@ -22,7 +22,6 @@ module.exports = {
         next (new Error(info)); // will return the info back to the client side
       } else {
         var token =  jwt.encode(user.username, 'lighthoney');
-<<<<<<< HEAD
         console.log('token', token);
         // var userID = user.get('id');
         var username = user.get('username');
@@ -30,13 +29,8 @@ module.exports = {
           username: username, 
           token: token
         });
+      };
         // workoutController.getAllWorkouts(req, res, next, token, userID);
-=======
-        console.log('token', token)
-        var userID = user.get('id')
-        workoutController.getAllWorkouts(req, res, next, token, userID);
->>>>>>> (feat) Add userId to arguments sent to workout controller from user controller
-      }
     })(req, res, next);
   },
 
