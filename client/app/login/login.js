@@ -2,29 +2,11 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-06 15:57:43
+* @Last Modified time: 2015-05-08 09:57:12
 */
 
 'use strict';
 (function (angular, _) {
-
-  var LoginConfig = function($stateProvider, $urlRouterProvider) {
-
-    $stateProvider
-      .state('login', {
-        url: '/login',
-        templateUrl: '/login/login.tpl.html',
-        controller: LoginCtrl
-      })
-      .state('signup', {
-        url: '/signup',
-        templateUrl: '/login/login.tpl.html',
-        controller: LoginCtrl
-      });
-
-    // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise('/login');
-  };
 
   /**
    * Sets viewstate for login page
@@ -37,12 +19,7 @@
         url: '/login',
         templateUrl: 'login/login.tpl.html',
         controller: LoginCtrl
-      })
-      // .state('login/signup', {
-      //   url: '/signup',
-      //   templateUrl: 'login/login.tpl.html',
-      //   controller: LoginCtrl
-      // });
+      });
   };
 
   /**
@@ -50,7 +27,7 @@
    * states for login and signup.
    * @param {angular} $scope
    */
-  var LoginCtrl = function ($scope, $window, $location, AuthFactory) {
+  var LoginCtrl = function ($scope, $window, $state, AuthFactory) {
     $scope.switchMethod = function() {
       $scope.newUser = !$scope.newUser;
     };
@@ -62,8 +39,9 @@
     $scope.signup = function() {
       AuthFactory.signup($scope.user)
         .then(function (data) {
+          console.log('data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
-          $location.path('/feed');
+          $state.go('feed');
         })
         .catch(function (error) {
           console.error(error);
@@ -73,8 +51,10 @@
     $scope.signin = function() {
       AuthFactory.signin($scope.user)
         .then(function (data) {
+          console.log('*data received:', data);
           $window.localStorage.setItem('com.trybe', data.token);
-          $location.path('/feed');
+
+          $state.go('feed');
         })
         .catch(function (error) {
           console.error(error);
@@ -85,7 +65,7 @@
   // Entry point for module
   angular
 
-    .module('trybe-app.login', ['trybe-app.common']) //can add 'Auth' to array
+    .module('trybe-app.login', ['trybe-app.common'])
 
     .config(LoginConfig)
 

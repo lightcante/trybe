@@ -1,8 +1,8 @@
-/* 
+/*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-05 18:07:07
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-08 00:06:06
 */
 
 'use strict';
@@ -13,7 +13,6 @@
    * @param {[type]} $stateProvider [description]
    */
   var FeedStateConfig = function ($stateProvider) {
-    
     $stateProvider.state('feed', {
       url: '/feed',
       templateUrl: 'feed/feed.tpl.html',
@@ -22,12 +21,51 @@
   };
 
   /**
-   * controls application access from the client side. Has
-   * states for login and signup.  
-   * @param {angular} $scope 
+   * controls feed state from client side
+   * @param {angular} $scope
    */
-  var FeedCtrl = function ($scope) {
-    $scope.foo = 'bar';
+  var FeedCtrl = function ($scope, $location, $state, FeedFactory) {
+    $scope.data = {};
+    $scope.view = 'all';
+
+    $scope.getWorkouts = function() {
+      FeedFactory.getWorkouts()
+        .then(function(data) {
+          $scope.data.workouts = data.workouts;
+          console.log($scope.data.workouts);
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+    };
+    $scope.getWorkouts();
+
+    $scope.viewMe = function() {
+      $scope.view = 'me';
+    }
+
+    $scope.viewAll = function() {
+      $scope.view = 'all';
+    }
+
+    $scope.viewFilter = function(workout) {
+      if($scope.view === 'me') {
+        //later change $scope.view to own username
+        return (workout.username === $scope.view);
+      } else {
+        return true;
+      }
+    }
+
+    //Sends workout data from user's selection to workout
+    //module so user can log workout
+    $scope.log = function(index) {
+      var selection = $scope.data.workouts[index];
+      console.log("selected workout:", selection);
+      FeedFactory.sendWorkout(selection);
+      $state.go('workout');
+    }
+
   };
 
   // Entry point for module
