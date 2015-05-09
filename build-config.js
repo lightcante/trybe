@@ -11,6 +11,9 @@ module.exports  = {
     // Source excluding test files
     js: [ 'client/app/**/*.js', '!client/app/**/*.spec.js'],
 
+    // Templates
+    atpl: [ 'client/app/**/*.tpl.html' ],
+
     // Entry page
     html: [ 'client/index.html' ],
 
@@ -20,11 +23,16 @@ module.exports  = {
   vendor_files  : {
     js: [
       'vendor/angular/angular.js',
-      'vendor/lodash/dist/lodash.js'
+      'vendor/angular-ui-router/release/angular-ui-router.js',
+      'vendor/angular-animate/angular-animate.js',
+      'vendor/lodash/lodash.js',
     ],
     css: [
       'vendor/animate.css/animate.min.css'
     ]
   },
-  sass_bootstrap_dir : 'vendor/bootstrap-sass-official/assets/stylesheets'
+  import_path: {
+    bootstrap : 'vendor/bootstrap-sass-official/assets/stylesheets',
+    fontawesome : 'vendor/font-awesome/scss'
+  }
 };

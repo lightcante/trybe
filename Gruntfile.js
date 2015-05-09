@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 11:30:21
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-04 15:15:58
+* @Last Modified time: 2015-05-06 17:59:38
 */
 
 'use strict';
@@ -77,6 +77,30 @@ module.exports = function (grunt) {
       }
     },
 
+    karma: {
+      options: {
+        configFile: 'karma.conf.js',
+        reporters: ['progress', 'coverage']
+      },
+      // Watch configuration
+      watch: {
+        background: true,
+        reporters: ['progress']
+      },
+      // Single-run configuration for development
+      single: {
+        singleRun: true,
+      },
+      // Single-run configuration for CI
+      ci: {
+        singleRun: true,
+        coverageReporter: {
+          type: 'lcov',
+          dir: 'results/coverage/'
+        }
+      }
+    },
+
     concurrent : {
       serverdev : {
         tasks : ['nodemon', 'watch:server'],
@@ -128,8 +152,8 @@ module.exports = function (grunt) {
         tasks: ['copy:appjs', 'index']
       },
       html: {
-        files: ['src/index.html'],
-        tasks: ['index']
+        files: ['<%= app_files.atpl %>', 'src/index.html'],
+        tasks: ['html2js', 'index']
       },
       gruntfile: {
         files: 'Gruntfile.js',
@@ -143,14 +167,17 @@ module.exports = function (grunt) {
     sass: {
       options: {
         sourceMap: true,
-        includePaths: ['<%= sass_bootstrap_dir %>'],
+        includePaths: [
+          '<%= import_path.bootstrap %>',
+          '<%= import_path.fontawesome %>'
+        ],
         imagePath: '<%= images %>',
         outputStyle: 'nested', //'nested' or 'compressed'
         precision: 10
       },
       gen: {
         files: {
-            '<%= styles %>/main.css': '<%= styles %/main.scss'
+            '<%= styles %>/main.css': '<%= styles %>/main.scss'
         }
       }
     },
@@ -211,13 +238,22 @@ module.exports = function (grunt) {
         baseRewrite: '../../../app'
       }
     },
-
+    html2js: {
+      app: {
+        options: {
+          base: '<%= app %>'
+        },
+        src: [ '<%= app_files.atpl %>' ],
+        dest: '<%= build %>/templates-app.js'
+      }
+    },
     index: {
       build: {
         dir: '<%= build %>',
         src: [
           '<%= vendor_files.js %>',
-          '<%= app %>/client/**/*.js',
+          '<%= app_files.js %>',
+          '<%= html2js.app.dest %>',
           '<%= vendor_files.css %>',
           '<%= styles %>/main.css'
         ]
@@ -240,6 +276,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-karma');
 
   // ----------------------------------------------------
   // Register tasks
@@ -247,7 +285,7 @@ module.exports = function (grunt) {
   grunt.registerTask('serverdev', ['concurrent:serverdev']);
 
   grunt.registerTask('serverdebug', ['concurrent:serverdebug']);
-  
+
   grunt.registerTask('clientdev', ['concurrent:clientdev']);
 
   grunt.registerTask('build', [
@@ -261,8 +299,10 @@ module.exports = function (grunt) {
 
   grunt.registerTask('wire-styles', ['manifest', 'sass', 'copy:css']);
 
-  grunt.registerTask('wire-behaviors', ['copy:appjs', 'index']);
- 
+  grunt.registerTask('wire-behaviors', ['copy:appjs', 'html2js', 'index']);
+
+  grunt.registerTask('testClient', ['karma:single']);
+
   // ----------------------------------------------------
   // Register multi-tasks and helper methods
   // ----------------------------------------------------

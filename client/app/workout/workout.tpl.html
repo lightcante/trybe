@@ -1,4 +1,52 @@
 <div class="workout">
-    
+  
+  <form>
+
+    <div class="form-group">
+      <label for="type">Type</label>
+      <div id="type" class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default">Lift</button>
+        <button type="button" class="btn btn-default">Metcon</button>
+        <button type="button" class="btn btn-default">Benchmark</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Instructions</label>
+      <textarea id="description" class="form-control" placeholder="Password"></textarea>
+      <ul class="exercise-list">
+        <li>
+          <span></span><span></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Create state -->
+    <div class="ctrls-by-type">
+
+      <div class="ctrl-group">
+        <label for="exercise-label">Label</label>
+        <input class="exercise-label" placeholder="name"></input>
+      </div>
+
+      <div class="ctrl-group">
+        <label for="exercise">Sets:</label>
+        <numstepper></numstepper>
+      </div>
+      <div class="ctrl-group">
+        <label for="exercise">Reps:</label>
+        <numstepper></numstepper>
+      </div>
+    </div>
+
+    <!-- Read state -->
+    <div class="ctrls-by-type">  
+    </div>
+
+    <!-- Log state -->
+    <div class="ctrls-by-type">
+    </div>
+
+  </form>
 
 </div>

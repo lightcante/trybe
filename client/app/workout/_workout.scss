@@ -1,3 +1,28 @@
+// With regard to Bootstrap, app modules are positioned as 
+// rows with nested spans, which divide rows horizontally.
 .workout {
+  @include make-xs-column(6);
+  @include make-xs-column-offset(3);
+  background-color: #ffc0cb;
   
+  .ctrls-by-type {
+    padding: 10px 20px 0 20px;
+
+    .ctrl-group {
+      @include clearfix;
+
+      label {
+        padding-top: 8px;
+        // float: left;
+      }
+      .exercise-label {
+        @extend .bs-input;
+        float: right;
+      }
+
+      .numstepper {
+        float: right;
+      }
+    }
+  }
 }
