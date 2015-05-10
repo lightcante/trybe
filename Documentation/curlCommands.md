@@ -28,10 +28,11 @@ This will store the workout into the database. You should expect to receive an o
 
 >curl -i -X POST -H "Content-Type: application/json" -d '{"username":"Tom","trybe":"CFSF","type":"lift","title":"05042015","description":"build up to 8- rep max of ","exercises":[{"exerciseName":"bench press","quantity":[3,8],"result":185},{"exerciseName":"squat","quantity":[2,8],"result":200}],"finalResult":null}' http://localhost:3444/api/workouts
 
+###Get All Workouts
+curl --header "X-Access-UserID:1" http://localhost:3444/api/workouts/all
 
-
-
-
+###Get Individual Workouts
+curl --header "X-Access-UserID:1" http://localhost:3444/api/workouts/individual
 
 
 
