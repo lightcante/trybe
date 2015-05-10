@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-08 12:58:03
+* @Last Modified time: 2015-05-10 14:49:45
 */
 'use strict';
 
@@ -10,6 +10,7 @@ var Workout = require('../models').workout;
 var Trybe = require('../models').trybe;
 var Exercise = require('../models').exercise;
 var User = require('../models').user;
+var async = require('async');
 
 module.exports = {
 
@@ -77,13 +78,14 @@ module.exports = {
     //   workout: [1, 2, 3], 
     //   userID: userID
     // }
-    var workouts = [];
+    var workoutsArray = [];
     var userID = req.headers['x-access-userid']
+   
     User.find ({where: {id: userID}}).then(function(user){ // find the user
       user.getTrybes().then(function(trybes){ //will return an array of trybe objects
-        trybes.forEach(function(trybe){
-          trybe.getWorkouts().then(function(workouts){ // will return an array of workouts
-            workouts.forEach(function(workout){
+        async.eachSeries(trybes, function(trybe, outerNext){
+          trybe.getWorkouts().then(function(workouts){
+            async.eachSeries(workouts, function(workout, innerNext){
               Exercise.findAll({where: {workoutID: workout.get('id')}}).then(function(exercises){ // finds all exercises for each workout
                 var workoutObj = {
                   username: user.get('username'),
@@ -94,14 +96,24 @@ module.exports = {
                   exercises: exercises,
                   finalResult: workout.get('finalResult')
                 };
-                workouts.push(workoutObj);
+                workoutsArray.push(workoutObj);
+                innerNext()
               });
+            }, function(err){
+              console.log('NO?')
+              outerNext();
+              console.log(err)
             })
           })
+        }, function(err){
+          console.log(err); 
+          console.log('YES?')
+          res.send(workoutsArray)
         })
-        res.send(workouts)
       })
     });
   }
+
+
 
 };
