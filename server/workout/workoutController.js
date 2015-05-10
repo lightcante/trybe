@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-10 14:49:45
+* @Last Modified time: 2015-05-10 15:08:16
 */
 'use strict';
 
@@ -83,11 +83,11 @@ module.exports = {
    
     User.find ({where: {id: userID}}).then(function(user){ // find the user
       user.getTrybes().then(function(trybes){ //will return an array of trybe objects
-        async.eachSeries(trybes, function(trybe, outerNext){
-          trybe.getWorkouts().then(function(workouts){
-            async.eachSeries(workouts, function(workout, innerNext){
+        async.eachSeries(trybes, function(trybe, outerNext){ // go through each trybe 
+          trybe.getWorkouts().then(function(workouts){ // get all workouts associated with the trybe
+            async.eachSeries(workouts, function(workout, innerNext){ // go through each workout in each trybe
               Exercise.findAll({where: {workoutID: workout.get('id')}}).then(function(exercises){ // finds all exercises for each workout
-                var workoutObj = {
+                var workoutObj = { // create the workout object in the proper format
                   username: user.get('username'),
                   trybe: trybe.get('name'),
                   type: workout.get('type'),
@@ -96,19 +96,23 @@ module.exports = {
                   exercises: exercises,
                   finalResult: workout.get('finalResult')
                 };
-                workoutsArray.push(workoutObj);
-                innerNext()
+                workoutsArray.push(workoutObj); 
+                innerNext() // this callback lets the async each know to move on to the next value
               });
-            }, function(err){
-              console.log('NO?')
-              outerNext();
-              console.log(err)
+            }, function(err){ // this function gets called when the async each is done going through all the workouts 
+              if(err){
+                console.error(err);
+              }
+              outerNext(err); //this lets the async each that's going through each trybe know to move to the next trybe
             })
           })
-        }, function(err){
-          console.log(err); 
-          console.log('YES?')
-          res.send(workoutsArray)
+        }, function(err){ // this function gets called when there are no more trybes to go through
+          if(err){
+            console.error(err)
+          }
+          // once the each function is done doing through every trybe and all the workouts have been pushed, we send back
+          // the workoutsArray to the client
+          res.send(workoutsArray) 
         })
       })
     });
