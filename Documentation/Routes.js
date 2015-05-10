@@ -48,7 +48,17 @@
   //Getting all workouts stored
   return $http({
     method: 'GET',
-    url: '/api/workouts',
+    url: '/api/workouts/all',
+    data: {'ORDERING_CRITERIA_KEY': 'ORDERING_CRITERIA_VALUE'} //optional
+  })
+    .then(function(response){
+      return response.data
+    })
+
+  //Getting solo workouts stored
+  return $http({
+    method: 'GET',
+    url: '/api/workouts/individual',
     data: {'ORDERING_CRITERIA_KEY': 'ORDERING_CRITERIA_VALUE'} //optional
   })
     .then(function(response){
@@ -58,7 +68,7 @@
   //Posting a workout
     return $http({
       method: 'POST',
-      url: 'api/workouts',
+      url: '/api/workouts',
       data: workoutObject
     })
       .then(function(response){
