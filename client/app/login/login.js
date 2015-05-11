@@ -2,8 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-10 22:37:38
-
+* @Last Modified time: 2015-05-10 22:40:30
 */
 
 'use strict';
@@ -40,7 +39,6 @@
     $scope.signup = function() {
       AuthFactory.signup($scope.user)
         .then(function (data) {
-          console.log('data received:', data);
           AuthFactory.setUserLocalStorage(data);
           $state.go('feed');
         })
@@ -52,7 +50,6 @@
     $scope.signin = function() {
       AuthFactory.signin($scope.user)
         .then(function (data) {
-          console.log('*data received:', data);
           //stringify obj to store into local storage
           AuthFactory.setUserLocalStorage(data);
           $state.go('feed');
