@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:06:45
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-11 11:07:40
 */
 
 'use strict';
@@ -27,8 +27,8 @@
   var FeedCtrl = function ($scope, $location, $state, $window, FeedFactory, AuthFactory) {
     $scope.data = {};
     $scope.userID = AuthFactory.getUserID();
-    console.log('Feed ctrl userID:', $scope.userID);
-    $scope.view = 'all';
+    console.log('Feed userID:', $scope.userID);
+    // $scope.view = 'all';
 
     $scope.getWorkouts = function() {
       FeedFactory.getWorkouts()
@@ -54,16 +54,8 @@
     };
 
     $scope.getAllWorkouts = function() {
+      console.log('getAllWorkouts called');
       $state.go('feed');
-    };
-
-    $scope.viewFilter = function(workout) {
-      if($scope.view === 'me') {
-        //later change $scope.view to own username
-        return (workout.username === $scope.view);
-      } else {
-        return true;
-      }
     };
 
     //Sends workout data from user's selection to workout
