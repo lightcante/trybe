@@ -26,13 +26,13 @@ If you need to grab a token, we recommend throwing in a console.log at the line 
 
 This will store the workout into the database. You should expect to receive an object with an array of all workout objects stored into the database. You can change the values in the object, but make sure that it follows the data object format described in the docs and is a json object
 
->curl -i -X POST -H "Content-Type: application/json" -d '{"username":"Tom","trybe":"CFSF","type":"lift","title":"05042015","description":"build up to 8- rep max of ","exercises":[{"exerciseName":"bench press","quantity":[3,8],"result":185},{"exerciseName":"squat","quantity":[2,8],"result":200}],"finalResult":null}' 
-http://localhost:3444/api/workouts
+>curl -i -X POST -H "Content-Type: application/json" -d '{"username":"Tom","trybe":"CFSF","type":"lift","title":"05042015","description":"build up to 8- rep max of ","exercises":[{"exerciseName":"bench press","quantity":[3,8],"result":185},{"exerciseName":"squat","quantity":[2,8],"result":200}],"finalResult":null}' http://localhost:3444/api/workouts
 
+###Get All Workouts
+curl --header "X-Access-UserID:1" http://localhost:3444/api/workouts/all
 
-
-
-
+###Get Individual Workouts
+curl --header "X-Access-UserID:1" http://localhost:3444/api/workouts/individual
 
 
 

@@ -1,8 +1,8 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
-* @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-06 17:50:38
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-11 11:14:10
 */
 'use strict';
 
@@ -10,35 +10,32 @@ var Workout = require('../models').workout;
 var Trybe = require('../models').trybe;
 var Exercise = require('../models').exercise;
 var User = require('../models').user;
+var async = require('async');
 
 module.exports = {
 
   saveWorkout: function(req, res, next){
-    // Acquire workout information from the req.body;
     // Write the workout information to the sql tables
-
     var userID;
     var trybeID;
     var workoutID;
-
     //Acquire userID from User table
     User.find({where: {username: req.body.username}}).then(function(user){
       userID = user.get('id');
-
       //Acquire trybeID from Trybe table
       Trybe.find({where: {name: req.body.trybe}}).then(function(trybe){
         trybeID = trybe.get('id');
-        
+  
         //Insert data into Workout table
-        Workout.build({
+        Workout.build({ // create table entry 
           UserId: userID,
           type: req.body.type,
           title: req.body.title,
           description: req.body.description, 
-          finalResult: req.body.finalResult,
+          finalResult: JSON.stringify(req.body.finalResult),
           TrybeId: trybeID
         })
-        .save()
+        .save() //save the table we just created into the database
         .then(function(workout){
 
           //Acquire the workoutID from Workout table
@@ -46,102 +43,105 @@ module.exports = {
 
           //Insert all exercises into Exercises table
           req.body.exercises.forEach(function(exercise){
-            Exercise.build({
+            Exercise.build({ // create table entry
               exerciseName: exercise.exerciseName,
               quantity: JSON.stringify(exercise.quantity), 
               result: exercise.result, 
               WorkoutId: workoutID
             })
-            .save();
+            .save() // save table entry into the database
+            .then(function(newExercise){ // after the exercise is successfully saved, we send back a 200
+              res.send(200);
+            })
+            .catch(function(error){ //if there is an error,  send back a 500 and console log the error
+              console.error(error);
+              res.send(500);
+            });
           });
-
-          //Run getAllWorkouts to return the response with 
-          //an array of workouts 
-          module.exports.getAllWorkouts(req, res, next);
+        })
+        .catch(function(error){
+          console.error(error);
+          res.send(500);
         });
       });
     });
-    
-
-
-
-    
-    // We then run getAllWorkouts to acquire workouts
-    // from workout table
   },
 
-
+// This function will go into the database and find all workouts from all of the trybes that the user is a part of and return that
+// as an object following the format stated in dataObjects.js
   getAllWorkouts: function(req, res, next){
-    // var body = {
-    //   token : token, 
-    //   workout: [1, 2, 3], 
-    //   userID: userID
-    // }
+    var workoutsArray = [];
+    var user= req.headers['x-access-username'];
+   
+    User.find ({where: {username: user}}).then(function(user){ // find the user
+      user.getTrybes().then(function(trybes){ //will return an array of trybe objects
+        async.eachSeries(trybes, function(trybe, outerNext){ // go through each trybe 
+          trybe.getWorkouts().then(function(workouts){ // get all workouts associated with the trybe
+            async.eachSeries(workouts, function(workout, innerNext){ // go through each workout in each trybe
+              Exercise.findAll({where: {workoutID: workout.get('id')}}).then(function(exercises){ // finds all exercises for each workout
+                User.find({where: {id: workout.get('UserId')}}).then(function(workoutUser){
+                  var workoutObj = { // create the workout object in the proper format
+                    username: workoutUser.get('username'),
+                    trybe: trybe.get('name'),
+                    type: workout.get('type'),
+                    title: workout.get('title'),
+                    description: workout.get('description'),
+                    exercises: exercises,
+                    finalResult: workout.get('finalResult')
+                  };
+                  workoutsArray.push(workoutObj); 
+                  innerNext();// this callback lets the async each know to move on to the next value
+                });
+              });
+            }, function(err){ // this function gets called when the async each is done going through all the workouts 
+              if(err){
+                console.error(err);
+              }
+              outerNext(err); //this lets the async each that's going through each trybe know to move to the next trybe
+            });
+          });
+        }, function(err){ // this function gets called when there are no more trybes to go through
+          if(err){
+            console.error(err);
+          }
+          // once the each function is done doing through every trybe and all the workouts have been pushed, we send back
+          // the workoutsArray to the client
+          res.send(workoutsArray) ;
+        });
+      });
+    });
+  }, 
 
-    res.send({
-      workouts: [ 
-      {
-        username: 'Tom',
-        trybe: 'CFSF',
-        type: 'lift',
-        title: '05042015',
-        description: 'build up to 8- rep max of ',
-        exercises: [
-          {
-            exerciseName: 'bench press',
-            quantity: [3, 8], //[sets, reps]
-            result: 185
-          },
-          {
-            exerciseName: 'squat',
-            quantity: [2,8],
-            result: 200
+  //getIndividualWorkouts sends back response consisting of just the user's workouts
+  getIndividualWorkout: function(req, res, next){
+    var workoutsArray = [];
+    var username = req.headers['x-access-username'];
+   
+    User.find({where: {username: username}}).then(function(user){ // find the user
+      user.getWorkouts().then(function(workouts){ // get all workouts associated with the user
+        async.eachSeries(workouts, function(workout, innerNext){ // go through each workout
+          Exercise.findAll({where: {workoutID: workout.get('id')}}).then(function(exercises){ // finds all exercises for each workout
+            Trybe.find({where: {id: workout.TrybeId}}).done(function(trybe){ // used to get trybe name 
+              var workoutObj = { // create the workout object in the proper format
+                username: user.get('username'),
+                trybe: trybe.get('name'),
+                type: workout.get('type'),
+                title: workout.get('title'),
+                description: workout.get('description'),
+                exercises: exercises,
+                finalResult: workout.get('finalResult')
+              };
+              workoutsArray.push(workoutObj); 
+              innerNext();// this callback lets the async each know to move on to the next value
+            });
+          });
+        }, function(err){ // this function gets called when the async each is done going through all the workouts 
+          if(err){
+            console.error(err);
           }
-        ],
-        finalResult: null
-      }, 
-      {
-        username: 'Mia',
-        trybe: 'CFSF',
-        type: 'metcon',
-        title: '05042015',
-        description: '5 rounds, each on a 3-minute clock of', 
-        exercises: [
-          {
-            exerciseName: '20 GHD sit-ups',
-            quantity: [null],
-            result: null
-          },
-          {
-            exerciseName: 'hip extensions',
-            quantity: [2,5],
-            result: null
-          }
-        ],
-        finalResult: {type: 'reps', value: 45}
-      }, 
-      {
-        username: 'Greg',
-        trybe: 'CFSF',
-        type: 'benchmark',
-        title: 'fran',
-        description: 'perform 21-15-9 reps of', 
-        exercises: [
-          {
-            exerciseName: '95 lb thrusters',
-            quantity: null,
-            result: null
-          },
-          {
-            exerciseName: 'pull-ups',
-            quantity: null, 
-            result: null
-          },
-        ],
-        finalResult: {type: 'time', value: 338}
-      } 
-      ]
+          res.send(workoutsArray) ;
+        }) ;
+      });
     });
   }
-
 };

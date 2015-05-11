@@ -1,14 +1,15 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-05 16:15:10
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 13:48:54
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-09 00:21:09
 */
 
 'use strict';
 
 var LocalStrategy = require ('passport-local').Strategy;
 var User = require('../models').user;
+var Trybe = require('../models').trybe;
 var passport = require('passport');
 
 module.exports = function(passport){
@@ -55,8 +56,14 @@ passport.use('local-signup', new LocalStrategy(
         return done(null, false, 'That username already exists') //send back a falsy value for user and the message
       } else {
         User.build({username: username, password: password}) // builds the new user to be saved in the database
+          // .setTrybes([trybe], {name: "CFSF"})
           .save() // saves the user to the database
           .then(function(user){ // on success, send back user data
+            Trybe.find({ where: {name: 'CFSF'} }).then(function(trybe){
+              user.setTrybes(trybe).then(function() {
+                console.log('relationship set!')
+              })
+            })
             return done(null, user)
           })
           .catch(function(err){ // error handling

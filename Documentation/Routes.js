@@ -10,7 +10,9 @@
       data: user
       })
         .then (function(response){
-          return response.data; // will have two properties : token and workouts (array of workout objects)
+          // will have two properties : token and 
+          // workouts (array of workout objects)
+          return response.data; 
         });
 
   //Signup
@@ -20,7 +22,9 @@
       data: user
       })
         .then (function(response){
-          return response.data; // will have two properties : token and workouts (array of workout objects)
+          // will have two properties : token and 
+          // workouts (array of workout objects)
+          return response.data; 
         });
 
   //Checking if signed in
@@ -31,7 +35,9 @@
       data: tokenObject
       })
         .then (function(response){
-          return response; // response will have a status that will be 200 (ok) or 401 (bad)
+          // response will have a status that will be 
+          // 200 (ok) or 401 (bad)
+          return response; 
         });
 
   //Logging out
@@ -44,12 +50,25 @@
 
 
 //These are the methods in the factory for posting workouts
+//and for getting individual or all workouts
   
   //Getting all workouts stored
   return $http({
     method: 'GET',
-    url: '/api/workouts',
-    data: {'ORDERING_CRITERIA_KEY': 'ORDERING_CRITERIA_VALUE'} //optional
+    url: '/api/workouts/all',
+    // data is optional
+    data: {'ORDERING_CRITERIA_KEY': 'ORDERING_CRITERIA_VALUE'}
+  })
+    .then(function(response){
+      return response.data
+    })
+
+  //Getting solo workouts stored
+  return $http({
+    method: 'GET',
+    url: '/api/workouts/individual',
+    // data is optional
+    data: {'ORDERING_CRITERIA_KEY': 'ORDERING_CRITERIA_VALUE'}
   })
     .then(function(response){
       return response.data
@@ -58,10 +77,12 @@
   //Posting a workout
     return $http({
       method: 'POST',
-      url: 'api/workouts',
+      url: '/api/workouts',
       data: workoutObject
     })
       .then(function(response){
         console.log('Workout added', response)
-        return response.data; // workouts (array of workout objects)
+        // workouts (array of workout objects) 
+        // will be all workouts
+        return response.data; 
       })
