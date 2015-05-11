@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-11 13:37:53
+* @Last Modified time: 2015-05-11 16:52:37
 */
 
 'use strict';
@@ -19,13 +19,25 @@
     var workoutSelectionStore = 'com.trybe.selectedWorkout';
     var localStorage = $window.localStorage
 
-    var getWorkouts = function () {
+    var getWorkouts = function (username) {
       return $http({
         method: 'GET',
-        url: '/api/workouts',
-        data: {} // {'ORDERING_CRITERIA_KEY': 'ORDERING_CRITERIA_VALUE'} optional
+        url: '/api/workouts/all', //change to all
+        headers: { 'x-access-username': username}
       })
       .then(function (resp) {
+        return resp.data; //sends back data to controller
+      });
+    };
+
+    var getMyWorkouts = function(username) {
+      return $http({
+        method: 'GET',
+        url: '/api/workouts/individual',
+        headers: { 'x-access-username': username }
+      })
+      .then(function (resp) {
+        console.log('getMyWorkout factory resp:', resp);
         return resp.data; //sends back data to controller
       });
     };
@@ -45,6 +57,7 @@
 
     return {
       getWorkouts: getWorkouts,
+      getMyWorkouts: getMyWorkouts,
       sendWorkout: sendWorkout,
       getWorkout: getWorkout,
       selection: workoutSelectionStore
