@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-10 15:08:16
+* @Last Modified time: 2015-05-11 09:18:04
 */
 'use strict';
 
@@ -53,12 +53,15 @@ module.exports = {
               result: exercise.result, 
               WorkoutId: workoutID
             })
-            .save();
+            .save()
+            .then(function(newExercise){ // after the exercise is successfully saved, we send back a 200
+              res.send(200);
+            })
+            .catch(function(error){ //if there is an error,  send back a 500 and console log the error
+              console.error(error);
+              res.send(500);
+            });
           });
-
-          //Run getAllWorkouts to return the response with 
-          //an array of workouts 
-          module.exports.getAllWorkouts(req, res, next);
         });
       });
     });
@@ -79,9 +82,9 @@ module.exports = {
     //   userID: userID
     // }
     var workoutsArray = [];
-    var userID = req.headers['x-access-userid']
+    var user= req.headers['x-access-username']
    
-    User.find ({where: {id: userID}}).then(function(user){ // find the user
+    User.find ({where: {username: user}}).then(function(user){ // find the user
       user.getTrybes().then(function(trybes){ //will return an array of trybe objects
         async.eachSeries(trybes, function(trybe, outerNext){ // go through each trybe 
           trybe.getWorkouts().then(function(workouts){ // get all workouts associated with the trybe
@@ -97,24 +100,24 @@ module.exports = {
                   finalResult: workout.get('finalResult')
                 };
                 workoutsArray.push(workoutObj); 
-                innerNext() // this callback lets the async each know to move on to the next value
+                innerNext();// this callback lets the async each know to move on to the next value
               });
             }, function(err){ // this function gets called when the async each is done going through all the workouts 
               if(err){
                 console.error(err);
               }
               outerNext(err); //this lets the async each that's going through each trybe know to move to the next trybe
-            })
-          })
+            });
+          });
         }, function(err){ // this function gets called when there are no more trybes to go through
           if(err){
-            console.error(err)
+            console.error(err);
           }
           // once the each function is done doing through every trybe and all the workouts have been pushed, we send back
           // the workoutsArray to the client
-          res.send(workoutsArray) 
-        })
-      })
+          res.send(workoutsArray) ;
+        });
+      });
     });
   }
 
