@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:10:22
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-11 12:03:59
 */
 
 'use strict';
@@ -17,22 +17,22 @@
   var FeedFactory = function ($http, $location, $window) {
     var workout;
 
-    var getWorkouts = function () {
+    var getWorkouts = function (username) {
       return $http({
         method: 'GET',
-        url: '/api/workouts', //change to all
-        data: {}
+        url: '/api/workouts/all', //change to all
+        headers: { 'x-access-username': username}
       })
       .then(function (resp) {
         return resp.data; //sends back data to controller
       });
     };
 
-    var getMyWorkouts = function(userID) {
+    var getMyWorkouts = function(username) {
       return $http({
         method: 'GET',
         url: '/api/workouts/individual',
-        data: { 'x-access-userID': userID }
+        headers: { 'x-access-username': username }
       })
       .then(function (resp) {
         console.log('getMyWorkout factory resp:', resp);
