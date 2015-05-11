@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 17:51:40
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-11 11:48:40
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-11 16:41:50
 */
 
 'use strict';
@@ -53,11 +53,14 @@
     };
 
     var isAuth = function () {
+      // TODO: Add localStorage item strings into centrally 
+      // located Config file
       return !!$window.localStorage.getItem('com.trybe');
     };
 
     var signout = function () {
       $window.localStorage.removeItem('com.trybe');
+      $window.localStorage.removeItem('com.trybe.selectedWorkout');
       $location.path('/signin');
     };
 

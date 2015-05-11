@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-11 11:49:43
+* @Last Modified time: 2015-05-11 13:44:04
 */
 
 'use strict';
@@ -29,13 +29,13 @@
    */
   var WorkoutCtrl = function ($scope, $state, AuthFactory, WorkoutFactory) {
 
-
     if (!AuthFactory.isAuth()) {
       $state.go('login');
     }
     else {
       // dummy workout object
       $scope.workout = WorkoutFactory.getWorkout();
+      if (!$scope.workout) { $state.go('feed'); }
       console.log('WorkoutCtrl: ', $scope.workout);
     }
 
