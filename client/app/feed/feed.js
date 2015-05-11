@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-10 22:41:43
+* @Last Modified time: 2015-05-10 22:42:07
 */
 
 'use strict';
@@ -28,19 +28,6 @@
     $scope.data = {};
     $scope.userID = AuthFactory.getUserID();
     console.log('Feed userID:', $scope.userID);
-    // $scope.view = 'all';
-
-    $scope.getWorkouts = function() {
-      FeedFactory.getWorkouts()
-        .then(function(data) {
-          $scope.data.workouts = data.workouts;
-          console.log('feed ctrl data received:', $scope.data.workouts);
-        })
-        .catch(function(error) {
-          console.error(error);
-        });
-    };
-    $scope.getWorkouts();
 
     $scope.getAllWorkouts = function() {
       FeedFactory.getWorkouts()
@@ -51,7 +38,7 @@
         .catch(function(error) {
           console.error(error);
         });
-      $scope.apply();
+      // $scope.apply();
     };
 
     $scope.getMyWorkouts = function() {
@@ -78,6 +65,8 @@
       FeedFactory.sendWorkout(selection);
       $state.go('workout');
     };
+
+    $scope.getAllWorkouts();
 
   };
 
