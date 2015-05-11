@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 17:51:40
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-05 19:13:07
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-10 17:52:17
 */
 
 'use strict';
@@ -40,6 +40,20 @@
       });
     };
 
+    var setUserLocalStorage = function(data) {
+      var userJSON = JSON.stringify(data);
+      $window.localStorage.setItem('com.trybe', userJSON);
+    };
+
+    var getUserID = function() {
+      var userJSON = $window.localStorage.getItem('com.trybe');
+      var userObj = JSON.parse(userJSON);
+      var userID = userObj.userID;
+      //for now, we send back username
+      var username = userObj.username;
+      return username;
+    };
+
     var isAuth = function () {
       return !!$window.localStorage.getItem('com.trybe');
     };
@@ -52,6 +66,8 @@
     return {
       signin: signin,
       signup: signup,
+      setUserLocalStorage: setUserLocalStorage,
+      getUserID: getUserID,
       isAuth: isAuth,
       signout: signout
     };
