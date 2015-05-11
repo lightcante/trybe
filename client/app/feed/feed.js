@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:37:47
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-11 11:47:23
 */
 
 'use strict';
@@ -26,11 +26,11 @@
    */
   var FeedCtrl = function ($scope, $location, $state, $window, FeedFactory, AuthFactory) {
     $scope.data = {};
-    $scope.userID = AuthFactory.getUserID();
-    console.log('Feed userID:', $scope.userID);
+    $scope.username = AuthFactory.getUsername();
+    console.log('Feed username:', $scope.username);
 
     $scope.getAllWorkouts = function() {
-      FeedFactory.getWorkouts()
+      FeedFactory.getWorkouts($scope.username)
         .then(function(data) {
           $scope.data.workouts = data.workouts;
           console.log('feed ctrl data received:', $scope.data.workouts);
@@ -43,10 +43,9 @@
 
     $scope.getMyWorkouts = function() {
       //temporary set workouts to null, since not getting server resp
-      $scope.data.workouts = null;
-      $scope.apply();
+      // $scope.data.workouts = null;
 
-      FeedFactory.getMyWorkouts(1) //change to $scope.userID
+      FeedFactory.getMyWorkouts($scope.username) //change to $scope.userID
         .then(function(data){
           $scope.data.workouts = data.workouts;
           console.log('workouts after viewMe called:', $scope.data.workouts);
@@ -54,6 +53,7 @@
         .catch(function(error){
           console.error(error);
         });
+      // $scope.apply();
     };
 
     //Sends workout data from user's selection to workout
