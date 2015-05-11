@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-10 16:24:44
+* @Last Modified time: 2015-05-10 17:16:25
 */
 
 'use strict';
@@ -40,7 +40,7 @@
       AuthFactory.signup($scope.user)
         .then(function (data) {
           console.log('data received:', data);
-          $window.localStorage.setItem('com.trybe', data.token);
+          AuthFactory.setUserLocalStorage(data);
           $state.go('feed');
         })
         .catch(function (error) {
@@ -52,7 +52,8 @@
       AuthFactory.signin($scope.user)
         .then(function (data) {
           console.log('*data received:', data);
-          $window.localStorage.setItem('com.trybe', data.token);
+          //stringify obj to store into local storage
+          AuthFactory.setUserLocalStorage(data);
           $state.go('feed');
         })
         .catch(function (error) {

@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-08 09:31:47
+* @Last Modified time: 2015-05-10 17:02:54
 */
 
 'use strict';
@@ -24,8 +24,9 @@
    * controls feed state from client side
    * @param {angular} $scope
    */
-  var FeedCtrl = function ($scope, $location, $state, FeedFactory) {
+  var FeedCtrl = function ($scope, $location, $state, $window, FeedFactory) {
     $scope.data = {};
+    $scope.userID = $window.localStorage.getItem('com.trybe');
     $scope.view = 'all';
 
     $scope.getWorkouts = function() {
@@ -41,7 +42,7 @@
     $scope.getWorkouts();
 
     $scope.viewMe = function() {
-      $scope.view = 'me';
+      FeedFactory.getMyWorkouts(); //more
     };
 
     $scope.viewAll = function() {
