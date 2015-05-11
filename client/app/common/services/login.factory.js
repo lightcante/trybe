@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 17:51:40
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-05 19:13:07
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-10 17:15:38
 */
 
 'use strict';
@@ -25,6 +25,7 @@
         data: user
       })
       .then(function (resp) {
+        console.log('signin fact response from server:', resp);
         return resp.data; //should receive user token and id
       });
     };
@@ -40,6 +41,11 @@
       });
     };
 
+    var setUserLocalStorage = function(data) {
+      var userJSON = JSON.stringify(data);
+      $window.localStorage.setItem('com.trybe', userJSON);
+    };
+
     var isAuth = function () {
       return !!$window.localStorage.getItem('com.trybe');
     };
@@ -52,6 +58,7 @@
     return {
       signin: signin,
       signup: signup,
+      setUserLocalStorage: setUserLocalStorage,
       isAuth: isAuth,
       signout: signout
     };
