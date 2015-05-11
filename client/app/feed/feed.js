@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-11 11:07:40
+g* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-11 11:07:59
 */
 
 'use strict';
@@ -42,7 +42,23 @@
     };
     $scope.getWorkouts();
 
+    $scope.getAllWorkouts = function() {
+      FeedFactory.getWorkouts()
+        .then(function(data) {
+          $scope.data.workouts = data.workouts;
+          console.log('feed ctrl data received:', $scope.data.workouts);
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+      $scope.apply();
+    };
+
     $scope.getMyWorkouts = function() {
+      //temporary set workouts to null, since not getting server resp
+      $scope.data.workouts = null;
+      $scope.apply();
+
       FeedFactory.getMyWorkouts(1) //change to $scope.userID
         .then(function(data){
           $scope.data.workouts = data.workouts;
@@ -53,10 +69,6 @@
         });
     };
 
-    $scope.getAllWorkouts = function() {
-      console.log('getAllWorkouts called');
-      $state.go('feed');
-    };
 
     //Sends workout data from user's selection to workout
     //module so user can log workout
