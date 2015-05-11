@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-05 17:51:40
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-10 17:15:38
+* @Last Modified time: 2015-05-10 17:21:39
 */
 
 'use strict';
@@ -46,6 +46,15 @@
       $window.localStorage.setItem('com.trybe', userJSON);
     };
 
+    var getUserID = function() {
+      var userJSON = $window.localStorage.getItem('com.trybe');
+      var userObj = JSON.parse(userJSON);
+      var userID = userObj.userID;
+      //for now, we send back username
+      var username = userObj.username;
+      return username;
+    };
+
     var isAuth = function () {
       return !!$window.localStorage.getItem('com.trybe');
     };
@@ -59,6 +68,7 @@
       signin: signin,
       signup: signup,
       setUserLocalStorage: setUserLocalStorage,
+      getUserID: getUserID,
       isAuth: isAuth,
       signout: signout
     };
