@@ -2,7 +2,26 @@
   
   <form ng-model="workout">
 
-    <fieldset>
+    <fieldset ui-view='log'>
+      <legend>Begin a Workout</legend>
+        <div class="form-group">
+          <label for="type">Type</label>
+          <input type="text" value="{{workout.type}}" readonly></input>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Instructions</label>
+          <textarea id="description" class="form-control" placeholder="Password">{{workout.description}}</textarea>
+          <ul class="exercise-list">
+            <li ng-repeat="ex in workout.exercises">
+              <span>{{ex.exerciseName}}</span>
+              <span class="workout-quantity">{{printWorkoutQuanity(ex)}}</span>
+            </li>
+          </ul>
+        </div>
+    </fieldset>
+
+    <fieldset ui-view='create'>
       <legend>Create a Workout</legend>
         <div class="form-group">
           <label for="type">Type</label>

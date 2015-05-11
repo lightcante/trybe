@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-11 13:44:04
+* @Last Modified time: 2015-05-11 15:55:33
 */
 
 'use strict';
@@ -14,11 +14,31 @@
    */
   var WorkoutStateConfig = function ($stateProvider) {
     
-    $stateProvider.state('workout', {
-      url: '/workout',
-      templateUrl: 'workout/workout.tpl.html',
-      controller: WorkoutCtrl
-    });
+    $stateProvider
+
+      .state('workout', {
+        url: '/workout',
+        templateUrl: 'workout/workout.tpl.html',
+        controller: WorkoutCtrl
+      })
+
+      .state('workout.log', {
+        views: {
+          // Relatively targets the 'create' view in this 
+          // state's parent state, 'workout', 
+          // <div ui-view='log'/> inside workout.tpl.html
+          log: {}
+        }
+      })
+
+      .state('workout.create', {
+        views: {
+          // Relatively targets the 'create' view in this 
+          // state's parent state, 'workout', 
+          // <div ui-view='create'/> inside workout.tpl.html
+          create: {}
+        }
+      });
   };
 
   /**
@@ -35,11 +55,19 @@
     else {
       // dummy workout object
       $scope.workout = WorkoutFactory.getWorkout();
-      if (!$scope.workout) { $state.go('feed'); }
       console.log('WorkoutCtrl: ', $scope.workout);
+      if (!$scope.workout) { $state.go('feed'); }
     }
 
-    // $scope.editState = 1;
+    
+    $scope.printWorkoutQuanity = function (exercise) {
+      var html = '';
+      var quantity = exercise.quantity;
+      if (quantity !== null) {
+        html = 'Sets: '+ quantity[0] +', Reps: '+ quantity[1];
+      }
+      return html;
+    };
   };
 
   // Entry point for module
