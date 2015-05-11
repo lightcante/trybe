@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:20:22
+* @Last Modified time: 2015-05-11 11:25:49
 */
 
 'use strict';
@@ -29,18 +29,6 @@
     };
 
     var getMyWorkouts = function(userID) {
-      return $http({
-        method: 'GET',
-        url: '/api/workouts/individual',
-        data: { 'x-access-userID': userID }
-      })
-      .then(function (resp) {
-        console.log('getMyWorkout factory resp:', resp);
-        return resp.data; //sends back data to controller
-      });
-    };
-
-    var getMyWorkouts = function(userID) { //later change to userID
       return $http({
         method: 'GET',
         url: '/api/workouts/individual',
