@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-07 23:25:20
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-11 10:03:51
 */
 
 'use strict';
@@ -47,7 +47,7 @@
 
 angular
 
-  .module('trybe-app.common', ['trybe-app.common'])
+  .module('trybe-app.common')
 
   .factory('FeedFactory', FeedFactory);
 
