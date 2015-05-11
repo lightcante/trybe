@@ -2,7 +2,7 @@
 * @Author: VINCE
 * @Date:   2015-05-08 11:11:52
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-10 22:28:10
+* @Last Modified time: 2015-05-11 10:31:30
 */
 
 'use strict';
@@ -152,4 +152,3 @@
     .controller('ProfileCtrl', ProfileCtrl);
 
 })(angular, _);
-
