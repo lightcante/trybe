@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:31:50
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-11 11:37:04
 */
 
 'use strict';
@@ -39,6 +39,18 @@
           console.error(error);
         });
       // $scope.apply();
+    };
+
+    $scope.getAllWorkouts = function() {
+      FeedFactory.getWorkouts()
+        .then(function(data) {
+          $scope.data.workouts = data.workouts;
+          console.log('feed ctrl data received:', $scope.data.workouts);
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+      $scope.apply();
     };
 
     $scope.getMyWorkouts = function() {
