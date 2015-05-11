@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 11:11:43
+* @Last Modified time: 2015-05-11 11:12:51
 */
 'use strict';
 
@@ -58,12 +58,13 @@ module.exports = {
               res.send(500);
             });
           });
+        })
+        .catch(function(error){
+          console.error(error);
+          res.send(500);
         });
       });
     });
-
-    // We then run getAllWorkouts to acquire workouts
-    // from workout table
   },
 
 
