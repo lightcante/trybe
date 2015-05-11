@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-11 10:12:41
+* @Last Modified time: 2015-05-11 10:14:36
 */
 'use strict';
 
@@ -99,6 +99,7 @@ module.exports = {
                   exercises: exercises,
                   finalResult: workout.get('finalResult')
                 };
+                console.log("THE WORKOUT OBJECT: ", workoutObj);
                 workoutsArray.push(workoutObj); 
                 innerNext();// this callback lets the async each know to move on to the next value
               });
@@ -123,24 +124,24 @@ module.exports = {
 
   //getSoloWorkouts sends back response consisting of just
   //the user's workouts
-  getIndividualWorkouts: function(req, res, next){
+  getIndividualWorkout: function(req, res, next){
     // var body = {
     //   token : token, 
     //   workout: [1, 2, 3], 
     //   userID: userID
     // }
-    var workouts = [];
-    var userID = req.headers['x-access-userid'];
-    console.log("THIS IS THE USERID: ", userID);
+
+    var workoutsArray = [];
+    var userID = req.headers['x-access-userid']
+   
     User.find ({where: {id: userID}}).then(function(user){ // find the user
-      console.log("THIS IS THE USER: ", user.dataValues);
+      
       user.getTrybes().then(function(trybes){ //will return an array of trybe objects
-        console.log("THIS IS THE TRYBE: ", trybes.dataValues);
-        trybes.forEach(function(trybe){
-          trybe.getWorkouts().then(function(workouts){ // will return an array of workouts
-            workouts.forEach(function(workout){
+        async.eachSeries(trybes, function(trybe, outerNext){ // go through each trybe 
+          trybe.getWorkouts().then(function(workouts){ // get all workouts associated with the trybe
+            async.eachSeries(workouts, function(workout, innerNext){ // go through each workout in each trybe
               Exercise.findAll({where: {workoutID: workout.get('id')}}).then(function(exercises){ // finds all exercises for each workout
-                var workoutObj = {
+                var workoutObj = { // create the workout object in the proper format
                   username: user.get('username'),
                   trybe: trybe.get('name'),
                   type: workout.get('type'),
@@ -149,15 +150,29 @@ module.exports = {
                   exercises: exercises,
                   finalResult: workout.get('finalResult')
                 };
-                workouts.push(workoutObj);
-                console.log("THESE ARE WORKOUTS: ", workouts);
+                workoutsArray.push(workoutObj); 
+                innerNext() // this callback lets the async each know to move on to the next value
               });
+            }, function(err){ // this function gets called when the async each is done going through all the workouts 
+              if(err){
+                console.error(err);
+              }
+              outerNext(err); //this lets the async each that's going through each trybe know to move to the next trybe
             })
           })
+        }, function(err){ // this function gets called when there are no more trybes to go through
+          if(err){
+            console.error(err)
+          }
+          // once the each function is done doing through every trybe and all the workouts have been pushed, we send back
+          // the workoutsArray to the client
+          res.send(workoutsArray) 
         })
-        res.send(workouts)
       })
+
     });
+
+
   }
 
 

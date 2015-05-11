@@ -2,7 +2,7 @@
 * @Author: vokoshyv
 * @Date:   2015-05-05 09:56:42
 * @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-09 18:54:51
+* @Last Modified time: 2015-05-11 09:26:42
 */
 'use strict';
 var workoutController = require('./workoutController.js');
@@ -12,6 +12,6 @@ module.exports = function(app){
   console.log('here');
   app.post('/', workoutController.saveWorkout);
   app.get('/all', workoutController.getAllWorkouts);
-  app.get('/individual', workoutController.getIndividualWorkouts);
+  app.get('/individual', workoutController.getIndividualWorkout);
 
 };
