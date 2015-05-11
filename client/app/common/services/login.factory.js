@@ -2,11 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-05 17:51:40
 * @Last Modified by:   vincetam
-<<<<<<< HEAD
-* @Last Modified time: 2015-05-11 11:21:57
-=======
-* @Last Modified time: 2015-05-10 17:21:39
->>>>>>> (feat) Feed makes get req for a specific user to get only user's workouts
+* @Last Modified time: 2015-05-11 11:30:16
 */
 
 'use strict';
@@ -29,7 +25,6 @@
         data: user
       })
       .then(function (resp) {
-        console.log('signin fact response from server:', resp);
         return resp.data; //should receive user token and id
       });
     };
