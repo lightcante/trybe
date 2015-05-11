@@ -1,8 +1,8 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 09:18:04
+* @Last Modified by:   vokoshyv
+* @Last Modified time: 2015-05-11 10:12:41
 */
 'use strict';
 
@@ -118,6 +118,45 @@ module.exports = {
           res.send(workoutsArray) ;
         });
       });
+    });
+  }, 
+
+  //getSoloWorkouts sends back response consisting of just
+  //the user's workouts
+  getIndividualWorkouts: function(req, res, next){
+    // var body = {
+    //   token : token, 
+    //   workout: [1, 2, 3], 
+    //   userID: userID
+    // }
+    var workouts = [];
+    var userID = req.headers['x-access-userid'];
+    console.log("THIS IS THE USERID: ", userID);
+    User.find ({where: {id: userID}}).then(function(user){ // find the user
+      console.log("THIS IS THE USER: ", user.dataValues);
+      user.getTrybes().then(function(trybes){ //will return an array of trybe objects
+        console.log("THIS IS THE TRYBE: ", trybes.dataValues);
+        trybes.forEach(function(trybe){
+          trybe.getWorkouts().then(function(workouts){ // will return an array of workouts
+            workouts.forEach(function(workout){
+              Exercise.findAll({where: {workoutID: workout.get('id')}}).then(function(exercises){ // finds all exercises for each workout
+                var workoutObj = {
+                  username: user.get('username'),
+                  trybe: trybe.get('name'),
+                  type: workout.get('type'),
+                  title: workout.get('title'),
+                  description: workout.get('description'),
+                  exercises: exercises,
+                  finalResult: workout.get('finalResult')
+                };
+                workouts.push(workoutObj);
+                console.log("THESE ARE WORKOUTS: ", workouts);
+              });
+            })
+          })
+        })
+        res.send(workouts)
+      })
     });
   }
 
