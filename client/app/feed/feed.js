@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-11 16:56:27
+* @Last Modified time: 2015-05-11 16:58:06
 */
 
 'use strict';
@@ -24,7 +24,7 @@
    * controls feed state from client side
    * @param {angular} $scope
    */
-  var FeedCtrl = function ($scope, $location, $state, $window, FeedFactory, AuthFactory) {
+  var FeedCtrl = function ($scope, $location, $state, $window, WorkoutFactory, AuthFactory) {
     $scope.data = {};
     $scope.username = AuthFactory.getUsername();
     console.log('Feed username:', $scope.username);
@@ -37,7 +37,7 @@
 
     $scope.getAllWorkouts = function() {
       // $scope.data.workouts = dummyData;
-      FeedFactory.getWorkouts($scope.username)
+      WorkoutFactory.getWorkouts($scope.username)
         .then(function(data) {
           $scope.data.workouts = data.workouts;
           console.log('FeedCtrl\tgetWorkouts: ', $scope.data.workouts);
@@ -48,7 +48,7 @@
     };
 
     $scope.getMyWorkouts = function() {
-      FeedFactory.getMyWorkouts($scope.username) //change to $scope.userID
+      WorkoutFactory.getMyWorkouts($scope.username) //change to $scope.userID
         .then(function(data){
           $scope.data.workouts = data;
           console.log('workouts after viewMe called:', $scope.data);
@@ -64,7 +64,7 @@
     $scope.log = function(index) {
       var selection = $scope.data.workouts[index];
       console.log('selected workout:', selection);
-      FeedFactory.sendWorkout(selection);
+      WorkoutFactory.sendWorkout(selection);
       $state.go('workout');
     };
 
