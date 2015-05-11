@@ -1,10 +1,10 @@
-// With regard to Bootstrap, app modules are positioned as 
+// With regard to Bootstrap, app modules are positioned as
 // rows with nested spans, which divide rows horizontally.
 .workout {
   @include make-xs-column(6);
   @include make-xs-column-offset(3);
-  background-color: #ffc0cb;
-  
+  background-color: $brand-primary;
+
   .ctrls-by-type {
     padding: 10px 20px 0 20px;
 

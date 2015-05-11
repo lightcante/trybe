@@ -1,22 +1,22 @@
 <div class="feed">
 
   <!-- Create workout button sends user to workout module -->
-  <div id="type" class="btn-group" role="group" aria-label="...">
-    <button type="button" ng-click="log()" class="btn btn-default">Create Workout</button>
+  <div id="type" class="create" role="group" aria-label="...">
+    <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Create Workout</button>
   </div>
 
   <!-- Filters workout feed to all workouts or only mine -->
-  <div id="type" class="btn-group" role="group" aria-label="...">
+  <div id="type" class="view" role="group" aria-label="...">
     <button type="button" ng-click="getAllWorkouts()" class="btn btn-default">All</button>
     <button type="button" ng-click="getMyWorkouts()" class="btn btn-default">Me</button>
   </div>
 
   <!-- Shows all workouts from filter -->
-  <input type='text' ng-model='search' placeholder='Find past workouts' class="search"/>
+  <div><input type='text' ng-model='search' placeholder='Find past workouts' class="search"/></div>
   <div class="workouts" ng-repeat="workout in data.workouts | filter:search track by $index">
     <div class="workout" ng-click="log($index)">
       <!-- Show workout descr -->
-      <div><span>{{ workout.username }} posted to {{ workout.trybe }}</span></div>
+      <div class="user-trybe-post"><span>{{ workout.username }} posted to {{ workout.trybe }}</span></div>
       <div><span ng-if="workout.type === 'benchmark'">{{ workout.title }}</span></div>
       <div><span>{{ workout.description }}</span></div>
 
@@ -29,8 +29,9 @@
 
       <!-- Shows workout result if a metcon or benchmark workout -->
       <div><span ng-if="workout.type !== 'lift'"> {{ workout.finalResult.type }} {{ workout.finalResult.value }} </span></div>
-      <div id="type" class="btn-group" role="group" aria-label="...">
-        <button type="button" class="tryButton">try</button>
+
+      <div id="type" role="group" aria-label="...">
+        <button type="button" class="btn-block tryButton">try</button>
       </div>
 
     </div>
