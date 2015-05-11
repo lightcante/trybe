@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-08 00:06:06
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-10 21:00:06
 */
 
 'use strict';
@@ -24,47 +24,49 @@
    * controls feed state from client side
    * @param {angular} $scope
    */
-  var FeedCtrl = function ($scope, $location, $state, FeedFactory) {
+  var FeedCtrl = function ($scope, $location, $state, $window, FeedFactory, AuthFactory) {
     $scope.data = {};
-    $scope.view = 'all';
+    $scope.userID = AuthFactory.getUserID();
+    console.log('Feed userID:', $scope.userID);
 
-    $scope.getWorkouts = function() {
+    $scope.getAllWorkouts = function() {
       FeedFactory.getWorkouts()
         .then(function(data) {
           $scope.data.workouts = data.workouts;
-          console.log($scope.data.workouts);
+          console.log('feed ctrl data received:', $scope.data.workouts);
         })
         .catch(function(error) {
           console.error(error);
         });
+      // $scope.apply();
     };
-    $scope.getWorkouts();
 
-    $scope.viewMe = function() {
-      $scope.view = 'me';
-    }
+    $scope.getMyWorkouts = function() {
+      //temporary set workouts to null, since not getting server resp
+      $scope.data.workouts = null;
+      $scope.apply();
 
-    $scope.viewAll = function() {
-      $scope.view = 'all';
-    }
+      FeedFactory.getMyWorkouts(1) //change to $scope.userID
+        .then(function(data){
+          $scope.data.workouts = data.workouts;
+          console.log('workouts after viewMe called:', $scope.data.workouts);
+        })
+        .catch(function(error){
+          console.error(error);
+        });
+    };
 
-    $scope.viewFilter = function(workout) {
-      if($scope.view === 'me') {
-        //later change $scope.view to own username
-        return (workout.username === $scope.view);
-      } else {
-        return true;
-      }
-    }
 
     //Sends workout data from user's selection to workout
     //module so user can log workout
     $scope.log = function(index) {
       var selection = $scope.data.workouts[index];
-      console.log("selected workout:", selection);
+      console.log('selected workout:', selection);
       FeedFactory.sendWorkout(selection);
       $state.go('workout');
-    }
+    };
+
+    $scope.getAllWorkouts();
 
   };
 
