@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 11:12:51
+* @Last Modified time: 2015-05-11 11:14:10
 */
 'use strict';
 
@@ -67,7 +67,8 @@ module.exports = {
     });
   },
 
-
+// This function will go into the database and find all workouts from all of the trybes that the user is a part of and return that
+// as an object following the format stated in dataObjects.js
   getAllWorkouts: function(req, res, next){
     var workoutsArray = [];
     var user= req.headers['x-access-username'];
