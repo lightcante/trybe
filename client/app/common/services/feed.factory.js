@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 12:03:59
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-11 15:47:38
 */
 
 'use strict';
@@ -20,7 +20,7 @@
     var getWorkouts = function (username) {
       return $http({
         method: 'GET',
-        url: '/api/workouts/all', //change to all
+        url: '/api/workouts/all',
         headers: { 'x-access-username': username}
       })
       .then(function (resp) {

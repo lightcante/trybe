@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 12:05:38
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-11 16:03:37
 */
 
 'use strict';
@@ -28,8 +28,15 @@
     $scope.data = {};
     $scope.username = AuthFactory.getUsername();
     console.log('Feed username:', $scope.username);
+    // var dummyData =
+    //   [
+    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null},
+    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null},
+    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null}
+    //   ];
 
     $scope.getAllWorkouts = function() {
+      // $scope.data.workouts = dummyData;
       FeedFactory.getWorkouts($scope.username)
         .then(function(data) {
           $scope.data.workouts = data;
@@ -38,13 +45,9 @@
         .catch(function(error) {
           console.error(error);
         });
-      // $scope.apply();
     };
 
     $scope.getMyWorkouts = function() {
-      //temporary set workouts to null, since not getting server resp
-      // $scope.data.workouts = null;
-
       FeedFactory.getMyWorkouts($scope.username) //change to $scope.userID
         .then(function(data){
           $scope.data.workouts = data;
