@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:08:29
+* @Last Modified time: 2015-05-11 11:11:18
 */
 
 'use strict';
@@ -55,7 +55,6 @@
           console.error(error);
         });
     };
-
 
     //Sends workout data from user's selection to workout
     //module so user can log workout

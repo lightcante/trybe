@@ -2,7 +2,7 @@
 * @Author: VINCE
 * @Date:   2015-05-08 11:11:52
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:08:50
+* @Last Modified time: 2015-05-11 11:11:52
 */
 
 'use strict';
@@ -23,7 +23,10 @@
   };
 
   /**
+<<<<<<< HEAD
 
+=======
+>>>>>>> b4444ad0c2e6405d11cc48e453fc473ff17bdc15
    * Controls profile for client side.
    * @param {angular} $scope
    */
@@ -153,4 +156,3 @@
     .controller('ProfileCtrl', ProfileCtrl);
 
 })(angular, _);
-
