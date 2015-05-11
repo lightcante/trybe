@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:12:58
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-06 13:49:16
+* @Last Modified time: 2015-05-11 13:15:16
 */
 'use strict';
 var config = require('./server-config');
@@ -23,7 +23,7 @@ models.sequelize.sync()
 .done(function(){
   server.listen(config.port, function () {
     console.log('Express server listening on port %d', config.port);
-    open( 'http://localhost:' + config.port, function (err) {
+    open( 'trybehr.herokuapp.com', function (err) {
       if (err) {
         throw err;
       } else {
