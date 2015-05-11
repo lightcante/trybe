@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:45:06
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-11 12:03:59
 */
 
 'use strict';
@@ -21,7 +21,7 @@
       return $http({
         method: 'GET',
         url: '/api/workouts/all', //change to all
-        data: { 'x-access-username': username}
+        headers: { 'x-access-username': username}
       })
       .then(function (resp) {
         return resp.data; //sends back data to controller
@@ -32,7 +32,7 @@
       return $http({
         method: 'GET',
         url: '/api/workouts/individual',
-        data: { 'x-access-username': username }
+        headers: { 'x-access-username': username }
       })
       .then(function (resp) {
         console.log('getMyWorkout factory resp:', resp);

@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-11 11:47:23
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-11 12:05:38
 */
 
 'use strict';
@@ -32,8 +32,8 @@
     $scope.getAllWorkouts = function() {
       FeedFactory.getWorkouts($scope.username)
         .then(function(data) {
-          $scope.data.workouts = data.workouts;
-          console.log('feed ctrl data received:', $scope.data.workouts);
+          $scope.data.workouts = data;
+          console.log('feed ctrl data received:', $scope.data);
         })
         .catch(function(error) {
           console.error(error);
@@ -47,8 +47,8 @@
 
       FeedFactory.getMyWorkouts($scope.username) //change to $scope.userID
         .then(function(data){
-          $scope.data.workouts = data.workouts;
-          console.log('workouts after viewMe called:', $scope.data.workouts);
+          $scope.data.workouts = data;
+          console.log('workouts after viewMe called:', $scope.data);
         })
         .catch(function(error){
           console.error(error);
