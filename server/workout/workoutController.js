@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 10:59:02
+* @Last Modified time: 2015-05-11 11:11:43
 */
 'use strict';
 
@@ -15,23 +15,19 @@ var async = require('async');
 module.exports = {
 
   saveWorkout: function(req, res, next){
-    // Acquire workout information from the req.body;
     // Write the workout information to the sql tables
-
     var userID;
     var trybeID;
     var workoutID;
-
     //Acquire userID from User table
     User.find({where: {username: req.body.username}}).then(function(user){
       userID = user.get('id');
-
       //Acquire trybeID from Trybe table
       Trybe.find({where: {name: req.body.trybe}}).then(function(trybe){
         trybeID = trybe.get('id');
-        
+  
         //Insert data into Workout table
-        Workout.build({
+        Workout.build({ // create table entry 
           UserId: userID,
           type: req.body.type,
           title: req.body.title,
@@ -39,7 +35,7 @@ module.exports = {
           finalResult: JSON.stringify(req.body.finalResult),
           TrybeId: trybeID
         })
-        .save()
+        .save() //save the table we just created into the database
         .then(function(workout){
 
           //Acquire the workoutID from Workout table
@@ -47,13 +43,13 @@ module.exports = {
 
           //Insert all exercises into Exercises table
           req.body.exercises.forEach(function(exercise){
-            Exercise.build({
+            Exercise.build({ // create table entry
               exerciseName: exercise.exerciseName,
               quantity: JSON.stringify(exercise.quantity), 
               result: exercise.result, 
               WorkoutId: workoutID
             })
-            .save()
+            .save() // save table entry into the database
             .then(function(newExercise){ // after the exercise is successfully saved, we send back a 200
               res.send(200);
             })
@@ -65,24 +61,15 @@ module.exports = {
         });
       });
     });
-    
 
-
-
-    
     // We then run getAllWorkouts to acquire workouts
     // from workout table
   },
 
 
   getAllWorkouts: function(req, res, next){
-    // var body = {
-    //   token : token, 
-    //   workout: [1, 2, 3], 
-    //   userID: userID
-    // }
     var workoutsArray = [];
-    var user= req.headers['x-access-username']
+    var user= req.headers['x-access-username'];
    
     User.find ({where: {username: user}}).then(function(user){ // find the user
       user.getTrybes().then(function(trybes){ //will return an array of trybe objects
@@ -103,7 +90,6 @@ module.exports = {
                   workoutsArray.push(workoutObj); 
                   innerNext();// this callback lets the async each know to move on to the next value
                 });
-
               });
             }, function(err){ // this function gets called when the async each is done going through all the workouts 
               if(err){
@@ -124,23 +110,16 @@ module.exports = {
     });
   }, 
 
-  //getSoloWorkouts sends back response consisting of just
-  //the user's workouts
+  //getIndividualWorkouts sends back response consisting of just the user's workouts
   getIndividualWorkout: function(req, res, next){
-    // var body = {
-    //   token : token, 
-    //   workout: [1, 2, 3], 
-    //   userID: userID
-    // }
-
     var workoutsArray = [];
-    var username = req.headers['x-access-username']
+    var username = req.headers['x-access-username'];
    
     User.find({where: {username: username}}).then(function(user){ // find the user
-      user.getWorkouts().then(function(workouts){ // get all workouts associated with the trybe
-        async.eachSeries(workouts, function(workout, innerNext){ // go through each workout in each trybe
+      user.getWorkouts().then(function(workouts){ // get all workouts associated with the user
+        async.eachSeries(workouts, function(workout, innerNext){ // go through each workout
           Exercise.findAll({where: {workoutID: workout.get('id')}}).then(function(exercises){ // finds all exercises for each workout
-            Trybe.find({where: {id: workout.TrybeId}}).done(function(trybe){
+            Trybe.find({where: {id: workout.TrybeId}}).done(function(trybe){ // used to get trybe name 
               var workoutObj = { // create the workout object in the proper format
                 username: user.get('username'),
                 trybe: trybe.get('name'),
@@ -158,9 +137,9 @@ module.exports = {
           if(err){
             console.error(err);
           }
-          res.send(workoutsArray) 
+          res.send(workoutsArray) ;
         }) ;
       });
     });
   }
-}
+};
