@@ -2,20 +2,19 @@
 * @Author: nimi
 * @Date:   2015-05-05 13:33:15
 * @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 13:30:42
+* @Last Modified time: 2015-05-11 14:57:39
 */
 
 //This file is used to coordinate all the schemas
 'use strict';
 
 var Sequelize = require('sequelize'); 
-var db_config = require('./db-config.js');
 
 //initialize database connection
-var database = process.env.DATABASE_NAME || db_config.database;
-var username =  process.env.DATABASE_USERNAME  || db_config.username;
-var password = process.env.DATABASE_PASSWORD || db_config.password;
-var host = process.env.DATABASE_HOST || db_config.hostName;
+var database = process.env.DATABASE_NAME;
+var username =  process.env.DATABASE_USERNAME;
+var password = process.env.DATABASE_PASSWORD;
+var host = process.env.DATABASE_HOST;
 
 
 var sequelize = new Sequelize(database, username , password, {
