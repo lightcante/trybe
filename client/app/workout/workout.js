@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-08 21:31:57
+* @Last Modified time: 2015-05-11 11:49:43
 */
 
 'use strict';
@@ -27,35 +27,27 @@
    * record workout results.
    * @param {angular} $scope 
    */
-  var WorkoutCtrl = function ($scope) {
+  var WorkoutCtrl = function ($scope, $state, AuthFactory, WorkoutFactory) {
 
-    // dummy workout object
-    $scope.workout = {
-      username: 'Tom',
-      trybe: 'CFSF',
-      type: 'lift',
-      title: '05042015',
-      description: 'build up to 8- rep max of ',
-      exercises: [
-        {
-          exerciseName: 'bench press',
-          quantity: [3, 8], //[sets, reps]
-          result: 185
-        },
-        {
-          exerciseName: 'squat',
-          quantity: [2,8],
-          result: 200
-        }
-      ],
-      finalResult: null
-    };
+
+    if (!AuthFactory.isAuth()) {
+      $state.go('login');
+    }
+    else {
+      // dummy workout object
+      $scope.workout = WorkoutFactory.getWorkout();
+      console.log('WorkoutCtrl: ', $scope.workout);
+    }
+
+    // $scope.editState = 1;
   };
 
   // Entry point for module
   angular
 
-    .module('trybe-app.workout', [])
+    .module('trybe-app.workout', [
+      'trybe-app.common'
+    ])
 
     .config(WorkoutStateConfig)
 
