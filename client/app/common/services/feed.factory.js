@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:03:21
+* @Last Modified time: 2015-05-11 11:07:03
 */
 
 'use strict';
@@ -20,15 +20,15 @@
     var getWorkouts = function () {
       return $http({
         method: 'GET',
-        url: '/api/workouts',
-        data: {} // {'ORDERING_CRITERIA_KEY': 'ORDERING_CRITERIA_VALUE'} optional
+        url: '/api/workouts', //change to all
+        data: {}
       })
       .then(function (resp) {
         return resp.data; //sends back data to controller
       });
     };
 
-    var getMyWorkouts = function(userID) { //later change to userID
+    var getMyWorkouts = function(userID) {
       return $http({
         method: 'GET',
         url: '/api/workouts/individual',

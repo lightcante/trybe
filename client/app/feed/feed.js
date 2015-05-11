@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 11:04:06
+* @Last Modified time: 2015-05-11 11:06:45
 */
 
 'use strict';
@@ -24,16 +24,17 @@
    * controls feed state from client side
    * @param {angular} $scope
    */
-  var FeedCtrl = function ($scope, $location, $state, $window, FeedFactory) {
+  var FeedCtrl = function ($scope, $location, $state, $window, FeedFactory, AuthFactory) {
     $scope.data = {};
-    $scope.userID = $window.localStorage.getItem('com.trybe');
+    $scope.userID = AuthFactory.getUserID();
+    console.log('Feed ctrl userID:', $scope.userID);
     $scope.view = 'all';
 
     $scope.getWorkouts = function() {
       FeedFactory.getWorkouts()
         .then(function(data) {
           $scope.data.workouts = data.workouts;
-          console.log($scope.data.workouts);
+          console.log('feed ctrl data received:', $scope.data.workouts);
         })
         .catch(function(error) {
           console.error(error);
@@ -41,12 +42,19 @@
     };
     $scope.getWorkouts();
 
-    $scope.viewMe = function() {
-      FeedFactory.getMyWorkouts(); //more
+    $scope.getMyWorkouts = function() {
+      FeedFactory.getMyWorkouts(1) //change to $scope.userID
+        .then(function(data){
+          $scope.data.workouts = data.workouts;
+          console.log('workouts after viewMe called:', $scope.data.workouts);
+        })
+        .catch(function(error){
+          console.error(error);
+        });
     };
 
-    $scope.viewAll = function() {
-      $scope.view = 'all';
+    $scope.getAllWorkouts = function() {
+      $state.go('feed');
     };
 
     $scope.viewFilter = function(workout) {
