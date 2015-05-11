@@ -12,7 +12,8 @@
   </div>
 
   <!-- Shows all workouts from filter -->
-  <div class="workouts" ng-repeat="workout in data.workouts | filter:viewFilter track by $index">
+  <input type='text' ng-model='search' placeholder='Find past workouts' class="search"/>
+  <div class="workouts" ng-repeat="workout in data.workouts | filter:search track by $index">
     <div class="workout" ng-click="log($index)">
       <!-- Show workout descr -->
       <div><span>{{ workout.username }} posted to {{ workout.trybe }}</span></div>
