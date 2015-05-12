@@ -7,9 +7,7 @@ Sublime Text 3 is the chosen editor for members of the Trybe project. You can us
 
 ### Project File (trybe.sublime-project)
 
-The project file standardizes a key editor settings between project members. For example, the file sets a default tab size for all new files to '2' and automattically translates all tab input to spaces. Another helpful setting; it displays two verical lines in the editor, the first marks the border for comments, the second marks the border code.
-
-When opening Sublime Text, remember to open the 
+The project file standardizes a key editor settings between project members. For example, the file sets a default tab size for all new files to '2' and automattically translates all tab input to spaces. Another helpful setting; it displays two verical lines in the editor, the first (60 spaces) marks the border for comments, the second (80 spaces) marks the border code.
 
 ### Plugins
 
@@ -38,7 +36,7 @@ Remember to [Read The Docs](http://www.sublimelinter.com/en/latest/index.html) b
 * SublimeLinter-jshint
 * SublimeLinter-contrib-scss-lint
 
-#### Themes
+### Themes
 
 Themes are optional. Your theme selection is largely a matter of preference. The most useful themes can be combined with linters to present graphic feedback on warnings and errors.  For example, ITG Flat, a project-favorite theme, can be setup inside `Preferences.sublime-settings` to affect Sublime Text's theme and color scheme.
 
@@ -58,25 +56,30 @@ LightCante's list of favorite themes appears below:
 * [Afterglow](http://yabatadesign.github.io/afterglow-theme/)
 
 
-## ZSH
+### ZSH
 
+ZSH is an command line terminal with powerful capabilities. It comes from bash, ksh, and tcsh. Installation of this command line terminal is optional. 
 
-## Deployment
+### Getting Set Up
 
--- Installing MYSQL 
+#####Development Environment 
 
-mysql -u root -p
+1. Ensure you have mysql installed by running <code>which mysql</code>. If not installed, run <code>brew install mysql</code>. For Linux machines, run <code>sudo apt-get install mysql-server</code>. You can then decide to enter as a root user or create a normal user (https://dev.mysql.com/doc/refman/5.5/en/changing-mysql-user.html). To enter the mysql environment, run <code>mysql -u root</code>. (Or whichever username you decide). Upon entering, create a trybe database with the following command: <code>create database 'trybe';</code>. To use this database, run <code>use trybe;</code>. If you run <code>show tables;</code>, you will not see any tables because you haven't actually run your server yet. 
 
-MYSQL has to be installed in order to create 'trybe' 
-database. When we ge ready to deploy, will have to write 
-grunt file to make the server to two tasks: 
+2. Outside of the mysql environment, in your directory, run <code>npm install</code>. 
 
-1) create 'trybe' database using the following command: 
+3. Upon completion, run <code>bower install</code>. 
 
-$~~ create database 'trybe';
+4. You should now have all of your front and back end dependencies. Now run <code>grunt build</code>. This command will build the tables from the schemas in trybe/server/models. 
 
-2) run grunt build
+5. In the terminal, set the following variables: DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST. Then run <code>export DATABASE_USERNAME DATABASE_PASSWORD DATABASE_HOST DATABASE_NAME</code>
 
---Installing/running bower
-In the Heroku deploy instructions, will need to install and
-run bower install to see front end
+6. Run <code>nodemon server/server.js</code> to start the server on your machine.
+
+#####Deployment Environment
+
+1. Contact us (lightcante team) for environmental variables for online Heroku app. We will give you the credentials then. 
+
+2. Copy and paste them into your terminal and press 'Enter'. 
+
+3. Run <code>nodemon server/server.js</code>. You will now be interacting directly with the Cleardb database. 
