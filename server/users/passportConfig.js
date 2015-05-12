@@ -1,8 +1,8 @@
 /* 
 * @Author: nimi
 * @Date:   2015-05-05 16:15:10
-* @Last Modified by:   vokoshyv
-* @Last Modified time: 2015-05-09 00:21:09
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-11 17:01:44
 */
 
 'use strict';
@@ -10,7 +10,6 @@
 var LocalStrategy = require ('passport-local').Strategy;
 var User = require('../models').user;
 var Trybe = require('../models').trybe;
-var passport = require('passport');
 
 module.exports = function(passport){
 
@@ -40,7 +39,7 @@ passport.use('local-signin', new LocalStrategy(
           // if the user does not match up, send back a null for the user and a message to send up to the client
           return done(null, false, 'The password does not match');
           }
-        })
+        });
       } else { //user does not exist with that username
         return done(null, false, 'User does not exist');
       }
@@ -53,24 +52,24 @@ passport.use('local-signup', new LocalStrategy(
   function(username, password, done){
     User.find( {where: {username: username} }).then(function(user){
       if(user){ //if that username already exists
-        return done(null, false, 'That username already exists') //send back a falsy value for user and the message
+        return done(null, false, 'That username already exists'); //send back a falsy value for user and the message
       } else {
         User.build({username: username, password: password}) // builds the new user to be saved in the database
-          // .setTrybes([trybe], {name: "CFSF"})
           .save() // saves the user to the database
           .then(function(user){ // on success, send back user data
-            Trybe.find({ where: {name: 'CFSF'} }).then(function(trybe){
+            //temporarily, all new users will have a default association to HR 26/27
+            Trybe.find({ where: {name: 'HR 26/27'} }).then(function(trybe){
               user.setTrybes(trybe).then(function() {
-                console.log('relationship set!')
-              })
-            })
-            return done(null, user)
+                console.log('relationship set!');
+              });
+            });
+            return done(null, user);
           })
           .catch(function(err){ // error handling
             return done(err);
-          })
+          });
       }
-    })
-  }))
+    });
+  }));
 
 };
