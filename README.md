@@ -1,6 +1,6 @@
-# Project Name
+# trybe
 
-> Pithy project description
+> Social Workouts for the CrossFit Community 
 
 ## Team
 
@@ -16,9 +16,7 @@
 1. [Team](#team)
 1. [Contributing](#contributing)
 
-## Usage
-
-> # Development Guide
+# Development Guide
 
 All project tools must be compatible between OSX and Linux systems. The standard project tools appear below.
 
