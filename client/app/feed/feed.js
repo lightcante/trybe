@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-11 16:58:06
+* @Last Modified by:   nimi
+* @Last Modified time: 2015-05-11 18:09:03
 */
 
 'use strict';
@@ -39,8 +39,8 @@
       // $scope.data.workouts = dummyData;
       WorkoutFactory.getWorkouts($scope.username)
         .then(function(data) {
-          $scope.data.workouts = data.workouts;
-          console.log('FeedCtrl\tgetWorkouts: ', $scope.data.workouts);
+          $scope.data.workouts = data;
+          console.log('FeedCtrl\tgetWorkouts: ', $scope.data);
         })
         .catch(function(error) {
           console.error(error);
