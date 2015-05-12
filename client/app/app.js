@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 10:16:27
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-08 11:07:57
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-11 16:42:35
 */
 
 'use strict';
@@ -28,11 +28,12 @@
    * Entry point for application. Loads all client-side dependencies
    * @param {angular} $scope
    */
-  var AppCtrl = function($scope) {
-    $scope.items = ['A', 'List', 'Of', 'Items'];
+  var AppCtrl = function($scope, $state) {
+
+    // Add state to rootScope for use inside view templates
+    // $rootScope.state = $state;
 
     // $rootScope.isAuthed = false;
-
     // $rootScope.$on('$routeChangeError', function (event, current, previous, rejection) {
     //   console.log('routeChangeError: ', event);
     // });

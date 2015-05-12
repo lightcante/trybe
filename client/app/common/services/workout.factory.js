@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-11 15:47:38
+* @Last Modified by:   justinwebb
+* @Last Modified time: 2015-05-11 16:52:37
 */
 
 'use strict';
@@ -14,13 +14,15 @@
    * @param {[angular]} $location
    * @param {[angular]} $window
    */
-  var FeedFactory = function ($http, $location, $window) {
+  var WorkoutFactory = function ($http, $location, $window) {
     var workout;
+    var workoutSelectionStore = 'com.trybe.selectedWorkout';
+    var localStorage = $window.localStorage
 
     var getWorkouts = function (username) {
       return $http({
         method: 'GET',
-        url: '/api/workouts/all',
+        url: '/api/workouts/all', //change to all
         headers: { 'x-access-username': username}
       })
       .then(function (resp) {
@@ -41,21 +43,24 @@
     };
 
     var sendWorkout = function(selection) {
-      console.log('workout sent from feed:', selection);
       workout = selection;
-      console.log('FeedFactory workout var:', workout);
+      localStorage.setItem(this.selection, JSON.stringify(workout));
+      console.log('WorkoutFactory\tsendWorkout: ', workout);
     };
 
     var getWorkout = function() {
-      console.log('workout req from log');
+      if (workout === undefined) {
+        workout = JSON.parse(localStorage.getItem(this.selection));
+      }
       return workout;
-    };
+    }
 
     return {
       getWorkouts: getWorkouts,
       getMyWorkouts: getMyWorkouts,
       sendWorkout: sendWorkout,
-      getWorkout: getWorkout
+      getWorkout: getWorkout,
+      selection: workoutSelectionStore
     };
   };
 
@@ -63,7 +68,7 @@ angular
 
   .module('trybe-app.common')
 
-  .factory('FeedFactory', FeedFactory);
+  .factory('WorkoutFactory', WorkoutFactory);
 
 })(angular, _);
 
