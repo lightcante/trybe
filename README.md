@@ -6,7 +6,7 @@
 
   - __Product Owner__: Vince Tam
   - __Scrum Master__: Ron Tsui
-  - __Development Team Members__: Justin Webb, Nimi Dharithreesan
+  - __Development Team Members__: Justin Webb, Nimi Dharithreesan, Ron Tsui, Vince Tam
 
 ## Table of Contents
 
