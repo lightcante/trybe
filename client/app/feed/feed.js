@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 14:39:26
+* @Last Modified time: 2015-05-18 14:57:09
 */
 
 'use strict';
@@ -29,11 +29,12 @@
     $scope.init = function() {
       if(!AuthFactory.isAuth()) {
         $state.go('login');
+      } else {
+        $scope.data = {};
+        $scope.username = AuthFactory.getUsername();
+        console.log('Feed username:', $scope.username);
+        $scope.getAllWorkouts();
       }
-      $scope.data = {};
-      $scope.username = AuthFactory.getUsername();
-      console.log('Feed username:', $scope.username);
-      $scope.getAllWorkouts();
     };
 
     $scope.getAllWorkouts = function() {
