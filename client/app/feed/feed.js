@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 14:25:28
+* @Last Modified time: 2015-05-18 14:39:26
 */
 
 'use strict';
@@ -25,15 +25,16 @@
    * @param {angular} $scope
    */
   var FeedCtrl = function ($scope, $location, $state, $window, WorkoutFactory, AuthFactory) {
-    $scope.data = {};
-    $scope.username = AuthFactory.getUsername();
-    console.log('Feed username:', $scope.username);
-    // var dummyData =
-    //   [
-    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null},
-    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null},
-    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null}
-    //   ];
+
+    $scope.init = function() {
+      if(!AuthFactory.isAuth()) {
+        $state.go('login');
+      }
+      $scope.data = {};
+      $scope.username = AuthFactory.getUsername();
+      console.log('Feed username:', $scope.username);
+      $scope.getAllWorkouts();
+    };
 
     $scope.getAllWorkouts = function() {
       // $scope.data.workouts = dummyData;
@@ -69,7 +70,7 @@
       $state.go('workout');
     };
 
-    $scope.getAllWorkouts();
+    $scope.init();
 
   };
 
