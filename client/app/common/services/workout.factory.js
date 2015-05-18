@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-11 16:52:37
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-18 14:20:39
 */
 
 'use strict';
@@ -26,6 +26,7 @@
         headers: { 'x-access-username': username}
       })
       .then(function (resp) {
+        console.log('getWorkouts factory resp:', resp);
         return resp.data; //sends back data to controller
       });
     };
