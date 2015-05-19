@@ -17,7 +17,7 @@
             <li ng-repeat="ex in workout.exercises track by $index">
               <div>{{ex.exerciseName}}</div>
               <!--if workout is lift, show quantity & results-->
-              <div ng-if="workout.type === 'lift'" class="workout-quantity">{{printWorkoutQuantity(ex, $index)}}
+              <div ng-if="workout.type === 'lift'" class="workout-quantity">{{printWorkoutQuantity(ex)}}
                 <div>Max weight: <input ng-model="workout.exercises[$index].result" type="text" value="{{ex.result}}"></input></div>
               </div>
 
@@ -43,9 +43,9 @@
           <textarea id="description" class="form-control" placeholder="{{placeholders.instructions}}" ng-model="workout.description"></textarea>
           <ul class="exercise-list">
             <li ng-repeat="ex in workout.exercises track by $index">
-              <div ng-if="ex.quantity[0]">
-                <span>{{ex.exerciseName}}:</span>
-                <span>{{ex.quantity[0]}} Sets, {{ex.quantity[1]}} Reps</span>
+              <div ng-if="ex">
+                <span>{{ex.exerciseName}}</span>
+                <span ng-if="ex.quantity[0]">{{ex.quantity[0]}} Sets, {{ex.quantity[1]}} Reps</span>
               </div>
             </li>
           </ul>
@@ -100,6 +100,7 @@
           </div>
 
           <div class="ctrl-group">
+            <label for="type">Result</label>
             <input class="ctrl-group" ng-model="temp.finalResults"></input>
           </div>
         </div>
