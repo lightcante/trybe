@@ -2,7 +2,7 @@
 
   <form ng-model="workout">
 
-    <fieldset ui-view='log'>
+    <fieldset ui-view='log' ng-if='!isCreatingWorkout'>
       <legend>Begin a Workout</legend>
         <div class="form-group">
           <label for="type">Type: {{workout.type}} workout</label>
@@ -27,7 +27,7 @@
         </div>
     </fieldset>
 
-    <fieldset ui-view='create'>
+    <fieldset ng-if='isCreatingWorkout' ui-view='create'>
       <legend>Create a Workout</legend>
         <div class="form-group">
           <label for="type">Type</label>
@@ -50,7 +50,7 @@
     </fieldset>
 
     <!-- Create state -->
-    <fieldset>
+    <fieldset ng-if='isCreatingWorkout'>
 
       <legend>Add Exercises to Workout</legend>
 

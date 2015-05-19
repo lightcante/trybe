@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 20:05:04
+* @Last Modified time: 2015-05-18 21:13:22
 */
 
 'use strict';
@@ -66,9 +66,17 @@
     //Sends workout data from user's selection to workout
     //module so user can log workout
     $scope.log = function(index) {
-      var selection = $scope.data.workouts[index];
+      var isNewWorkout;
+      var selection;
+      if(index !== undefined) {
+        selection = $scope.data.workouts[index];
+        isNewWorkout = false;
+      } else {
+        selection = null;
+        isNewWorkout = true;
+      }
       console.log('selected workout:', selection);
-      WorkoutFactory.sendWorkout(selection);
+      WorkoutFactory.sendWorkout(selection, isNewWorkout);
       $state.go('workout');
     };
 

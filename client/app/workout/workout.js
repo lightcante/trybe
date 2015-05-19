@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-18 20:27:07
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-18 21:05:45
 */
 
 'use strict';
@@ -55,8 +55,10 @@
     else {
       // dummy workout object
       $scope.workout = WorkoutFactory.getWorkout();
+      $scope.isCreatingWorkout = WorkoutFactory.isCreatingWorkout() === true;
+      console.log('isCreatingWorkout', $scope.isCreatingWorkout);
       console.log('WorkoutCtrl: ', $scope.workout);
-      if (!$scope.workout) { $state.go('feed'); }
+      // if (!$scope.workout) { $state.go('feed'); }
     }
 
 

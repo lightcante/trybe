@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-18 20:03:15
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-18 20:48:04
 */
 
 'use strict';
@@ -16,8 +16,9 @@
    */
   var WorkoutFactory = function ($http, $location, $window) {
     var workout;
+    var isNewWorkout;
     var workoutSelectionStore = 'com.trybe.selectedWorkout';
-    var localStorage = $window.localStorage
+    var localStorage = $window.localStorage;
 
     var getWorkouts = function (username) {
       return $http({
@@ -52,8 +53,9 @@
     };
 
     //saves to local storage
-    var sendWorkout = function(selection) {
+    var sendWorkout = function(selection, isNew) {
       workout = selection;
+      isNewWorkout = isNew;
       localStorage.setItem(this.selection, JSON.stringify(workout));
       console.log('WorkoutFactory\tsendWorkout: ', workout);
     };
@@ -78,13 +80,18 @@
       return workout;
     };
 
+    var isCreatingWorkout = function() {
+      return isNewWorkout;
+    };
+
     return {
       getWorkouts: getWorkouts,
       getMyWorkouts: getMyWorkouts,
       sendWorkout: sendWorkout,
       postWorkout: postWorkout,
       getWorkout: getWorkout,
-      selection: workoutSelectionStore
+      selection: workoutSelectionStore,
+      isCreatingWorkout: isCreatingWorkout
     };
   };
 
