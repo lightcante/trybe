@@ -17,7 +17,7 @@
             <li ng-repeat="ex in workout.exercises track by $index">
               <div>{{ex.exerciseName}}</div>
               <!--if workout is lift, show quantity & results-->
-              <div ng-if="workout.type === 'lift'" class="workout-quantity">{{printWorkoutQuantity(ex)}}
+              <div ng-if="workout.type === 'lift'" class="workout-quantity">{{printWorkoutQuantity(ex, $index)}}
                 <div>Max weight: <input ng-model="workout.exercises[$index].result" type="text" value="{{ex.result}}"></input></div>
               </div>
 

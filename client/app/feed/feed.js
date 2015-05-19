@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 14:57:09
+* @Last Modified time: 2015-05-18 20:05:04
 */
 
 'use strict';
@@ -61,6 +61,7 @@
         });
       // $scope.apply();
     };
+
 
     //Sends workout data from user's selection to workout
     //module so user can log workout

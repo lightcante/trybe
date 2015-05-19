@@ -15,7 +15,7 @@
   <!-- Shows all workouts from filter -->
   <input class='form-control' type='text' ng-model='search' placeholder='Find Workouts'>
   <div class="workouts" ng-repeat="workout in data.workouts | filter:search track by $index">
-    <div class="workout" ng-click="log($index)">
+    <div class="workout">
       <!-- Show workout descr -->
       <div class="user-trybe-post"><span>{{ workout.username }} posted to {{ workout.trybe }}</span></div>
       <div><span ng-if="workout.type === 'benchmark'">{{ workout.title }}</span></div>
@@ -24,7 +24,7 @@
       <!-- Repeats through exercises in workout, shows sets & reps if a lift -->
       <div class="exercises" ng-repeat="exercise in workout.exercises track by $index">
         <div><span>{{ exercise.exerciseName }}</span></div>
-          <div><span ng-if="workout.type === 'lift'">{{ exercise.quantity[0] }} Sets, {{ exercise.quantity[1] }} Reps</span></div>
+          <div><span ng-if="workout.type === 'lift'">{{exercise.quantity[0]}} Sets, {{exercise.quantity[1]}} Reps</span></div>
           <div><span ng-if="workout.type === 'lift'" class="liftResult">Result: {{ exercise.result }} </span></div>
       </div>
 
@@ -32,7 +32,7 @@
       <div><span ng-if="workout.type !== 'lift'"> {{ workout.finalResult.type }} {{ workout.finalResult.value }} </span></div>
 
       <div id="type" role="group" aria-label="...">
-        <button type="button" class="btn-block tryButton">try</button>
+        <button type="button" ng-click="log($index)" class="btn-block tryButton">try</button>
       </div>
 
     </div>

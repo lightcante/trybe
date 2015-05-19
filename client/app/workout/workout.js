@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-18 19:24:55
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-18 20:05:32
 */
 
 'use strict';
@@ -62,7 +62,7 @@
 
     $scope.printWorkoutQuantity = function (exercise) {
       var html = '';
-      var quantity = exercise.quantity;
+      var quantity = exercise.quantity; //delete if works
       if (quantity !== null) {
         html = quantity[0] +' Sets, ' + quantity[1] + ' Reps';
       }

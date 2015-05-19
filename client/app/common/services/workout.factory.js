@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-18 19:03:07
+* @Last Modified time: 2015-05-18 20:03:15
 */
 
 'use strict';
@@ -27,6 +27,14 @@
       })
       .then(function (resp) {
         console.log('getWorkouts factory resp:', resp);
+        resp.data.forEach(function(workout){
+          if(workout.type === 'lift') {
+            workout.exercises.forEach(function(ex){
+              ex.quantity = JSON.parse(ex.quantity);
+            });
+          }
+        });
+        console.log('getWorkouts updated quant:', resp);
         return resp.data; //sends back data to controller
       });
     };
