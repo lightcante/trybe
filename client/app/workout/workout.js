@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 20:05:32
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-18 20:27:07
 */
 
 'use strict';
@@ -71,9 +71,7 @@
 
     $scope.log = function() {
       $scope.workout.username = AuthFactory.getUsername();
-      var workout = $scope.workout;
-      console.log('updated workout from log:', workout);
-      WorkoutFactory.postWorkout(workout);
+      WorkoutFactory.postWorkout($scope.workout);
       $state.go('feed');
     };
   };
