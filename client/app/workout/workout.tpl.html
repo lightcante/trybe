@@ -40,7 +40,7 @@
 
         <div class="form-group">
           <label for="description">Instructions</label>
-          <textarea id="description" class="form-control" placeholder="Workout instructions" ng-model="$scope.workout.description">{{description}}</textarea>
+          <textarea id="description" class="form-control" placeholder="{{placeholders.instructions}}" ng-model="workout.description"></textarea>
           <ul class="exercise-list">
             <li ng-repeat="ex in workout.exercises track by $index">
               <div ng-if="ex.quantity[0]">
@@ -61,7 +61,7 @@
 
         <div class="ctrl-group">
           <label for="exercise-label">Exercise</label>
-          <input class="exercise-label" ng-model="temp.exName" placeholder="Exercise name"></input>
+          <input class="exercise-label" ng-model="temp.exName" placeholder="{{placeholders.exercise}}"></input>
         </div>
 
 
@@ -78,9 +78,33 @@
             <!-- <numstepper id="reps"></numstepper> -->
             <input class="ctrl-group" ng-model="temp.currentReps"></input>
           </div>
+
+          <div class="ctrl-group">
+            <label for="reps">Results</label>
+            <!-- <numstepper id="reps"></numstepper> -->
+            <input class="ctrl-group" ng-model="temp.liftResults"></input>
+          </div>
         </div>
 
-          <button type="button" ng-click="addExercise()" class="btn btn-default">Add Exercise</button>
+        <!-- Type: Metcon or Benchmark -->
+        <div ng-if="workout.type !== 'lift'">
+          <div class="ctrl-group">
+            <label for="type">Track</label>
+            <div id="type" class="btn-group" role="group" aria-label="...">
+              <button type="button" ng-click="setType('time')" class="btn btn-default">Total time</button>
+              <button type="button" ng-click="setType('reps')" class="btn btn-default">Reps</button>
+            </div>
+          </div>
+
+          <div class="ctrl-group">
+          </div>
+
+          <div class="ctrl-group">
+            <input class="ctrl-group" ng-model="temp.finalResults"></input>
+          </div>
+        </div>
+
+          <button type="button" ng-click="addExercise()" class="btn btn-default">Add Another Exercise</button>
 
       </div>
     <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Log</button>

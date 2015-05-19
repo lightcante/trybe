@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 23:19:44
+* @Last Modified time: 2015-05-19 09:58:50
 */
 
 'use strict';
@@ -51,13 +51,12 @@
 
     if (!AuthFactory.isAuth()) {
       $state.go('login');
-    }
-    else {
-      $scope.workout = WorkoutFactory.getWorkout();
+    } else {
       $scope.isCreatingWorkout = WorkoutFactory.isCreatingWorkout() !== false;
     }
 
     $scope.createWorkout = function(type) {
+      type = type || 'lift';
       $scope.exerciseCount = 0;
       $scope.temp = {};
       var workout = {
@@ -76,9 +75,14 @@
         'finalResult':{'type': null,'value': null}
       };
 
+      //Initialize placeholder suggestions
+      $scope.placeholders = {};
       if(type === 'lift') {
-      } else if(type === 'metcon') {
-      } else if (type === 'benchmark') {
+        $scope.placeholders.instructions = 'Build up to 5-rep max of:';
+        $scope.placeholders.exercise = 'Bench';
+      } else if(type !== 'lift') {
+        $scope.placeholders.instructions = 'Perform 21, 15, 9 reps of:';
+        $scope.placeholders.exercise = 'Pull ups';
       }
 
       $scope.workout = workout;
@@ -95,6 +99,7 @@
       currentEx.exerciseName = $scope.temp.exName;
       currentEx.quantity[0] = Number($scope.temp.currentSets);
       currentEx.quantity[1] = Number($scope.temp.currentReps);
+      currentEx.result = $scope.temp.liftResults;
       $scope.exerciseCount++;
       console.log('updated workouts obj', $scope.workout);
 
@@ -102,6 +107,7 @@
       $scope.temp.exName = null;
       $scope.temp.currentSets = null;
       $scope.temp.currentReps = null;
+      $scope.temp.liftResults = null;
     };
 
     $scope.printWorkoutQuantity = function (exercise) {
@@ -113,6 +119,10 @@
       return html;
     };
 
+    $scope.setResultType = function(type) {
+      $scope.workout.finalResult.type = type;
+    };
+
     $scope.log = function() {
       if($scope.temp.exName) {
         $scope.addExercise();
@@ -122,8 +132,11 @@
       $state.go('feed');
     };
 
+    //Initialize workout for log
     if($scope.isCreatingWorkout) {
       $scope.createWorkout();
+    } else {
+      $scope.workout = WorkoutFactory.getWorkout();
     }
   };
 
