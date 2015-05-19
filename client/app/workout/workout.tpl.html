@@ -42,8 +42,11 @@
           <label for="description">Instructions</label>
           <textarea id="description" class="form-control" placeholder="Workout instructions" ng-model="$scope.workout.description">{{description}}</textarea>
           <ul class="exercise-list">
-            <li>
-              <span></span><span></span>
+            <li ng-repeat="ex in workout.exercises track by $index">
+              <div ng-if="ex.quantity[0]">
+                <span>{{ex.exerciseName}}:</span>
+                <span>{{ex.quantity[0]}} Sets, {{ex.quantity[1]}} Reps</span>
+              </div>
             </li>
           </ul>
         </div>
@@ -58,7 +61,7 @@
 
         <div class="ctrl-group">
           <label for="exercise-label">Exercise</label>
-          <input class="exercise-label" placeholder="Exercise name"></input>
+          <input class="exercise-label" ng-model="temp.exName" placeholder="Exercise name"></input>
         </div>
 
 
@@ -66,21 +69,21 @@
         <div ng-if="workout.type === 'lift'">
           <div class="ctrl-group">
             <label for="sets">Sets</label>
-            <!-- <numstepper ng-model="workout.test" ng-click="printSets()"id="sets"></numstepper> -->
-            <input class="sets"></input>
+            <!-- <numstepper ng-model="workout.test" id="sets"></numstepper> -->
+            <input class="sets" ng-model="temp.currentSets"></input>
           </div>
 
           <div class="ctrl-group">
             <label for="reps">Reps</label>
             <!-- <numstepper id="reps"></numstepper> -->
-            <input class="ctrl-group" placeholder="Num reps"></input>
+            <input class="ctrl-group" ng-model="temp.currentReps"></input>
           </div>
         </div>
 
-          <button type="button" class="btn btn-default">Add Exercise</button>
+          <button type="button" ng-click="addExercise()" class="btn btn-default">Add Exercise</button>
 
       </div>
-
+    <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Log</button>
 
     </fieldset>
 

@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 22:24:03
+* @Last Modified time: 2015-05-18 23:03:33
 */
 
 'use strict';
@@ -55,15 +55,11 @@
     else {
       $scope.workout = WorkoutFactory.getWorkout();
       $scope.isCreatingWorkout = WorkoutFactory.isCreatingWorkout() !== false;
-      console.log('isCreatingWorkout', $scope.isCreatingWorkout);
-      console.log('WorkoutCtrl workout: ', $scope.workout);
-      if($scope.isCreatingWorkout) {
-        $scope.exerciseCount = 0;
-      }
     }
 
     $scope.createWorkout = function(type) {
-      console.log('createWorkout type:', type);
+      $scope.exerciseCount = 0;
+      $scope.temp = {};
       var workout = {
         'username':null, //handled later
         'trybe':'HR 26/27',
@@ -71,11 +67,11 @@
         'title':null,
         'description':null,
         'exercises':[
-          {
-            'exerciseName': null,
-            'quantity': [],
-            'result': null
-          }
+          // {
+          //   'exerciseName': null,
+          //   'quantity': [],
+          //   'result': null
+          // }
         ],
         'finalResult':{'type': null,'value': null}
       };
@@ -84,17 +80,28 @@
       } else if(type === 'metcon') {
       } else if (type === 'benchmark') {
       }
+
       $scope.workout = workout;
     };
 
-    $scope.printSets = function() {
-      console.log($scope.workout.test);
-    };
-
     $scope.addExercise = function() {
-      var currentEx = $scope.workout.exercises[exerciseCount];
-      currentEx.exerciseName
-      exerciseCount++;
+      //Set ex, sets, and reps to workout obj
+      $scope.workout.exercises.push({
+        exerciseName: null,
+        quantity: [],
+        result: null
+      });
+      var currentEx = $scope.workout.exercises[$scope.exerciseCount];
+      currentEx.exerciseName = $scope.temp.exName;
+      currentEx.quantity[0] = Number($scope.temp.currentSets);
+      currentEx.quantity[1] = Number($scope.temp.currentReps);
+      $scope.exerciseCount++;
+      console.log('updated workouts obj', $scope.workout);
+
+      //Reset temp variables
+      $scope.temp.exName = null;
+      $scope.temp.currentSets = null;
+      $scope.temp.currentReps = null;
     };
 
     $scope.printWorkoutQuantity = function (exercise) {
@@ -111,6 +118,10 @@
       WorkoutFactory.postWorkout($scope.workout);
       $state.go('feed');
     };
+
+    if($scope.isCreatingWorkout) {
+      $scope.createWorkout();
+    }
   };
 
   // Entry point for module
