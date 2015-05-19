@@ -32,15 +32,15 @@
         <div class="form-group">
           <label for="type">Type</label>
           <div id="type" class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default">Lift</button>
-            <button type="button" class="btn btn-default">Metcon</button>
-            <button type="button" class="btn btn-default">Benchmark</button>
+            <button type="button" ng-click="createWorkout('lift')" class="btn btn-default">Lift</button>
+            <button type="button" ng-click="createWorkout('metcon')" class="btn btn-default">Metcon</button>
+            <button type="button" ng-click="createWorkout('benchmark')" class="btn btn-default">Benchmark</button>
           </div>
         </div>
 
         <div class="form-group">
           <label for="description">Instructions</label>
-          <textarea id="description" class="form-control" placeholder="Password">{{description}}</textarea>
+          <textarea id="description" class="form-control" placeholder="Workout instructions" ng-model="$scope.workout.description">{{description}}</textarea>
           <ul class="exercise-list">
             <li>
               <span></span><span></span>
@@ -63,15 +63,21 @@
 
 
         <!-- Type: Lift -->
-        <div class="ctrl-group">
-          <label for="sets">Sets:</label>
-          <numstepper id="sets"></numstepper>
+        <div ng-if="workout.type === 'lift'">
+          <div class="ctrl-group">
+            <label for="sets">Sets</label>
+            <!-- <numstepper ng-model="workout.test" ng-click="printSets()"id="sets"></numstepper> -->
+            <input class="sets"></input>
+          </div>
+
+          <div class="ctrl-group">
+            <label for="reps">Reps</label>
+            <!-- <numstepper id="reps"></numstepper> -->
+            <input class="ctrl-group" placeholder="Num reps"></input>
+          </div>
         </div>
 
-        <div class="ctrl-group">
-          <label for="reps">Reps:</label>
-          <numstepper id="reps"></numstepper>
-        </div>
+          <button type="button" class="btn btn-default">Add Exercise</button>
 
       </div>
 

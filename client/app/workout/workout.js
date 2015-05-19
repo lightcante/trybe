@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 21:05:45
+* @Last Modified time: 2015-05-18 22:24:03
 */
 
 'use strict';
@@ -53,14 +53,49 @@
       $state.go('login');
     }
     else {
-      // dummy workout object
       $scope.workout = WorkoutFactory.getWorkout();
-      $scope.isCreatingWorkout = WorkoutFactory.isCreatingWorkout() === true;
+      $scope.isCreatingWorkout = WorkoutFactory.isCreatingWorkout() !== false;
       console.log('isCreatingWorkout', $scope.isCreatingWorkout);
-      console.log('WorkoutCtrl: ', $scope.workout);
-      // if (!$scope.workout) { $state.go('feed'); }
+      console.log('WorkoutCtrl workout: ', $scope.workout);
+      if($scope.isCreatingWorkout) {
+        $scope.exerciseCount = 0;
+      }
     }
 
+    $scope.createWorkout = function(type) {
+      console.log('createWorkout type:', type);
+      var workout = {
+        'username':null, //handled later
+        'trybe':'HR 26/27',
+        'type':type,
+        'title':null,
+        'description':null,
+        'exercises':[
+          {
+            'exerciseName': null,
+            'quantity': [],
+            'result': null
+          }
+        ],
+        'finalResult':{'type': null,'value': null}
+      };
+
+      if(type === 'lift') {
+      } else if(type === 'metcon') {
+      } else if (type === 'benchmark') {
+      }
+      $scope.workout = workout;
+    };
+
+    $scope.printSets = function() {
+      console.log($scope.workout.test);
+    };
+
+    $scope.addExercise = function() {
+      var currentEx = $scope.workout.exercises[exerciseCount];
+      currentEx.exerciseName
+      exerciseCount++;
+    };
 
     $scope.printWorkoutQuantity = function (exercise) {
       var html = '';
