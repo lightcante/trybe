@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 14:20:39
+* @Last Modified time: 2015-05-18 18:26:07
 */
 
 'use strict';
@@ -53,8 +53,9 @@
       if (workout === undefined) {
         workout = JSON.parse(localStorage.getItem(this.selection));
       }
+      console.log('getWorkout retrieved', workout);
       return workout;
-    }
+    };
 
     return {
       getWorkouts: getWorkouts,
