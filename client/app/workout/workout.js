@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 23:03:33
+* @Last Modified time: 2015-05-18 23:19:44
 */
 
 'use strict';
@@ -114,6 +114,9 @@
     };
 
     $scope.log = function() {
+      if($scope.temp.exName) {
+        $scope.addExercise();
+      }
       $scope.workout.username = AuthFactory.getUsername();
       WorkoutFactory.postWorkout($scope.workout);
       $state.go('feed');
