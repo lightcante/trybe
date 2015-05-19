@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-19 09:58:50
+* @Last Modified time: 2015-05-19 14:06:03
 */
 
 'use strict';
@@ -121,6 +121,7 @@
 
     $scope.setResultType = function(type) {
       $scope.workout.finalResult.type = type;
+      //type and final result not being set
     };
 
     $scope.log = function() {
