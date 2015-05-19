@@ -14,14 +14,16 @@
           <textarea id="description" class="form-control" placeholder="Instructions: ">{{workout.description}}</textarea>
           <ul class="exercise-list">
             <label for="exercises">Exercises</label>
-            <li ng-repeat="ex in workout.exercises">
-              <input type="text" value="{{ex.exerciseName}}"></input>
-              <!-- if the workout's a lift, show quantity -->
+            <li ng-repeat="ex in workout.exercises track by $index">
+              <div>{{ex.exerciseName}}</div>
+              <!--if workout is lift, show quantity & results-->
               <div ng-if="workout.type === 'lift'" class="workout-quantity">{{printWorkoutQuantity(ex)}}
-                <span></span>
+                <div>Max weight: <input ng-model="workout.exercises[$index].result" type="text" value="{{ex.result}}"></input></div>
               </div>
+
             </li>
           </ul>
+          <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Log</button>
         </div>
     </fieldset>
 

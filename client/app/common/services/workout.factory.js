@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 18:26:07
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-18 19:03:07
 */
 
 'use strict';
@@ -43,11 +43,24 @@
       });
     };
 
+    //saves to local storage
     var sendWorkout = function(selection) {
       workout = selection;
       localStorage.setItem(this.selection, JSON.stringify(workout));
       console.log('WorkoutFactory\tsendWorkout: ', workout);
     };
+
+    var postWorkout = function(workout) {
+      return $http({
+        method: 'POST',
+        url: '/api/workouts',
+        data: workout
+      })
+        .then(function(response){
+          console.log('Workout added', response);
+          return response.data;
+        });
+      };
 
     var getWorkout = function() {
       if (workout === undefined) {
@@ -61,6 +74,7 @@
       getWorkouts: getWorkouts,
       getMyWorkouts: getMyWorkouts,
       sendWorkout: sendWorkout,
+      postWorkout: postWorkout,
       getWorkout: getWorkout,
       selection: workoutSelectionStore
     };

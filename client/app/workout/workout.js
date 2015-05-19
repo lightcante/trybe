@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 18:06:54
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-18 19:24:55
 */
 
 'use strict';
@@ -64,9 +64,17 @@
       var html = '';
       var quantity = exercise.quantity;
       if (quantity !== null) {
-        html = 'Sets: '+ quantity[0] +', Reps: '+ quantity[1];
+        html = quantity[0] +' Sets, ' + quantity[1] + ' Reps';
       }
       return html;
+    };
+
+    $scope.log = function() {
+      $scope.workout.username = AuthFactory.getUsername();
+      var workout = $scope.workout;
+      console.log('updated workout from log:', workout);
+      WorkoutFactory.postWorkout(workout);
+      $state.go('feed');
     };
   };
 
