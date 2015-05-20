@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-19 14:06:03
+* @Last Modified by:   VINCE
+* @Last Modified time: 2015-05-20 10:09:03
 */
 
 'use strict';
@@ -100,6 +100,7 @@
       currentEx.quantity[0] = Number($scope.temp.currentSets);
       currentEx.quantity[1] = Number($scope.temp.currentReps);
       currentEx.result = $scope.temp.liftResults;
+
       $scope.exerciseCount++;
       console.log('updated workouts obj', $scope.workout);
 
@@ -125,8 +126,14 @@
     };
 
     $scope.log = function() {
+      //If user input a new exercise but did not add it, add
+      //for them
       if($scope.temp.exName) {
         $scope.addExercise();
+      }
+      //If user set a final result value, set
+      if($scope.temp.finalResult) {
+        $scope.workout.finalResult.value = $scope.temp.finalResult;
       }
       $scope.workout.username = AuthFactory.getUsername();
       WorkoutFactory.postWorkout($scope.workout);
