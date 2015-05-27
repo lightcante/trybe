@@ -1,8 +1,8 @@
-/* 
+/*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:12:58
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 15:37:30
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-27 13:33:30
 */
 'use strict';
 var config = require('./server-config');
@@ -13,13 +13,19 @@ var open = require('open');
 var models = require('./models');
 var passport = require('passport');
 var mysql = require('mysql');
+console.log('in server - models', models);
+var trybe = models.trybe;
 
 // Configure server
 app.use(express.static(config.static_site_root));
 
 
 // Create tables and start server
-models.sequelize.sync()
+models.sequelize.sync() //{force: true} obj put inside drops db
+.then(function(){
+  //initializes default trybe if not existing
+  trybe.findOrCreate({where: {name: 'HR 26/27'}});
+})
 .done(function(){
   server.listen(config.port, function () {
     console.log('Express server listening on port %d', config.port);
@@ -27,7 +33,7 @@ models.sequelize.sync()
       //when deploying to heroku, this will fail because heroku does not have a browser. Since we don't want this to stop
       //our app from running, console log the error and move on
       if (err) {
-        console.error(err); 
+        console.error(err);
       } else {
           console.log('App server browser tab is open...');
       }

@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-20 10:09:03
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-27 13:46:55
 */
 
 'use strict';
@@ -122,19 +122,20 @@
 
     $scope.setResultType = function(type) {
       $scope.workout.finalResult.type = type;
-      //type and final result not being set
     };
 
     $scope.log = function() {
-      //If user input a new exercise but did not add it, add
-      //for them
-      if($scope.temp.exName) {
+      //If user inputs a new exercise, add for them
+      if($scope.temp && $scope.temp.exName) {
         $scope.addExercise();
       }
-      //If user set a final result value, set
-      if($scope.temp.finalResult) {
+
+      //If user set a final result value, save for them
+      if($scope.temp && $scope.temp.finalResult) {
         $scope.workout.finalResult.value = $scope.temp.finalResult;
       }
+
+      //Update workout's username entry, then post
       $scope.workout.username = AuthFactory.getUsername();
       WorkoutFactory.postWorkout($scope.workout);
       $state.go('feed');

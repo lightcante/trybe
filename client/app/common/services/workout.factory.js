@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 20:48:04
+* @Last Modified time: 2015-05-27 13:49:17
 */
 
 'use strict';
@@ -16,6 +16,7 @@
    */
   var WorkoutFactory = function ($http, $location, $window) {
     var workout;
+    var allWorkouts;
     var isNewWorkout;
     var workoutSelectionStore = 'com.trybe.selectedWorkout';
     var localStorage = $window.localStorage;
@@ -36,7 +37,8 @@
           }
         });
         console.log('getWorkouts updated quant:', resp);
-        return resp.data; //sends back data to controller
+        allWorkouts = resp.data;
+        return allWorkouts; //sends back data to controller
       });
     };
 
@@ -48,6 +50,11 @@
       })
       .then(function (resp) {
         console.log('getMyWorkout factory resp:', resp);
+        if(workout.type === 'lift') {
+          workout.exercises.forEach(function(ex){
+            ex.quantity = JSON.parse(ex.quantity);
+          });
+        }
         return resp.data; //sends back data to controller
       });
     };

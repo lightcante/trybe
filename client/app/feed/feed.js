@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-18 21:13:22
+* @Last Modified time: 2015-05-27 10:10:55
 */
 
 'use strict';
@@ -41,7 +41,6 @@
       // $scope.data.workouts = dummyData;
       WorkoutFactory.getWorkouts($scope.username)
         .then(function(data) {
-          console.log('getAllWorkouts received:', data);
           $scope.data.workouts = data;
           console.log('FeedCtrl getWorkouts: ', $scope.data);
         })
@@ -51,10 +50,9 @@
     };
 
     $scope.getMyWorkouts = function() {
-      WorkoutFactory.getMyWorkouts($scope.username) //change to $scope.userID
+      WorkoutFactory.getMyWorkouts($scope.username)
         .then(function(data){
           $scope.data.workouts = data;
-          console.log('workouts after viewMe called:', $scope.data);
         })
         .catch(function(error){
           console.error(error);
@@ -62,12 +60,14 @@
       // $scope.apply();
     };
 
-
     //Sends workout data from user's selection to workout
     //module so user can log workout
     $scope.log = function(index) {
       var isNewWorkout;
       var selection;
+
+      //If user selected a pre-existing workout,
+      //save workout and send to workout factory
       if(index !== undefined) {
         selection = $scope.data.workouts[index];
         isNewWorkout = false;
@@ -81,7 +81,6 @@
     };
 
     $scope.init();
-
   };
 
   // Entry point for module
