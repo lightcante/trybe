@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:12:58
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-27 13:33:30
+* @Last Modified time: 2015-05-27 15:37:52
 */
 'use strict';
 var config = require('./server-config');
@@ -13,8 +13,7 @@ var open = require('open');
 var models = require('./models');
 var passport = require('passport');
 var mysql = require('mysql');
-console.log('in server - models', models);
-var trybe = models.trybe;
+var trybeTable = models.trybe;
 
 // Configure server
 app.use(express.static(config.static_site_root));
@@ -24,7 +23,7 @@ app.use(express.static(config.static_site_root));
 models.sequelize.sync() //{force: true} obj put inside drops db
 .then(function(){
   //initializes default trybe if not existing
-  trybe.findOrCreate({where: {name: 'HR 26/27'}});
+  trybeTable.findOrCreate({where: {name: 'HR 26/27'}});
 })
 .done(function(){
   server.listen(config.port, function () {

@@ -1,8 +1,8 @@
 /*
 * @Author: nimi
 * @Date:   2015-05-05 13:33:15
-* @Last Modified by:   VINCE
-* @Last Modified time: 2015-05-27 13:10:35
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-27 15:42:02
 */
 
 //This file is used to coordinate all the schemas
@@ -16,7 +16,7 @@ var username =  'root' || process.env.DATABASE_USERNAME;
 // var password = '' || process.env.DATABASE_PASSWORD;
 var host = 'localhost' || process.env.DATABASE_HOST;
 
-//change null back to 'password' without quotes
+//change null to password if using deployed db
 var sequelize = new Sequelize(database, username , null, {
   host: host
 });

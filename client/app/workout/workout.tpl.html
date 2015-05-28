@@ -5,13 +5,14 @@
     <fieldset ui-view='log' ng-if='!isCreatingWorkout'>
       <legend>Begin a Workout</legend>
         <div class="form-group">
-          <label for="type">Type: {{workout.type}} workout</label>
+          <label for="type">Type: {{workout.type}}</label>
           <!-- <input type="text" value="{{workout.type}}" readonly></input> -->
         </div>
 
         <div class="form-group">
           <label for="description">Instructions</label>
           <textarea id="description" class="form-control" placeholder="Instructions: ">{{workout.description}}</textarea>
+
           <ul class="exercise-list">
             <label for="exercises">Exercises</label>
             <li ng-repeat="ex in workout.exercises track by $index">
@@ -20,9 +21,15 @@
               <div ng-if="workout.type === 'lift'" class="workout-quantity">{{printWorkoutQuantity(ex)}}
                 <div>Max weight: <input ng-model="workout.exercises[$index].result" type="text" value="{{ex.result}}"></input></div>
               </div>
-
             </li>
           </ul>
+
+          <!-- If workout isn't a lift, show final result -->
+          <div ng-if="workout.type !== 'lift'">
+            <label for="result">{{workout.finalResult.type}}</label>
+            <input ng-model="workout.finalResult.value"></input>
+          </div>
+
           <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Log</button>
         </div>
     </fieldset>

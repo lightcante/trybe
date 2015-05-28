@@ -2,7 +2,7 @@
 * @Author: vincetam
 * @Date:   2015-05-06 18:01:45
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-27 13:49:17
+* @Last Modified time: 2015-05-27 21:25:20
 */
 
 'use strict';
@@ -29,16 +29,8 @@
       })
       .then(function (resp) {
         console.log('getWorkouts factory resp:', resp);
-        resp.data.forEach(function(workout){
-          if(workout.type === 'lift') {
-            workout.exercises.forEach(function(ex){
-              ex.quantity = JSON.parse(ex.quantity);
-            });
-          }
-        });
-        console.log('getWorkouts updated quant:', resp);
-        allWorkouts = resp.data;
-        return allWorkouts; //sends back data to controller
+        parseWorkouts(resp.data);
+        return resp.data; //sends back data to controller
       });
     };
 
@@ -50,11 +42,7 @@
       })
       .then(function (resp) {
         console.log('getMyWorkout factory resp:', resp);
-        if(workout.type === 'lift') {
-          workout.exercises.forEach(function(ex){
-            ex.quantity = JSON.parse(ex.quantity);
-          });
-        }
+        parseWorkouts(resp.data);
         return resp.data; //sends back data to controller
       });
     };
@@ -89,6 +77,18 @@
 
     var isCreatingWorkout = function() {
       return isNewWorkout;
+    };
+
+    var parseWorkouts = function(resp) {
+      resp.forEach(function(workout){
+        if(workout.type === 'lift') {
+          workout.exercises.forEach(function(ex){
+            ex.quantity = JSON.parse(ex.quantity);
+          });
+        } else {
+          workout.finalResult = JSON.parse(workout.finalResult);
+        }
+      });
     };
 
     return {
