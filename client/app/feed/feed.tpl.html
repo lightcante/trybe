@@ -25,11 +25,11 @@
       <div class="exercises" ng-repeat="exercise in workout.exercises track by $index">
         <div><span>{{ exercise.exerciseName }}</span></div>
           <div><span ng-if="workout.type === 'lift'">{{exercise.quantity[0]}} Sets, {{exercise.quantity[1]}} Reps</span></div>
-          <div><span ng-if="workout.type === 'lift'" class="liftResult">Result: {{ exercise.result }} </span></div>
+          <div><span ng-if="workout.type === 'lift'" class="liftResult">Max: {{ exercise.result }} </span></div>
       </div>
 
       <!-- Shows workout result if a metcon or benchmark workout -->
-      <div><span ng-if="workout.type !== 'lift'"> {{ workout.finalResult.type }} {{ workout.finalResult.value }} </span></div>
+      <div><span ng-if="workout.type !== 'lift'"> {{ workout.finalResult.type }}: {{ workout.finalResult.value }} </span></div>
 
       <div id="type" role="group" aria-label="...">
         <button type="button" ng-click="log($index)" class="btn-block tryButton">try</button>
