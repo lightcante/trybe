@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-27 13:46:55
+* @Last Modified time: 2015-05-28 09:40:56
 */
 
 'use strict';
@@ -65,15 +65,17 @@
         'type':type,
         'title':null,
         'description':null,
-        'exercises':[
-          // {
-          //   'exerciseName': null,
-          //   'quantity': [],
-          //   'result': null
-          // }
-        ],
-        'finalResult':{'type': null,'value': null}
+        'exercises':[],
+        'finalResult':{
+          'type': (type !== 'lift') ? 'time' : null,
+          'value': null
+        }
       };
+      workout.exercises.push({
+        exerciseName: null,
+        quantity: [],
+        result: null
+      });
 
       //Initialize placeholder suggestions
       $scope.placeholders = {};
@@ -86,6 +88,7 @@
       }
 
       $scope.workout = workout;
+      console.log('workout module obj', $scope.workout);
     };
 
     $scope.addExercise = function() {
@@ -95,20 +98,9 @@
         quantity: [],
         result: null
       });
-      var currentEx = $scope.workout.exercises[$scope.exerciseCount];
-      currentEx.exerciseName = $scope.temp.exName;
-      currentEx.quantity[0] = Number($scope.temp.currentSets);
-      currentEx.quantity[1] = Number($scope.temp.currentReps);
-      currentEx.result = $scope.temp.liftResults;
 
       $scope.exerciseCount++;
       console.log('updated workouts obj', $scope.workout);
-
-      //Reset temp variables
-      $scope.temp.exName = null;
-      $scope.temp.currentSets = null;
-      $scope.temp.currentReps = null;
-      $scope.temp.liftResults = null;
     };
 
     $scope.printWorkoutQuantity = function (exercise) {

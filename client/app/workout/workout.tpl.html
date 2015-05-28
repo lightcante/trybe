@@ -2,18 +2,20 @@
 
   <form ng-model="workout">
 
+    <!-- Copy workout state -->
     <fieldset ui-view='log' ng-if='!isCreatingWorkout'>
       <legend>Begin a Workout</legend>
         <div class="form-group">
           <label for="type">Type: {{workout.type}}</label>
-          <!-- <input type="text" value="{{workout.type}}" readonly></input> -->
         </div>
 
+        <!-- Display workout instructions -->
         <div class="form-group">
           <label for="description">Instructions</label>
           <textarea id="description" class="form-control" placeholder="Instructions: ">{{workout.description}}</textarea>
 
-          <ul class="exercise-list">
+          <!-- If workout is lift, show exercise list -->
+          <ul ng-if="workout.type === 'lift'" class="exercise-list">
             <label for="exercises">Exercises</label>
             <li ng-repeat="ex in workout.exercises track by $index">
               <div>{{ex.exerciseName}}</div>
@@ -30,10 +32,12 @@
             <input ng-model="workout.finalResult.value"></input>
           </div>
 
+          <!-- Log button posts workout data to server -->
           <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Log</button>
         </div>
     </fieldset>
 
+    <!-- Create state -->
     <fieldset ng-if='isCreatingWorkout' ui-view='create'>
       <legend>Create a Workout</legend>
         <div class="form-group">
@@ -48,78 +52,59 @@
         <div class="form-group">
           <label for="description">Instructions</label>
           <textarea id="description" class="form-control" placeholder="{{placeholders.instructions}}" ng-model="workout.description"></textarea>
-          <ul class="exercise-list">
-            <li ng-repeat="ex in workout.exercises track by $index">
-              <div ng-if="ex">
-                <span>{{ex.exerciseName}}</span>
-                <span ng-if="ex.quantity[0]">{{ex.quantity[0]}} Sets, {{ex.quantity[1]}} Reps</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-    </fieldset>
-
-    <!-- Create state -->
-    <fieldset ng-if='isCreatingWorkout'>
-
-      <legend>Add Exercises to Workout</legend>
-
-       <div class="ctrls-by-type">
-
-        <div class="ctrl-group">
-          <label for="exercise-label">Exercise</label>
-            <input class="exercise-label" ng-model="temp.exName" placeholder="{{placeholders.exercise}}"></input>
         </div>
 
+      <!-- Type: Lift -->
+      <div ng-if="workout.type === 'lift'">
+        <legend>Add Exercises to Workout</legend>
+        <div class="ctrls-by-type">
 
-        <!-- Type: Lift -->
-        <div ng-if="workout.type === 'lift'">
-          <div class="ctrl-group">
-            <!-- <numstepper ng-model="workout.test" id="sets"></numstepper> -->
-            <input class="sets" ng-model="temp.currentSets" placeholder="Sets"></input>
-          </div>
+          <div class="ctrl-group" ng-repeat="ex in workout.exercises track by $index">
+            <input class="exercise-label" ng-model="ex.exerciseName" placeholder="Exercise"></input>
+            <div class="ctrl-group">
+              <!-- <numstepper ng-model="workout.test" id="sets"></numstepper> -->
+              <input class="sets" ng-model="ex.quantity[0]" placeholder="Sets"></input>
+            </div>
 
-          <div class="ctrl-group">
-            <!-- <numstepper id="reps"></numstepper> -->
-            <input class="ctrl-group" ng-model="temp.currentReps" placeholder="Reps"></input>
-          </div>
+            <div class="ctrl-group">
+              <!-- <numstepper id="reps"></numstepper> -->
+              <input class="ctrl-group" ng-model="ex.quantity[1]" placeholder="Reps"></input>
+            </div>
 
-          <div class="ctrl-group">
-            <!-- <numstepper id="reps"></numstepper> -->
-            <input class="ctrl-group" ng-model="temp.liftResults" placeholder="Max weight"></input>
-          </div>
-        </div>
-
-        <!-- Type: Metcon or Benchmark -->
-        <div ng-if="workout.type !== 'lift'">
-          <div class="ctrl-group">
-            <label for="type">Track</label>
-            <div id="type" class="btn-group" role="group" aria-label="...">
-              <button type="button" ng-click="setResultType('time')" class="btn btn-default">Total time</button>
-              <button type="button" ng-click="setResultType('reps')" class="btn btn-default">Reps</button>
+            <div class="ctrl-group">
+              <!-- <numstepper id="reps"></numstepper> -->
+              <input class="ctrl-group" ng-model="ex.result" placeholder="Max weight"></input>
             </div>
           </div>
 
-          <div class="ctrl-group">
-          </div>
+        </div>
+        <button type="button" ng-click="addExercise()" class="btn btn-default">Add Another Exercise</button>
+      </div>
 
-          <div class="ctrl-group">
-            <label for="type">Result</label>
-            <input class="ctrl-group" ng-model="temp.finalResult"></input>
+
+      <!-- Type: Metcon or Benchmark -->
+      <div ng-if="workout.type !== 'lift'">
+        <div class="ctrl-group">
+          <label for="type">Track</label>
+          <div id="type" class="btn-group" role="group" aria-label="...">
+            <button type="button" ng-click="setResultType('time')" class="btn btn-default">Total time</button>
+            <button type="button" ng-click="setResultType('reps')" class="btn btn-default">Reps</button>
           </div>
         </div>
 
-          <button type="button" ng-click="addExercise()" class="btn btn-default">Add Another Exercise</button>
+        <div class="ctrl-group">
+        </div>
 
+        <div class="ctrl-group">
+          <label for="type">{{workout.finalResult.type}}</label>
+          <input class="ctrl-group" ng-model="temp.finalResult"></input>
+        </div>
       </div>
-    <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Complete</button>
+
+      <!-- Posts workout data to server and sends user to feed -->
+      <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Complete</button>
 
     </fieldset>
-
-
-    <!-- Read state -->
-
-    <!-- Log state -->
 
   </form>
 
