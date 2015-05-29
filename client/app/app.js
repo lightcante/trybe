@@ -1,8 +1,8 @@
 /*
 * @Author: vincetam
 * @Date:   2015-05-05 10:16:27
-* @Last Modified by:   justinwebb
-* @Last Modified time: 2015-05-11 16:42:35
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-18 14:54:45
 */
 
 'use strict';
@@ -16,12 +16,12 @@
    */
   var AppStateConfig = function($stateProvider, $urlRouterProvider){
     $stateProvider.state('root', {
-      url: '/',
+      url: '/feed',
       controller: AppCtrl
     });
 
     // For any unmatched url, redirect to /state1
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/feed');
   };
 
   /**

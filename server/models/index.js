@@ -1,32 +1,32 @@
-/* 
+/*
 * @Author: nimi
 * @Date:   2015-05-05 13:33:15
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 14:57:39
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-28 13:28:00
 */
 
 //This file is used to coordinate all the schemas
 'use strict';
 
-var Sequelize = require('sequelize'); 
+var Sequelize = require('sequelize');
 
 //initialize database connection
-var database = process.env.DATABASE_NAME;
-var username =  process.env.DATABASE_USERNAME;
-var password = process.env.DATABASE_PASSWORD;
-var host = process.env.DATABASE_HOST;
+var database = process.env.DATABASE_NAME || 'trybe';
+var username = process.env.DATABASE_USERNAME || 'root';
+var password = process.env.DATABASE_PASSWORD || null;
+var host = process.env.DATABASE_HOST || 'localhost';
 
-
+//change null to password if using deployed db
 var sequelize = new Sequelize(database, username , password, {
   host: host
-}); 
+});
 
 // load models
-var models = ['user', 'workout', 'trybe', 'exercise']; 
+var models = ['user', 'workout', 'trybe', 'exercise'];
 models.forEach(function(model){
   // sequelize.import will load models that have been defined in other files
   module.exports[model] = sequelize.import(__dirname + '/' + model + 'Schema');
-}); 
+});
 
 // this immediately invoked function will define relationships between models
 (function(module){
@@ -45,4 +45,4 @@ models.forEach(function(model){
 }(module.exports));
 
 // export connection
-module.exports.sequelize = sequelize; 
+module.exports.sequelize = sequelize;

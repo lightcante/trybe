@@ -5,11 +5,23 @@
   @include make-xs-column-offset(3);
   background-color: $brand-primary;
 
+  .instructions {
+    padding-bottom: 50px;
+    margin-bottom: 10px;
+  }
+
+  .results {
+    margin-bottom: 10px;
+  }
+
   .ctrls-by-type {
     padding: 10px 20px 0 20px;
 
+
     .ctrl-group {
       @include clearfix;
+
+      padding-bottom: 8px;
 
       label {
         padding-top: 8px;

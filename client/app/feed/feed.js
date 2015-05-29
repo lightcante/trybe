@@ -1,8 +1,8 @@
 /*
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
-* @Last Modified by:   nimi
-* @Last Modified time: 2015-05-11 18:09:03
+* @Last Modified by:   vincetam
+* @Last Modified time: 2015-05-28 19:34:14
 */
 
 'use strict';
@@ -25,22 +25,24 @@
    * @param {angular} $scope
    */
   var FeedCtrl = function ($scope, $location, $state, $window, WorkoutFactory, AuthFactory) {
-    $scope.data = {};
-    $scope.username = AuthFactory.getUsername();
-    console.log('Feed username:', $scope.username);
-    // var dummyData =
-    //   [
-    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null},
-    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null},
-    //     {'username':'Tom','trybe':'HR 26/27','type':'lift','title':'05042015','description':'Build up to 8- rep max of ','exercises':[{'exerciseName':'Bench press','quantity':[3,8],'result':185},{'exerciseName':'Squat','quantity':[2,8],'result':200}],'finalResult':null}
-    //   ];
+
+    $scope.init = function() {
+      if(!AuthFactory.isAuth()) {
+        $state.go('login');
+      } else {
+        $scope.data = {};
+        $scope.username = AuthFactory.getUsername();
+        console.log('Feed username:', $scope.username);
+        $scope.getAllWorkouts();
+      }
+    };
 
     $scope.getAllWorkouts = function() {
-      // $scope.data.workouts = dummyData;
       WorkoutFactory.getWorkouts($scope.username)
         .then(function(data) {
-          $scope.data.workouts = data;
-          console.log('FeedCtrl\tgetWorkouts: ', $scope.data);
+          //reverse workout data so it's ordered by recency
+          $scope.data.workouts = data.reverse();
+          console.log('FeedCtrl getWorkouts: ', $scope.data);
         })
         .catch(function(error) {
           console.error(error);
@@ -48,28 +50,37 @@
     };
 
     $scope.getMyWorkouts = function() {
-      WorkoutFactory.getMyWorkouts($scope.username) //change to $scope.userID
+      WorkoutFactory.getMyWorkouts($scope.username)
         .then(function(data){
-          $scope.data.workouts = data;
-          console.log('workouts after viewMe called:', $scope.data);
+          //reverse workout data so it's ordered by recency
+          $scope.data.workouts = data.reverse();
         })
         .catch(function(error){
           console.error(error);
         });
-      // $scope.apply();
     };
 
     //Sends workout data from user's selection to workout
     //module so user can log workout
     $scope.log = function(index) {
-      var selection = $scope.data.workouts[index];
+      var isNewWorkout;
+      var selection;
+
+      //If user selected a pre-existing workout,
+      //save workout and send to workout factory
+      if(index !== undefined) {
+        selection = $scope.data.workouts[index];
+        isNewWorkout = false;
+      } else {
+        selection = null;
+        isNewWorkout = true;
+      }
       console.log('selected workout:', selection);
-      WorkoutFactory.sendWorkout(selection);
+      WorkoutFactory.sendWorkout(selection, isNewWorkout);
       $state.go('workout');
     };
 
-    $scope.getAllWorkouts();
-
+    $scope.init();
   };
 
   // Entry point for module
