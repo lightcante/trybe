@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-05 13:33:15
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-27 15:42:02
+* @Last Modified time: 2015-05-28 13:28:00
 */
 
 //This file is used to coordinate all the schemas
@@ -11,13 +11,13 @@
 var Sequelize = require('sequelize');
 
 //initialize database connection
-var database = 'trybe' || process.env.DATABASE_NAME;
-var username =  'root' || process.env.DATABASE_USERNAME;
-// var password = '' || process.env.DATABASE_PASSWORD;
-var host = 'localhost' || process.env.DATABASE_HOST;
+var database = process.env.DATABASE_NAME || 'trybe';
+var username = process.env.DATABASE_USERNAME || 'root';
+var password = process.env.DATABASE_PASSWORD || null;
+var host = process.env.DATABASE_HOST || 'localhost';
 
 //change null to password if using deployed db
-var sequelize = new Sequelize(database, username , null, {
+var sequelize = new Sequelize(database, username , password, {
   host: host
 });
 
