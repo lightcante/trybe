@@ -2,7 +2,7 @@
 * @Author: justinwebb
 * @Date:   2015-05-04 15:54:33
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-27 10:10:55
+* @Last Modified time: 2015-05-28 19:34:14
 */
 
 'use strict';
@@ -38,10 +38,10 @@
     };
 
     $scope.getAllWorkouts = function() {
-      // $scope.data.workouts = dummyData;
       WorkoutFactory.getWorkouts($scope.username)
         .then(function(data) {
-          $scope.data.workouts = data;
+          //reverse workout data so it's ordered by recency
+          $scope.data.workouts = data.reverse();
           console.log('FeedCtrl getWorkouts: ', $scope.data);
         })
         .catch(function(error) {
@@ -52,12 +52,12 @@
     $scope.getMyWorkouts = function() {
       WorkoutFactory.getMyWorkouts($scope.username)
         .then(function(data){
-          $scope.data.workouts = data;
+          //reverse workout data so it's ordered by recency
+          $scope.data.workouts = data.reverse();
         })
         .catch(function(error){
           console.error(error);
         });
-      // $scope.apply();
     };
 
     //Sends workout data from user's selection to workout
