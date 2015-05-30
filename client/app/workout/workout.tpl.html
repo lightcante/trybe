@@ -55,10 +55,10 @@
         <div class="ctrls-by-type">
 
           <div class="ctrl-group" ng-repeat="ex in workout.exercises track by $index">
-            <input ng-model="ex.exerciseName" placeholder="Squats"></input>
+            <input ng-model="ex.exerciseName" placeholder="Exercise"></input>
             <div class="ctrl-group exercise">
               <!-- <numstepper ng-model="ex.quantity[0]" id="sets"></numstepper> -->
-              <input type="number" class="ctrl-group" ng-model="ex.quantity[0]" placeholder="Sets"></input> x
+              <input type="number" class="ctrl-group" ng-model="ex.quantity[0]" placeholder="Sets"></input>
               <input type="number" class="ctrl-group" ng-model="ex.quantity[1]" placeholder="Reps"></input>
               <input type="number" class="ctrl-group" ng-model="ex.result" placeholder="Max Weight"></input>
             </div>

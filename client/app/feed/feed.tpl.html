@@ -1,19 +1,21 @@
 <div class="feed">
 
+  <div class="brand">trybe</div>
+
   <!-- Create workout button sends user to workout module -->
   <div id="type" class="create" role="group" aria-label="...">
-    <button class="btn-block" type="button" ng-click="log()" class="btn btn-default">Create Workout</button>
+    <button type="button" ng-click="log()" class="btn btn-default create">Create Workout</button>
   </div>
 
   <!-- Filters workout feed to all workouts or only user's -->
   <div id="type" class="view" role="group" aria-label="...">
     <div>Filter Workouts By</div>
-    <button type="button" ng-click="getMyWorkouts()" class="btn btn-default">My Log</button>
+    <button type="button" ng-click="getMyWorkouts()" class="btn btn-default">Me</button>
     <button type="button" ng-click="getAllWorkouts()" class="btn btn-default">All</button>
   </div>
 
   <!-- Shows all workouts from filter -->
-  <input class='form-control' type='text' ng-model='search' placeholder='Find Workouts'>
+  <input class='form-control' type='text' ng-model='search' placeholder='Search Workouts'>
   <div class="workouts" ng-repeat="workout in data.workouts | filter:search track by $index">
     <div class="workout">
       <!-- Show workout descr -->
