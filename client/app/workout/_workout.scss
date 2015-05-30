@@ -1,8 +1,8 @@
 // With regard to Bootstrap, app modules are positioned as
 // rows with nested spans, which divide rows horizontally.
 .workout {
-  @include make-xs-column(6);
-  @include make-xs-column-offset(3);
+  @include make-xs-column(12);
+  @include make-xs-column-offset(0);
   background-color: $brand-primary;
 
   .instructions {

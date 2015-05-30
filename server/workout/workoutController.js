@@ -2,7 +2,7 @@
 * @Author: nimi
 * @Date:   2015-05-04 16:41:47
 * @Last Modified by:   vincetam
-* @Last Modified time: 2015-05-27 13:21:22
+* @Last Modified time: 2015-05-29 13:44:54
 */
 'use strict';
 
@@ -76,7 +76,7 @@ module.exports = {
     console.log(user);
     User.find ({where: {username: user}}).then(function(user){ // find the user
       user.getTrybes().then(function(trybes){ //will return an array of trybe objects
-        console.log(trybes)
+        console.log(trybes);
         async.eachSeries(trybes, function(trybe, outerNext){ // go through each trybe
           trybe.getWorkouts().then(function(workouts){ // get all workouts associated with the trybe
             async.eachSeries(workouts, function(workout, innerNext){ // go through each workout in each trybe
